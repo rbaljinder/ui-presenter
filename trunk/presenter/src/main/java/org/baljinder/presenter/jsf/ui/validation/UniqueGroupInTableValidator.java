@@ -15,7 +15,7 @@ import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.lang.StringUtils;
 import org.baljinder.presenter.jsf.util.FacesContextUtil;
-import org.baljinder.presenter.jsf.util.TokenizedMessageBean;
+import org.baljinder.presenter.jsf.util.MessageBean;
 
 import com.google.common.collect.Maps;
 
@@ -72,7 +72,7 @@ public class UniqueGroupInTableValidator extends UniqueGroupValidator {
 				message.setSummary(messageToDisplay);
 				message.setSeverity(FacesMessage.SEVERITY_ERROR);
 				FacesContextUtil.getInstance().getScopeUtil().storeOnRequest("validationFaliedAlready" + facesContext.getViewRoot().getViewId(), true);
-				TokenizedMessageBean.getInstance().addErrorMessage(getMessage()); 
+				MessageBean.getInstance().addErrorMessage(getMessage()); 
 				throw new ValidatorException(message);
 			}
 		}

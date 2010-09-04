@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.myfaces.trinidad.bean.FacesBean;
 import org.apache.myfaces.trinidad.bean.PropertyKey;
 import org.apache.myfaces.trinidad.component.UIXTable;
-import org.baljinder.presenter.jsf.util.TokenizedMessageBean;
+import org.baljinder.presenter.jsf.util.MessageBean;
 
 /**
  * @author Baljinder Randhawa
@@ -21,13 +21,23 @@ public class FacesUtils {
 	public static final String _ROW_SELECTION_PROP_KEY = "rowSelection";
 
 	private static Log logger = LogFactory.getLog(FacesUtils.class);
+	
+	static MessageBean messageBean ;
+
+	public static MessageBean getMessageBean() {
+		return messageBean;
+	}
+
+	public static void setMessageBean(MessageBean messageBean) {
+		FacesUtils.messageBean = messageBean;
+	}
 
 	public static void addInfoMessage(String message) {
-		TokenizedMessageBean.getInstance().addInfoMessage(message);
+		messageBean.addInfoMessage(message);
 	}
 
 	public static void addErrorMessage(String message) {
-		TokenizedMessageBean.getInstance().addErrorMessage(message);
+		messageBean.addErrorMessage(message);
 	}
 
 	public static boolean isMultiSelect(UIXTable table) {

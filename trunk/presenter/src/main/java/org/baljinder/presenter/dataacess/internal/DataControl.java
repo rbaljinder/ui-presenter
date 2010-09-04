@@ -9,12 +9,12 @@ import org.apache.myfaces.trinidad.component.UIXTable;
 import org.apache.myfaces.trinidad.event.SortEvent;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 import org.apache.myfaces.trinidad.model.SortCriterion;
-
 import org.baljinder.presenter.dataacess.GenericPresentationDAO;
 import org.baljinder.presenter.dataacess.IDataControl;
 import org.baljinder.presenter.dataacess.util.FacesUtils;
 import org.baljinder.presenter.util.ClassUtils;
 import org.baljinder.presenter.util.Utils;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -100,10 +100,9 @@ public class DataControl extends AbstractDataControl {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public String insert() {
 		eventHandler.beforeInsert(this);
-		for (Class clazz : getModelList()) {
+		for (Class <?>clazz : getModelList()) {
 			Object newInstance = ClassUtils.getNewInstance(clazz, "Verify the bean Declartion for classs model name for DataControl[" + getDataControlName() + "]");
 			Map<String, Object> modelNameObjectMap = Maps.newHashMap();
 			final int noOfModelsInvolved = getModelList().size();

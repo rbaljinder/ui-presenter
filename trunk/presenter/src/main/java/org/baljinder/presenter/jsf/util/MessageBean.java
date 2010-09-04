@@ -9,15 +9,34 @@ import org.baljinder.presenter.util.LocaleSupport;
 import org.springframework.context.MessageSource;
 
 
-public class TokenizedMessageBean
+public class MessageBean
 {
-	public static String BEAN_NAME = "tokenizedFacesMessage";
 
 	private MessageSource messageSource;
+	
+	private LocaleSupport localeSupport ;
 
-	public static TokenizedMessageBean getInstance()
-	{
-		return (TokenizedMessageBean)FacesContextUtil.getInstance().getManagedBean(TokenizedMessageBean.BEAN_NAME);
+	private  static MessageBean messageBean = getInstance();
+	
+	
+	private MessageBean() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	//how to instantiate with message source and  local support 
+	public static MessageBean getInstance(){
+		if(messageBean == null){
+			messageBean = new MessageBean();
+		}
+		return messageBean ;
+	}
+	
+	public LocaleSupport getLocaleSupport() {
+		return localeSupport;
+	}
+
+	public void setLocaleSupport(LocaleSupport localeSupport) {
+		this.localeSupport = localeSupport;
 	}
 
 	public MessageSource getMessageSource() {
