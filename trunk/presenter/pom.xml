@@ -50,10 +50,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.javax</groupId>
-			<artifactId>faces</artifactId>
-			<version>1.1</version>
-			<scope>compile</scope>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>1.1_02</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -74,16 +73,14 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>trinidad</groupId>
+			<groupId>org.apache.myfaces.trinidad</groupId>
 			<artifactId>trinidad-api</artifactId>
 			<version>1.0.8</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>tomahawk</groupId>
+			<groupId>org.apache.myfaces.tomahawk</groupId>
 			<artifactId>tomahawk</artifactId>
 			<version>1.1.6</version>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
