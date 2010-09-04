@@ -13,20 +13,20 @@ public class TokenizedMessageBean
 {
 	public static String BEAN_NAME = "tokenizedFacesMessage";
 
-	private MessageSource _presentationMetadataProvider;
+	private MessageSource messageSource;
 
 	public static TokenizedMessageBean getInstance()
 	{
 		return (TokenizedMessageBean)FacesContextUtil.getInstance().getManagedBean(TokenizedMessageBean.BEAN_NAME);
 	}
 
-	public MessageSource getPresentationMetadataProvider() {
-		return _presentationMetadataProvider;
+	public MessageSource getMessageSource() {
+		return messageSource;
 	}
 
-	public void setPresentationMetadataProvider(
-			MessageSource presentationMetadataProvider) {
-		_presentationMetadataProvider = presentationMetadataProvider;
+	public void setMessageSource(
+			MessageSource messageSource) {
+		this.messageSource = messageSource;
 	}
 
 	public LocaleSupport getLoacleSupport()
@@ -74,7 +74,7 @@ public class TokenizedMessageBean
 	public String getLocalizedMessage(String code, Object[] params)
 	{
 		//TODO: is this correct
-		String message = _presentationMetadataProvider.getMessage(code,params,getLoacleSupport().getCurrentLocale());//, arg1, arg2)// getMessage().get(code);  
+		String message = messageSource.getMessage(code,params,getLoacleSupport().getCurrentLocale());//, arg1, arg2)// getMessage().get(code);  
 		return message != null ? MessageFormat.format(message, params) : message;
 
 	}

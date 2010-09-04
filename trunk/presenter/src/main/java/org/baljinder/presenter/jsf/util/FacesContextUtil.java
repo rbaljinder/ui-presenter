@@ -8,6 +8,7 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
+//copied form somewhere..i could have written one of my own
 public class FacesContextUtil
 {
 	private FacesContext _context;

@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+//copied this from somewhere.. just a utility class .. no harm i guess
 public class ScopeUtil
 {
 	private FacesContextUtil _contextUtil;
