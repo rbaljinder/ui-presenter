@@ -9,10 +9,10 @@
 
 	<tlib-version>0.03</tlib-version>
 	<jsp-version>1.2</jsp-version>
-	<short-name>icf</short-name>
+	<short-name>presenter</short-name>
 	<uri>http://presenter.rbaljinder.org/component</uri>
 	<description>
-		This tag library has the tags for the ICF Components
+		This tag library has the tags for the presenter Components
   </description>
   <tag>
 		<name>uniqueGroupValidation</name>

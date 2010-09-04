@@ -1,10 +1,11 @@
-package org.baljinder.presenter.util;
+package org.baljinder.presenter.jsf.util;
 
 import java.text.MessageFormat;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.baljinder.presenter.util.LocaleSupport;
 import org.springframework.context.MessageSource;
 
 

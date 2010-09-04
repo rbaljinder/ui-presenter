@@ -16,8 +16,7 @@ import org.w3c.dom.Element;
  * @author Baljinder Randhawa
  * 
  */
-// TODO:Seprate the inner classes into there individual class files. have a common base class for page and data control
-public class ICNameSpaceHandler extends NamespaceHandlerSupport {
+public class PresenterNameSpaceHandler extends NamespaceHandlerSupport {
 
 	public void init() {
 		registerBeanDefinitionParser("page", new PageBeanDefinitionParser());

@@ -5,7 +5,7 @@ package org.baljinder.presenter.dataacess.internal.support;
 
 import org.baljinder.presenter.dataacess.IDataAccessStrategy;
 import org.baljinder.presenter.dataacess.IDataControl;
-import org.baljinder.presenter.util.FacesContextUtil;
+import org.baljinder.presenter.jsf.util.FacesContextUtil;
 
 /**
  * @author Baljinder Randhawa

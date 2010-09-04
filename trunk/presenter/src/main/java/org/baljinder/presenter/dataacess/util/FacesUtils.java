@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.myfaces.trinidad.bean.FacesBean;
 import org.apache.myfaces.trinidad.bean.PropertyKey;
 import org.apache.myfaces.trinidad.component.UIXTable;
-import org.baljinder.presenter.util.TokenizedMessageBean;
+import org.baljinder.presenter.jsf.util.TokenizedMessageBean;
 
 /**
  * @author Baljinder Randhawa

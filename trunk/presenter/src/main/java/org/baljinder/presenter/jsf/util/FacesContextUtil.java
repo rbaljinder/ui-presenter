@@ -1,4 +1,4 @@
-package org.baljinder.presenter.util;
+package org.baljinder.presenter.jsf.util;
 
 import java.util.List;
 

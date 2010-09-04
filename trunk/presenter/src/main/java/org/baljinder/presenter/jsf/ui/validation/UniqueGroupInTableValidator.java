@@ -14,8 +14,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.lang.StringUtils;
-import org.baljinder.presenter.util.FacesContextUtil;
-import org.baljinder.presenter.util.TokenizedMessageBean;
+import org.baljinder.presenter.jsf.util.FacesContextUtil;
+import org.baljinder.presenter.jsf.util.TokenizedMessageBean;
 
 import com.google.common.collect.Maps;
 
