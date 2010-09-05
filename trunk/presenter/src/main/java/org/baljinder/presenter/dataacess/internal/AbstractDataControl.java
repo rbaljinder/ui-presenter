@@ -12,12 +12,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.myfaces.trinidad.component.UIXTable;
 
-import org.baljinder.presenter.dataacess.GenericPresentationDAO;
+import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.IDataAccessStrategy;
 import org.baljinder.presenter.dataacess.IDataControl;
 import org.baljinder.presenter.dataacess.IEventHandler;
 import org.baljinder.presenter.dataacess.ModelFieldMapping;
-import org.baljinder.presenter.dataacess.PresentationLookupPersistenceManager;
+import org.baljinder.presenter.dataacess.IPersistenceManager;
 import org.baljinder.presenter.dataacess.internal.support.EmptyEventHandler;
 import org.baljinder.presenter.dataacess.util.IQueryBuilder;
 import org.baljinder.presenter.dataacess.util.PresentationConstants;
@@ -33,7 +33,7 @@ public abstract class AbstractDataControl implements IDataControl {
 
 	protected static final Log logger = LogFactory.getLog(AbstractDataControl.class);
 	
-	private PresentationLookupPersistenceManager persistenceManager;
+	private IPersistenceManager persistenceManager;
 
 	private UIXTable table = null;
 
@@ -47,7 +47,7 @@ public abstract class AbstractDataControl implements IDataControl {
 
 	private String joinCriteria;
 
-	private GenericPresentationDAO dao;
+	private IPresentationDao dao;
 
 	private String daoKeyName;
 
@@ -114,11 +114,11 @@ public abstract class AbstractDataControl implements IDataControl {
 		return this;
 	}
 
-	public GenericPresentationDAO getDao() {
+	public IPresentationDao getDao() {
 		return dao;
 	}
 
-	public void setDao(GenericPresentationDAO dao) {
+	public void setDao(IPresentationDao dao) {
 		this.dao = dao;
 	}
 
@@ -174,11 +174,11 @@ public abstract class AbstractDataControl implements IDataControl {
 		this.table = table;
 	}
 
-	public PresentationLookupPersistenceManager getPersistenceManager() {
+	public IPersistenceManager getPersistenceManager() {
 		return persistenceManager;
 	}
 
-	public void setPersistenceManager(PresentationLookupPersistenceManager persistenceManager) {
+	public void setPersistenceManager(IPersistenceManager persistenceManager) {
 		this.persistenceManager = persistenceManager;
 	}
 

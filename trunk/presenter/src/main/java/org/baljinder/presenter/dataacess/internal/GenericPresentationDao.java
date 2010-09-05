@@ -8,23 +8,41 @@ import java.util.Map;
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
+import net.sf.hibernate.SessionFactory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.orm.hibernate.HibernateCallback;
-import org.springframework.orm.hibernate.support.HibernateDaoSupport;
-
-import org.baljinder.presenter.dataacess.GenericPresentationDAO;
+import org.baljinder.presenter.dataacess.IPresentationDao;
+import org.baljinder.presenter.dataacess.extension.SupportsHibernate;
 import org.baljinder.presenter.dataacess.util.PresentationConstants;
 import org.baljinder.presenter.util.Utils;
+import org.springframework.orm.hibernate.HibernateCallback;
+import org.springframework.orm.hibernate.HibernateTemplate;
+import org.springframework.orm.hibernate.SessionFactoryUtils;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class GenericPresentationDAOImpl extends HibernateDaoSupport implements GenericPresentationDAO {
+public class GenericPresentationDao implements IPresentationDao,SupportsHibernate {
 
 	private int prefetchCount = PresentationConstants.NO_OF_RECORDS_TO_PREFETCH;
 
-	private static Log logger = LogFactory.getLog(GenericPresentationDAOImpl.class);
+	private static Log logger = LogFactory.getLog(GenericPresentationDao.class);
+
+	private HibernateTemplate hibernateTemplate ;
+
+	public GenericPresentationDao() {
+	}
+	
+	public GenericPresentationDao(HibernateTemplate hibernateTemplate){
+		this.hibernateTemplate = hibernateTemplate;
+	}
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
 
 	public void create(Object object) 
     {	   
@@ -40,9 +58,15 @@ public class GenericPresentationDAOImpl extends HibernateDaoSupport implements G
 	    getHibernateTemplate().delete(object);
 	}
 	
-	public Object getObject(java.lang.Class modelClass,Serializable  primaryKey)
+	public Object getObject(Class modelClass,Serializable  primaryKey)
 	{
 	    return  getHibernateTemplate().get(modelClass,primaryKey);
+	}
+	
+	public Session getSession() {
+		SessionFactory sessionFactory = getHibernateTemplate().getSessionFactory();
+		return !getHibernateTemplate().isAllowCreate() ?SessionFactoryUtils.getSession(sessionFactory, false):
+			SessionFactoryUtils.getSession(sessionFactory, getHibernateTemplate().getEntityInterceptor(), getHibernateTemplate().getJdbcExceptionTranslator());
 	}
 	
 	public void executeSql(final String sql)
@@ -128,7 +152,7 @@ public class GenericPresentationDAOImpl extends HibernateDaoSupport implements G
 
 	@SuppressWarnings("unchecked")
 	public List<Map<String, Object>> getAllEntities(final List<Class<? extends Object>> modelList, final Integer maxResult, final Integer firstResult, final String queryString) {
-		return (List) getHibernateTemplate().execute(new HibernateCallback() {
+		return (List<Map<String, Object>>) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
 				logger.info("Query generated: ["+queryString+"]"+", No of records to fetch["+ (maxResult)+"]");
 				List<Map<String, Object>> result = Lists.newArrayList();

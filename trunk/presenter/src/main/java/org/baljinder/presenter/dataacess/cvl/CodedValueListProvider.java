@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.baljinder.presenter.datamodel.config.ValidValueModel;
-import org.baljinder.presenter.dataacess.PresentationLookupPersistenceManager;
+import org.baljinder.presenter.dataacess.IPersistenceManager;
 import org.baljinder.presenter.util.ReflectionUtils;
 import com.google.common.collect.Maps;
 
@@ -26,7 +26,7 @@ public class CodedValueListProvider {
 		};
 	};
 
-	private PresentationLookupPersistenceManager persistenceManager;
+	private IPersistenceManager persistenceManager;
 
 	private Map<String, CodedValueDefinition> definitions = new HashMap<String, CodedValueDefinition>();
 
@@ -36,11 +36,11 @@ public class CodedValueListProvider {
 		codedValueDAO = (CodedValueDAO) persistenceManager.getDAO("org.baljinder.presenter.jsf.ui.dataacess.cvl.CodedValueDAO");
 	}
 
-	public PresentationLookupPersistenceManager getPersistenceManager() {
+	public IPersistenceManager getPersistenceManager() {
 		return persistenceManager;
 	}
 
-	public void setPersistenceManager(PresentationLookupPersistenceManager persistenceManager) {
+	public void setPersistenceManager(IPersistenceManager persistenceManager) {
 		this.persistenceManager = persistenceManager;
 	}
 

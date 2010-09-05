@@ -142,8 +142,10 @@ public class FilterBuilder implements SQLConstants {
 				switch (fieldCase) {
 				case LOWER:
 					fieldValue = StringUtils.lowerCase(fieldValue);
+					break;
 				case UPPER:
 					fieldValue = StringUtils.upperCase(fieldValue);
+					break;
 				}
 			}
 		}

@@ -9,7 +9,7 @@ import org.baljinder.presenter.util.LocaleSupport;
 import org.springframework.context.MessageSource;
 
 
-public class MessageBean
+public class MessageBean 
 {
 
 	private MessageSource messageSource;

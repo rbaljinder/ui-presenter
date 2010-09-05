@@ -25,7 +25,7 @@ public class PresenterNameSpaceHandler extends NamespaceHandlerSupport {
 		registerBeanDefinitionParser("event-handler", new EventHandlerBeanDefinitionParser());
 	}
 
-	public class EventHandlerBeanDefinitionParser extends AbstractBeanDefinitionParser {
+	public static class EventHandlerBeanDefinitionParser extends AbstractBeanDefinitionParser {
 		/*
 		 * (non-Javadoc)
 		 * 

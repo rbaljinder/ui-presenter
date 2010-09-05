@@ -9,7 +9,7 @@ import org.apache.myfaces.trinidad.component.UIXTable;
 import org.apache.myfaces.trinidad.event.SortEvent;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 import org.apache.myfaces.trinidad.model.SortCriterion;
-import org.baljinder.presenter.dataacess.GenericPresentationDAO;
+import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.IDataControl;
 import org.baljinder.presenter.dataacess.util.FacesUtils;
 import org.baljinder.presenter.util.ClassUtils;
@@ -137,7 +137,7 @@ public class DataControl extends AbstractDataControl {
 		if(elementToSave.entrySet().isEmpty())
 			return ;
 		eventHandler.beforeSave(this);
-		GenericPresentationDAO dao = getDao();
+		IPresentationDao dao = getDao();
 		if (newlyInsertedElements.contains(elementToSave)) {
 			dao.create(elementToSave);
 			newlyInsertedElements.remove(elementToSave);

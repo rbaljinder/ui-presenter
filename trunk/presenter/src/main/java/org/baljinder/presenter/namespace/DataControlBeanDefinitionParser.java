@@ -23,7 +23,7 @@ public class DataControlBeanDefinitionParser extends AbsractDataControlOrPagePar
 		defaults.put(PAGECLASS, "org.baljinder.presenter.dataacess.internal.PageController");
 		defaults.put(QUERYBUILDER, "defaultQueryBuilder");
 		defaults.put(PERSISTANCEMANAGER, "presentationPersistence");
-		defaults.put(DAOKEYNAME, "org.baljinder.presenter.dataacess.GenericPresentationDAO");
+		defaults.put(DAOKEYNAME, "org.baljinder.presenter.dataacess.internal.GenericPresentationDao");
 	}
 
 	public BeanDefinition parse(Element dataControlElement, ParserContext parserContext) {

@@ -36,7 +36,7 @@ public class EmptyInterceptor implements Interceptor {
 	 */
 	public Boolean isUnsaved(Object obj) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	/* (non-Javadoc)

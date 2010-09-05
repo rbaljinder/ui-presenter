@@ -24,6 +24,7 @@ public class NameSpaceTestCase extends TestCase {
 		assertNotNull(page.getEventHandler()) ;
 		IDataControl dataControl = (IDataControl)ac.getBean("Workbench_SalesAgentChannelMapping_SalesChannelMapping_DataControl") ;
 		assertNotNull(dataControl) ;
-		
+		IDataControl dataAccess = (IDataControl)ac.getBean("dataControl_dataAccess_test") ;
+		assertTrue(dataAccess.getData().size() > 1 ) ;
 	}
 }

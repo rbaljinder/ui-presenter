@@ -71,12 +71,12 @@
 			</xsd:element>
 			<xsd:element name="dao-key-name" minOccurs="0" maxOccurs="1">
 				<xsd:complexType mixed="true">
-					<xsd:attribute name="key" type="xsd:string" default="org.baljinder.presenter.dataacess.internal.GenericPresentationDAOImpl" use="optional">
+					<xsd:attribute name="key" type="xsd:string" default="org.baljinder.presenter.dataacess.internal.GenericPresentationDao" use="optional">
 						<xsd:annotation>
 							<xsd:appinfo>
 								<tool:annotation>
 									<tool:expected-type type="java.lang.Class" />
-									<tool:assignable-to type="org.baljinder.presenter.dataacess.GenericPresentationDAO" />
+									<tool:assignable-to type="org.baljinder.presenter.dataacess.IPresentationDao" />
 								</tool:annotation>
 							</xsd:appinfo>
 						</xsd:annotation>

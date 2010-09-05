@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import org.baljinder.presenter.dataacess.GenericPresentationDAO;
+import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.internal.DataControl;
 import org.baljinder.presenter.dataacess.internal.PageController;
 import org.baljinder.presenter.dataacess.internal.TransitionController;
@@ -157,7 +157,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	static {
 		defaultClasses.put(DATACONTROLCLASS, DataControl.class);
 		defaultClasses.put(PAGECLASS, PageController.class);
-		defaultClasses.put(DAOKEYNAME, GenericPresentationDAO.class);
+		defaultClasses.put(DAOKEYNAME, IPresentationDao.class);
 		defaultClasses.put(TRANSITIONCLASS, TransitionController.class);
 
 		defaults.put(QUERYBUILDER, "defaultQueryBuilder");

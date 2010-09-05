@@ -6,6 +6,9 @@ package org.baljinder.presenter.namespace;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.baljinder.presenter.dataacess.internal.GenericPresentationDao;
+import org.baljinder.presenter.dataacess.internal.extension.ValidValueDataControl;
+import org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -19,8 +22,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import org.baljinder.presenter.dataacess.internal.extension.ValidValueDataControl;
-import org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl;
 import com.google.common.collect.Lists;
 
 /**
@@ -48,6 +49,7 @@ public abstract class AbsractDataControlOrPageParser extends AbstractBeanDefinit
 		defaults.put(DIRECT, "directDataAccessStrategy");
 		defaultClasses.put(DATACONTROLCLASSFORCODEDVALUE, ValidValueDataControl.class);
 		defaultClasses.put(DAOKEYNAMEFORCODEDVALUE, ValidValueGenericDaoImpl.class);
+		defaultClasses.put(DAOKEYNAME, GenericPresentationDao.class);
 	}
 
 	/**

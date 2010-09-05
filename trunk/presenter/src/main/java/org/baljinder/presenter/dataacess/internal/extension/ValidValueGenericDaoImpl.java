@@ -10,10 +10,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.baljinder.presenter.dataacess.extension.ValidValueGenricDao;
-import org.baljinder.presenter.dataacess.internal.GenericPresentationDAOImpl;
+import org.baljinder.presenter.dataacess.internal.GenericPresentationDao;
 import org.baljinder.presenter.dataacess.util.FacesUtils;
 import org.baljinder.presenter.util.ReflectionUtils;
 import org.baljinder.presenter.util.Utils;
+import org.springframework.orm.hibernate.HibernateTemplate;
 
 /**
  * @author Baljinder Randhawa
@@ -24,10 +25,17 @@ import org.baljinder.presenter.util.Utils;
 // FIXME:
 
 
-public class ValidValueGenericDaoImpl extends GenericPresentationDAOImpl implements ValidValueGenricDao {
+public class ValidValueGenericDaoImpl extends GenericPresentationDao implements ValidValueGenricDao {
 
 	private static Log logger = LogFactory.getLog(ValidValueGenericDaoImpl.class);
 
+	public ValidValueGenericDaoImpl() {
+	}
+	
+	public ValidValueGenericDaoImpl(HibernateTemplate hibernateTemplate){
+		super(hibernateTemplate);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -115,10 +123,6 @@ public class ValidValueGenericDaoImpl extends GenericPresentationDAOImpl impleme
 			logger.error(th);
 		}
 		return peroprtyValue;
-	}
-
-	private String getFirstLetterCapped(String string) {
-		return string.substring(0, 1).toUpperCase() + string.substring(1);
 	}
 
 	/*

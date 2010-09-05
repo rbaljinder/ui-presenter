@@ -116,9 +116,9 @@ public interface IDataControl extends SupportsEventHandler {
 	 */
 	public void setQueryBuilder(IQueryBuilder queryBuilder) ;
 	
-	public PresentationLookupPersistenceManager getPersistenceManager() ;
+	public IPersistenceManager getPersistenceManager() ;
 
-	public void setPersistenceManager(PresentationLookupPersistenceManager persistenceManager) ;
+	public void setPersistenceManager(IPersistenceManager persistenceManager) ;
 		
 	public void setDataAccessStrategy(IDataAccessStrategy accessStrategy);
 	
