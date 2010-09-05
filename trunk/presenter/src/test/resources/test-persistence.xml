@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:ic="http://www.rbaljinder.org/schema/presenter" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+		http://www.rbaljinder.org/schema/presenter presenter.xsd">
+
+	<bean id="genericValidValueDao"
+		class="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl">
+	</bean>	
+
+	<bean id="genericPresentationDao"
+		class="org.baljinder.presenter.dataacess.internal.GenericPresentationDao" />
+
+	<bean id="codedValueDAO"
+		class="org.baljinder.presenter.dataacess.cvl.CodedValueDAO" />
+
+	<bean id="presentationPersistence"
+		class="org.baljinder.presenter.dataacess.internal.PersistenceManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="daoAssociations">
+			<map>
+				<entry
+					key="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl" 
+					value-ref="genericValidValueDao" />
+				<entry
+					key="org.baljinder.presenter.dataacess.internal.GenericPresentationDao"
+					value-ref="genericPresentationDao" />
+				<entry key="org.baljinder.presenter.dataacess.cvl.CodedValueDAO"
+					value-ref="codedValueDAO" />
+			</map>
+		</property>
+	</bean>
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+		<property name="dataSource" ref="datasource" />
+		<property name="mappingLocations">
+			<list>
+				<value>mapping.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">net.sf.hibernate.dialect.HSQLDialect</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="datasource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver"></property>
+		<property name="url" value="jdbc:hsqldb:file:test-db.script" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+	</bean>
+</beans>
