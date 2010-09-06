@@ -28,6 +28,7 @@ import com.google.common.collect.Lists;
  * @author Baljinder Randhawa
  * 
  */
+//TODO: add event-handler-ref property to data control definition
 public abstract class AbsractDataControlOrPageParser extends AbstractBeanDefinitionParser {
 
 	protected final static String DATAACCESSSTRATEGY = "dataAccessStrategy";
