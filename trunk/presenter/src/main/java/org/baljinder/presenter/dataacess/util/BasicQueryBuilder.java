@@ -7,25 +7,24 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-
-import org.baljinder.presenter.datamodel.DataModelMetadataProvider;
 import org.baljinder.presenter.dataacess.IDataControl;
 import org.baljinder.presenter.dataacess.filter.Filter;
 import org.baljinder.presenter.dataacess.internal.OrderByAttribute;
+import org.baljinder.presenter.datamodel.DataModelMetadataProvider;
 import org.baljinder.presenter.util.ReflectionUtils;
 import org.baljinder.presenter.util.Utils;
+
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-//TODO: Try to make more helper classes out of it ; like one for handling Filtering Criteria , one for handling where clauses
 //TODO: Everything is in line with ORACLE
 public class BasicQueryBuilder implements IQueryBuilder, SQLConstants {
 
 	Map<String, Map<String, Filter>> filters = Maps.newHashMap();
 
-	private DataModelMetadataProvider metaDataProvider;
+	private DataModelMetadataProvider metaDataProvider = DataModelMetadataProvider.emptyInstance;
 
 	private FilterBuilder filterBuilder = new FilterBuilder(this);
 

@@ -13,6 +13,8 @@ import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.myfaces.validator.ValidatorBase;
+import org.baljinder.presenter.dataacess.IPresentationMetaDataProvider;
+import org.baljinder.presenter.jsf.util.FacesContextUtil;
 
 /**
  * @author Baljinder Randhawa
@@ -64,13 +66,10 @@ public class UniqueGroupValidator extends ValidatorBase {
 	/**
 	 * @return
 	 */
-	//TODO: fix me
 	protected String getMessageFromPresentationProvider() {
-		// TODO Auto-generated method stub
-		/*PresentationMetadataProvider presentationMetadataProvider = (PresentationMetadataProvider) FacesContextUtil.getInstance().getManagedBean(
-				"presentationMetadataProvider");
-		return presentationMetadataProvider.getMessage().get(getMessage());*/
-		return null;
+		IPresentationMetaDataProvider presentationMetadataProvider = (IPresentationMetaDataProvider) FacesContextUtil.getInstance().getManagedBean(
+				IPresentationMetaDataProvider.PRESENTATION_METADATA_SERVICE_NAME);
+		return presentationMetadataProvider.getMessage().get(getMessage());
 	}
 
 	/**

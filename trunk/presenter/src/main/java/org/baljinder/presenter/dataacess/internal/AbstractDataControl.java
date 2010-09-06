@@ -266,10 +266,14 @@ public abstract class AbstractDataControl implements IDataControl {
 		this.countForLastPageFetch = countForLastPageFetch;
 	}
 
-	public String getQueryString() {
+	public String getQuery() {
 		return getQueryBuilder().buildQuery(this);
 	}
 
+	public String getCountQuery() {
+		return getQueryBuilder().getCountQuery(this);
+	}
+	
 	public int getCurrentPageSize() {
 		if (getPageCursor() > 0)
 			return getPageCursor();
@@ -322,7 +326,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	 * 
 	 */
 	protected Integer calculateLastPageCursor() {
-		return getDao().getCountOfRecords(getQueryBuilder().getCountQuery(this));
+		return getDao().getCountOfRecords(getCountQuery());
 	}
 
 	/*

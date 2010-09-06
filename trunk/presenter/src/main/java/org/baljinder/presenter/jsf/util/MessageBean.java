@@ -1,29 +1,20 @@
-package org.baljinder.presenter.jsf.util;
 
+package org.baljinder.presenter.jsf.util;
 import java.text.MessageFormat;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import org.baljinder.presenter.util.LocaleSupport;
-import org.springframework.context.MessageSource;
+import org.baljinder.presenter.dataacess.IPresentationMetaDataProvider;
 
 
 public class MessageBean 
 {
 
-	private MessageSource messageSource;
+	private IPresentationMetaDataProvider  presentationMetaDataProvider ;
 	
-	private LocaleSupport localeSupport ;
-
 	private  static MessageBean messageBean = getInstance();
 	
-	
-	private MessageBean() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	//how to instantiate with message source and  local support 
 	public static MessageBean getInstance(){
 		if(messageBean == null){
 			messageBean = new MessageBean();
@@ -31,28 +22,6 @@ public class MessageBean
 		return messageBean ;
 	}
 	
-	public LocaleSupport getLocaleSupport() {
-		return localeSupport;
-	}
-
-	public void setLocaleSupport(LocaleSupport localeSupport) {
-		this.localeSupport = localeSupport;
-	}
-
-	public MessageSource getMessageSource() {
-		return messageSource;
-	}
-
-	public void setMessageSource(
-			MessageSource messageSource) {
-		this.messageSource = messageSource;
-	}
-
-	public LocaleSupport getLoacleSupport()
-	{
-		return (LocaleSupport)FacesContextUtil.getInstance().getManagedBean(LocaleSupport.BEAN_NAME);
-	}
-
 	public void addErrorMessage(String code)
 	{
 		addMessage(FacesMessage.SEVERITY_ERROR, code, null);
@@ -92,9 +61,16 @@ public class MessageBean
 
 	public String getLocalizedMessage(String code, Object[] params)
 	{
-		//TODO: is this correct
-		String message = messageSource.getMessage(code,params,getLoacleSupport().getCurrentLocale());//, arg1, arg2)// getMessage().get(code);  
+		String message = presentationMetaDataProvider.getMessage(code,params);  
 		return message != null ? MessageFormat.format(message, params) : message;
 
+	}
+
+	public IPresentationMetaDataProvider getPresentationMetaDataProvider() {
+		return presentationMetaDataProvider;
+	}
+
+	public void setPresentationMetaDataProvider(IPresentationMetaDataProvider presentationMetaDataProvider) {
+		this.presentationMetaDataProvider = presentationMetaDataProvider;
 	}
 }

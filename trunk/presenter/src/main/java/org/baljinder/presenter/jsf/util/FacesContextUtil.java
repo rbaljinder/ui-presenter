@@ -8,34 +8,28 @@ import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
 
-//copied form somewhere..i could have written one of my own
-public class FacesContextUtil
-{
+//inspired from somewhere
+public class FacesContextUtil {
 	private FacesContext _context;
 
-	private ScopeUtil _scopeUtil;
-	
+	private FacesScopeUtil _scopeUtil;
+
 	private static ThreadLocal<FacesContextUtil> _instance = new ThreadLocal<FacesContextUtil>();
 
-	private FacesContextUtil()
-	{
+	private FacesContextUtil() {
 	}
-	
-	private void setContext(FacesContext context)
-	{
+
+	private void setContext(FacesContext context) {
 		_context = context;
 	}
 
-	public static FacesContextUtil getInstance()
-	{
+	public static FacesContextUtil getInstance() {
 		return getInstance(FacesContext.getCurrentInstance());
 	}
 
-	public static FacesContextUtil getInstance(FacesContext context)
-	{
+	public static FacesContextUtil getInstance(FacesContext context) {
 		FacesContextUtil result = _instance.get();
-		if (result == null)
-		{
+		if (result == null) {
 			result = new FacesContextUtil();
 			_instance.set(result);
 		}
@@ -43,62 +37,46 @@ public class FacesContextUtil
 		return result;
 	}
 
-	public FacesContext getFacesContext()
-	{
+	public FacesContext getFacesContext() {
 		return _context;
 	}
 
-	public ValueBinding createValueBinding(final String expression)
-	{
+	public ValueBinding createValueBinding(final String expression) {
 		return _context.getApplication().createValueBinding(expression);
 	}
 
-	public Object resolveExpression(final String expression)
-	{
-		Object result = createValueBinding(expression).getValue(_context);
-		return result;
+	public Object resolveExpression(final String expression) {
+		return  createValueBinding(expression).getValue(_context);
 	}
 
-	public Object getManagedBean(final String beanName)
-	{
-		Object requestedObject = _context.getApplication().getVariableResolver().resolveVariable(_context, beanName);
-		return requestedObject;
+	public Object getManagedBean(final String beanName) {
+		return _context.getApplication().getVariableResolver().resolveVariable(_context, beanName);
 	}
-	
-	public ScopeUtil getScopeUtil()
-	{
-		if (_scopeUtil == null)
-		{
-			_scopeUtil = new ScopeUtil(this);
+
+	public FacesScopeUtil getScopeUtil() {
+		if (_scopeUtil == null) {
+			_scopeUtil = new FacesScopeUtil(this);
 		}
-		return _scopeUtil; 
+		return _scopeUtil;
 	}
-	
-	
-	public void clearSubmittedValuesInComponentTree(String componentName) 
-	 {
+
+	@SuppressWarnings("unchecked")
+	public void clearSubmittedValuesInComponentTree(String componentName) {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		UIViewRoot view = fc.getViewRoot();
-		UIComponent refreshComponent =  view.findComponent(componentName) ;
-		if(refreshComponent!=null)
-			clearChildren(refreshComponent.getChildren()) ;
-	 }
-	 
-	 private void clearChildren(List<UIComponent> componentList)
-		{
-			for(UIComponent component: componentList)
-			{
-				if(component.getChildCount()>0)
-					clearChildren(component.getChildren());//recursion
-				if(component instanceof EditableValueHolder)
-				{
-					//this will force the values of these components to be read from the model.
-					//this is required for components in subforms which need to 
-					//be refreshed when other subforms are submitted on a page
-					((EditableValueHolder)component).setSubmittedValue(null);
-					
-				}
-			}	
+		UIComponent refreshComponent = view.findComponent(componentName);
+		if (refreshComponent != null)
+			clearChildren(refreshComponent.getChildren());
+	}
+
+	@SuppressWarnings("unchecked")
+	private void clearChildren(List<UIComponent> componentList) {
+		for (UIComponent component : componentList) {
+			if (component.getChildCount() > 0)
+				clearChildren(component.getChildren());
+			if (component instanceof EditableValueHolder)
+				((EditableValueHolder) component).setSubmittedValue(null);
 		}
+	}
 
 }

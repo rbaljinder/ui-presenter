@@ -24,7 +24,7 @@ public class FilterDataControlTest extends TestCase {
 	
 	public void testDataControl(){
 		IDataControl dataControl = buildDataControl();
-		java.lang.System.out.println("DataControl Query" +dataControl.getQueryString());
+		java.lang.System.out.println("DataControl Query" +dataControl.getQuery());
 		java.lang.System.out.println("DataControl Coutn Query" +getQueryBuilder().getCountQuery(dataControl));
 		
 	}
@@ -35,7 +35,7 @@ public class FilterDataControlTest extends TestCase {
 		filterObjectMap.get("transaction.configurationId").setValue("10") ;
 		filterObjectMap.get("unitedstatesconsumersubject.firstName").setValue("name") ;
 		dataControl.setFilterObjectMap(filterObjectMap);
-		java.lang.System.out.println("DataControl With Filter Query" +dataControl.getQueryString());
+		java.lang.System.out.println("DataControl With Filter Query" +dataControl.getQuery());
 		java.lang.System.out.println("DataControl With Filter Coutn Query" +getQueryBuilder().getCountQuery(dataControl));
 	}
 	
@@ -47,7 +47,7 @@ public class FilterDataControlTest extends TestCase {
 		dataControl.setFilterObjectMap(filterObjectMap);
 		List<OrderByAttribute> orderBy =  Lists.newArrayList(new OrderByAttribute("transaction", "transactionId", OrderByAttribute.ASC));
 		dataControl.setOrderByList(orderBy ); 
-		java.lang.System.out.println("DataControl With Filter And Order bY Query" +dataControl.getQueryString());
+		java.lang.System.out.println("DataControl With Filter And Order bY Query" +dataControl.getQuery());
 		java.lang.System.out.println("DataControl With Filter And Order bY Coutn Query" +getQueryBuilder().getCountQuery(dataControl));
 	}
 	
@@ -60,7 +60,7 @@ public class FilterDataControlTest extends TestCase {
 		filterObjectMap.get("transaction.configurationId").setValue("10") ;
 		filterObjectMap.get("unitedstatesconsumersubject.firstName").setValue("name") ;
 		dataControl.setFilterObjectMap(filterObjectMap);
-		java.lang.System.out.println("DataControl with join Query" +dataControl.getQueryString());
+		java.lang.System.out.println("DataControl with join Query" +dataControl.getQuery());
 		java.lang.System.out.println("DataControl with join Coutn Query" +getQueryBuilder().getCountQuery(dataControl));
 	}
 	
@@ -92,7 +92,7 @@ public class FilterDataControlTest extends TestCase {
 	
 	public void testEmbeddableDataControl(){
 		IDataControl dataControl = buildEmbeddableDataControl();
-		java.lang.System.out.println("DataControl with embedding Query" +dataControl.getQueryString());
+		java.lang.System.out.println("DataControl with embedding Query" +dataControl.getQuery());
 		java.lang.System.out.println("DataControl with embedding Coutn Query" +getQueryBuilder().getCountQuery(dataControl));
 	}
 	

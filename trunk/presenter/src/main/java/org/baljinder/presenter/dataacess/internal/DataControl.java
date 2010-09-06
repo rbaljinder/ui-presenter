@@ -47,7 +47,7 @@ public class DataControl extends AbstractDataControl {
 			return;
 		eventHandler.beforeDataFetch(this);
 		logger.info("Fetching data for Data Control[" + getDataControlName() + "]");
-		data = getDao().getAllEntities(getModelList(), getPageSize(), calculateFirstResultToFetch(), getQueryString());
+		data = getDao().getAllEntities(getModelList(), getPageSize(), calculateFirstResultToFetch(), getQuery());
 		setCountForLastPageFetch(-1);
 		clearSelectedIndexesOfUITable();
 		if (data.size() > 0)
@@ -297,7 +297,7 @@ public class DataControl extends AbstractDataControl {
 		}
 		eventHandler.beforeRefresh(this);
 		logger.info("Refreshing data for Data Control[" + getDataControlName() + "]");
-		data = getDao().getAllEntities(getModelList(), getPageSize(), calculateFirstResultToFetch(), getQueryString());
+		data = getDao().getAllEntities(getModelList(), getPageSize(), calculateFirstResultToFetch(), getQuery());
 		setCountForLastPageFetch(-1);
 		clearSelectedIndexesOfUITable();
 		if (data.size() > 0)

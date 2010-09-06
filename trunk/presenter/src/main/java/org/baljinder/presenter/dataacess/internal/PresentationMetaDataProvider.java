@@ -1,6 +1,7 @@
 package org.baljinder.presenter.dataacess.internal;
 
 import java.util.Locale;
+import java.util.Map;
 
 import org.baljinder.presenter.dataacess.IPresentationMetaDataProvider;
 import org.springframework.context.MessageSource;
@@ -39,6 +40,11 @@ public class PresentationMetaDataProvider implements
 
 	public void setMessageSource(MessageSource messageSource) {
 		this.messageSource = messageSource;
+	}
+
+	//TODO: implement it
+	public Map<String, String> getMessage() {
+		throw new UnsupportedOperationException();
 	}
 
 }

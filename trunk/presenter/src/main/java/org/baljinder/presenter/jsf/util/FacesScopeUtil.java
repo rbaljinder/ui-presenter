@@ -1,16 +1,13 @@
 package org.baljinder.presenter.jsf.util;
 
-import java.util.Map;
-
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-//copied this from somewhere.. just a utility class .. no harm i guess
-public class ScopeUtil
+public class FacesScopeUtil
 {
 	private FacesContextUtil _contextUtil;
 
-	ScopeUtil(FacesContextUtil contextUtil)
+	FacesScopeUtil(FacesContextUtil contextUtil)
 	{
 		_contextUtil = contextUtil;
 	}
@@ -18,36 +15,28 @@ public class ScopeUtil
 	@SuppressWarnings("unchecked")
 	public Object storeOnSession(final String key, final Object object)
 	{
-		Map sessionMap = getContext().getExternalContext().getSessionMap();
-		return sessionMap.put(key, object);
+		return getContext().getExternalContext().getSessionMap().put(key, object);
 	}
 
-	@SuppressWarnings("unchecked")
 	public Object getFromSession(final String key)
 	{
-		Map sessionMap = getContext().getExternalContext().getSessionMap();
-		return sessionMap.get(key);
+		return getContext().getExternalContext().getSessionMap().get(key);
 	}
 
 	@SuppressWarnings("unchecked")
 	public Object storeOnRequest(final String key, final Object object)
 	{
-		Map requestMap = getContext().getExternalContext().getRequestMap();
-		return requestMap.put(key, object);
+		return getContext().getExternalContext().getRequestMap().put(key, object);
 	}
 
-	@SuppressWarnings("unchecked")
 	public Object getFromRequest(final String key)
 	{
-		Map requestMap = getContext().getExternalContext().getRequestMap();
-		return requestMap.get(key);
+		return getContext().getExternalContext().getRequestMap().get(key);
 	}
 
-	@SuppressWarnings("unchecked")
 	public Object removeFromSession(final String key)
 	{
-		Map sessionMap = getContext().getExternalContext().getSessionMap();
-		return sessionMap.remove(key);
+		return getContext().getExternalContext().getSessionMap().remove(key);
 	}
 
 	public void invalidateSession()

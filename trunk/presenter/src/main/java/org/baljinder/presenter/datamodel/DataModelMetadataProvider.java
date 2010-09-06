@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.baljinder.presenter.datamodel.config.Config.Case;
 import org.baljinder.presenter.datamodel.config.DataModel;
 import org.baljinder.presenter.datamodel.config.Field;
 import org.baljinder.presenter.util.ClassUtils;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -21,13 +23,16 @@ import com.google.common.collect.Maps;
  */
 public class DataModelMetadataProvider {
 
-	//private static Logger logger = Logger.getLogger(DataModelMetadataProvider.class) ; 
+	private static Log logger = LogFactory.getLog(DataModelMetadataProvider.class) ; 
 	
 	private List<String> dataModelpackages = Lists.newArrayList();
 
 	private Map<Class<?>, DataModelMetadata> metaData = Maps.newHashMap();
+	
+	public static DataModelMetadataProvider emptyInstance = new DataModelMetadataProvider();
 
-	public void loadMetaData() {
+	public void  loadMetaData() {
+		logger.info("Loading Data Model metadata for packages["+dataModelpackages);
 		for (String packageName : dataModelpackages) {
 			List<Class<?>> classList = ClassUtils.getClassesForPackage(packageName);
 			for (Class<?> clazz : classList)
