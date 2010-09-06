@@ -26,4 +26,12 @@ public class NotToAnnotate {
 	public void setTest(String test) {
 		this.test = test;
 	}
+
+	public String getNo() {
+		return no;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
+	}
 }

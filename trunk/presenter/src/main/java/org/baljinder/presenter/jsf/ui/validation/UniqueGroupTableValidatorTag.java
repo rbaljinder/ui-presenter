@@ -38,7 +38,7 @@ public class UniqueGroupTableValidatorTag extends ValidatorBaseTag {
 		if (getGroupComponentIds() != null) {
 			if (UIComponentTag.isValueReference(getGroupComponentIds())) {
 				ValueBinding vb = facesContext.getApplication().createValueBinding(getGroupComponentIds());
-				validator.setGroupComponentIds(new String(vb.getValue(facesContext).toString()));
+				validator.setGroupComponentIds(vb.getValue(facesContext).toString());
 			} else {
 				validator.setGroupComponentIds(getGroupComponentIds());
 				validator.setMessage(getMessage());

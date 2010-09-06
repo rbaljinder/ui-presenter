@@ -94,7 +94,7 @@ public class GenericPresentationDao implements IPresentationDao,SupportsHibernat
 		try {
 			getSession().flush();
 		} catch (Throwable th) {
-			new RuntimeException(th);
+			throw new RuntimeException(th);
 		}
 	}
 	
@@ -112,7 +112,7 @@ public class GenericPresentationDao implements IPresentationDao,SupportsHibernat
 		try {
 			getSession().flush();
 		} catch (Throwable th) {
-			new RuntimeException(th);
+			throw new RuntimeException(th);
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class GenericPresentationDao implements IPresentationDao,SupportsHibernat
 		try {
 			getSession().flush();
 		} catch (Throwable th) {
-			new RuntimeException(th);
+			throw new RuntimeException(th);
 		}
 		
 	}

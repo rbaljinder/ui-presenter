@@ -74,10 +74,10 @@ public class CodedValueListProvider {
 	 */
 	//TODO: move this too to the cached stuff
 	public Map<String,String> getValidValueMap(Class<?> codeValueObject) {
-		Map<String,String> validValueMap = cachedValidValueMaps.get(codeValueObject);
-		if(validValueMap != null)
-			return validValueMap;
-		Map<String,String> codedValueMap = Maps.newHashMap();
+		Map<String,String> codedValueMap = cachedValidValueMaps.get(codeValueObject);
+		if(codedValueMap != null)
+			return codedValueMap;
+	    codedValueMap = Maps.newHashMap();
 		ValidValueModel validValueModel = codeValueObject.getAnnotation(ValidValueModel.class);
 		List<?> validValueObjects = getValidValueList(codeValueObject);
 		if(validValueModel != null || validValueObjects != null){
@@ -87,7 +87,7 @@ public class CodedValueListProvider {
 				codedValueMap.put(key, desc);
 			}
 		}	
-		cachedValidValueMaps.put(codeValueObject, validValueMap);
+		cachedValidValueMaps.put(codeValueObject, codedValueMap);
 		return codedValueMap;
 	}
 	@SuppressWarnings( { "unchecked" })

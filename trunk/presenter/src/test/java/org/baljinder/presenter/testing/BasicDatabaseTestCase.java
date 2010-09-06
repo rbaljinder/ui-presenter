@@ -30,7 +30,7 @@ public class BasicDatabaseTestCase extends DatabaseTestCase{
 	}
 	@Override
 	protected IDatabaseConnection getConnection() throws Exception {
-		Class driverClass = Class.forName("org.hsqldb.jdbcDriver");
+		Class.forName("org.hsqldb.jdbcDriver");
 		Connection connection =  DriverManager.getConnection(getConnnectionUrl()+getDatabaseName(),getDatabaseUser(),getDatabasePassword());
 		return new DatabaseConnection(connection);
 	}
@@ -53,7 +53,7 @@ public class BasicDatabaseTestCase extends DatabaseTestCase{
 	
 	@Override
 	protected IDataSet getDataSet() throws Exception {
-		return new FlatXmlDataSet(getClass().getResourceAsStream(getDataSeedFileName()));
+		return new FlatXmlDataSet(getClass().getClassLoader().getResourceAsStream(getDataSeedFileName()));
 	}
 
 	public String getDataSeedFileName() {
