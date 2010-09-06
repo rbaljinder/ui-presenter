@@ -11,7 +11,7 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.operation.DatabaseOperation;
 
-public class BasicDatabaseTestCase extends DatabaseTestCase{
+public abstract class BasicDatabaseTestCase extends DatabaseTestCase{
 	
 	public static String DEFAULT_DATABASE_CONNECTION_URL = "jdbc:hsqldb:file:";
 	
@@ -53,14 +53,14 @@ public class BasicDatabaseTestCase extends DatabaseTestCase{
 	
 	@Override
 	protected IDataSet getDataSet() throws Exception {
-		return new FlatXmlDataSet(getClass().getClassLoader().getResourceAsStream(getDataSeedFileName()));
+		return new FlatXmlDataSet(getClass().getResourceAsStream(getDataSeedFileName()));
 	}
 
 	public String getDataSeedFileName() {
 		return DEFAULT_SEED_DATA_FILE ;
 	}
 	
-	public void xxtestMe() throws Exception{
+	public void testMe() throws Exception{
 	  assertNotNull(getConnection());	
 	}
 }

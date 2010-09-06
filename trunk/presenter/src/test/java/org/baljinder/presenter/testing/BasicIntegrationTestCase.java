@@ -3,7 +3,7 @@ package org.baljinder.presenter.testing;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class BasicIntegrationTestCase extends BasicDatabaseTestCase{
+public abstract class BasicIntegrationTestCase extends BasicDatabaseTestCase{
 
 	public static String DEFAULT_SPRING_CONFIG_FILE = "configuration.xml";
 	
@@ -11,8 +11,8 @@ public class BasicIntegrationTestCase extends BasicDatabaseTestCase{
 	
 	@Override
 	protected void setUp() throws Exception {
-		super.setUp();
 		ac = new ClassPathXmlApplicationContext(getConfigFiles());
+		super.setUp();
 	}
 	
 	protected ApplicationContext getApplicationContext() {

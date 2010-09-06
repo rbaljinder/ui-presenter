@@ -5,7 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import junit.framework.TestCase;
 
-public class SpringContextTestCase extends TestCase {
+public abstract class SpringContextTestCase extends TestCase {
 
 	public static String DEFAULT_SPRING_CONFIG_FILE = "configuration.xml";
 	

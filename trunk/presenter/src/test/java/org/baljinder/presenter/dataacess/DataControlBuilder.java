@@ -12,13 +12,14 @@ import com.google.common.collect.Lists;
 
 public class DataControlBuilder {
 
-	public static IDataControl getBasicDataControlWithMockedData(String name,final List<Map<String, Object>> dataList) {
+	public static IDataControl getBasicDataControlWithMockedData(String name,List<Class<?>> modelList,final List<Map<String, Object>> dataList) {
 		IDataControl dataControl = new DataControl(){
 			public List<java.util.Map<String,Object>> getData() {
 				return dataList ;
 			};
 		};
 		dataControl.setDataControlName(name);
+		dataControl.setModelList(modelList);
 		dataControl.setQueryBuilder(getQueryBuilder());
 		return dataControl;
 	}
