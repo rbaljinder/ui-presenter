@@ -6,30 +6,35 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
 		http://www.rbaljinder.org/schema/presenter presenter.xsd">
-	<import resource="persistence.xml"/>
-	<!--Keeping the scope of the beans as prototype(for some of the beans its session/request out of the box), as i am not using WebApplicationContext  -->
-	<ps:data-control
-		name="EventHandler_Supporting_DataControl"
+	<import resource="persistence.xml" />
+	<!--Keeping the scope of the beans as prototype(for some of the beans its 
+		session/request out of the box), as i am not using WebApplicationContext -->
+	<ps:data-control name="EventHandler_Supporting_DataControl"
 		coded-value="true" scope="prototype" access-strategy="direct"
 		event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
 		<ps:model class="org.baljinder.presenter.testing.support.model.System" />
 	</ps:data-control>
-	<ps:transition name="EventHandler_TransitionAction_Supporting_Transition" scope="prototype"
-		event-handler-ref="doNothingEventHandler">
+	<ps:transition name="EventHandler_TransitionAction_Supporting_Transition"
+		scope="prototype" event-handler-ref="doNothingEventHandler">
 		<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
-		<ps:transition-action class="org.baljinder.presenter.testing.support.DoNothingTransitionAction"
+		<ps:transition-action
+			class="org.baljinder.presenter.testing.support.DoNothingTransitionAction"
 			scope="prototype" />
 	</ps:transition>
-	<ps:event-handler name="doNothingEventHandler" class="org.baljinder.presenter.testing.support.DoNothingEventHandler" />
-	<ps:transition name="TransitionAction_Supporting_Transition" scope="prototype">
+	<ps:event-handler name="doNothingEventHandler"
+		class="org.baljinder.presenter.testing.support.DoNothingEventHandler" />
+	<ps:transition name="TransitionAction_Supporting_Transition"
+		scope="prototype">
 		<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
-		<ps:transition-action class="org.baljinder.presenter.testing.support.DoNothingTransitionAction"
+		<ps:transition-action
+			class="org.baljinder.presenter.testing.support.DoNothingTransitionAction"
 			scope="prototype" />
 	</ps:transition>
-	<ps:page name="All_Properties_Configurable_Supporting_Page" scope="prototype" event-handler-ref="doNothingEventHandler">
-		<ps:data-control
-			name="All_Properties_Configurable_DataControl"
-			init-method="initialize" scope="prototype" size="20" access-strategy="jsf-based" event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler" >
+	<ps:page name="All_Properties_Configurable_Supporting_Page"
+		scope="prototype" event-handler-ref="doNothingEventHandler">
+		<ps:data-control name="All_Properties_Configurable_DataControl"
+			init-method="initialize" scope="prototype" size="20" access-strategy="jsf-based"
+			event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
 			<ps:type class="org.baljinder.presenter.dataacess.internal.DataControl" />
 			<ps:default-where-clause clause="testClause" />
 			<ps:dao-key-name
@@ -39,8 +44,7 @@
 			<ps:query-builder builder="defaultQueryBuilder" />
 			<ps:model class="org.baljinder.presenter.testing.support.model.System" />
 			<ps:join-criteria criteria="testC" />
-			<ps:data-control
-				name="Basic_Child_DataControl"
+			<ps:data-control name="Basic_Child_DataControl"
 				access-strategy="direct" scope="prototype">
 				<ps:model class="org.baljinder.presenter.testing.support.model.System" />
 				<ps:parent-relations>
@@ -50,8 +54,9 @@
 			</ps:data-control>
 		</ps:data-control>
 	</ps:page>
-	<ps:data-control name="dataControl_dataAccess_test" access-strategy="direct" scope="prototype">
-		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable"/>
+	<ps:data-control name="dataControl_dataAccess_test"
+		access-strategy="direct" scope="prototype">
+		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
 	</ps:data-control>
 	<bean id="defaultQueryBuilder"
 		class="org.baljinder.presenter.dataacess.util.BasicQueryBuilder">

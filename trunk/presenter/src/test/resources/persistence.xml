@@ -9,13 +9,12 @@
 
 	<bean id="genericValidValueDao"
 		class="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl">
-	</bean>	
+	</bean>
 
 	<bean id="genericPresentationDao"
 		class="org.baljinder.presenter.dataacess.internal.GenericPresentationDao" />
 
-	<bean id="codedValueDAO"
-		class="org.baljinder.presenter.dataacess.cvl.CodedValueDAO" />
+	<bean id="codedValueDAO" class="org.baljinder.presenter.dataacess.cvl.CodedValueDAO" />
 
 	<bean id="presentationPersistence"
 		class="org.baljinder.presenter.dataacess.internal.PersistenceManager">
@@ -23,7 +22,7 @@
 		<property name="daoAssociations">
 			<map>
 				<entry
-					key="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl" 
+					key="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl"
 					value-ref="genericValidValueDao" />
 				<entry
 					key="org.baljinder.presenter.dataacess.internal.GenericPresentationDao"
@@ -41,7 +40,8 @@
 		<property name="dataSource" ref="datasource" />
 		<property name="mappingLocations">
 			<list>
-				<value>/org/baljinder/presenter/testing/support/model/mapping.hbm.xml</value>
+				<value>/org/baljinder/presenter/testing/support/model/mapping.hbm.xml
+				</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

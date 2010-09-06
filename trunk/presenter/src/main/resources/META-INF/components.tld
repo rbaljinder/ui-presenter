@@ -14,7 +14,7 @@
 	<description>
 		This tag library has the tags for the presenter Components
   </description>
-  <tag>
+	<tag>
 		<name>uniqueGroupValidation</name>
 		<tag-class>org.baljinder.presenter.ui.validation.UniqueGroupValueValidatorTag</tag-class>
 		<body-content>JSP</body-content>
