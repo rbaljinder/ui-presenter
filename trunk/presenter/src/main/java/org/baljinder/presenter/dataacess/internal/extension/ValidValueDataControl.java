@@ -62,9 +62,9 @@ public class ValidValueDataControl extends DataControl {
 	private void saveInternal(Map<String, Object> elementToSave) {
 		ValidValueGenricDao dao = getValidValueDao();
 		for (Object element : elementToSave.values()) {
-			if (newlyInsertedElements.contains(element)) {
+			if (newlyCreatedElements.contains(element)) {
 				if (dao.createNewIfDoesNotExist(element, Utils.getClassNameForModel(getModelList(), element)))
-					newlyInsertedElements.remove(element);
+					newlyCreatedElements.remove(element);
 				objectsIDFromDB.add(dao.getAssignedIdOfObject(elementToSave, Utils.getClassNameForModel(getModelList(), element)));
 			} else {
 				dao.deleteExistingIfIdChangeOrUpdate(getCurrentElementInternal(), Utils.getClassNameForModel(getModelList(), element), objectsIDFromDB);
@@ -72,7 +72,7 @@ public class ValidValueDataControl extends DataControl {
 		}
 	}
 
-	public String saveAll() {
+	public String saveSelectedElements() {
 		List<Map<String, Object>> data = getData();
 		for (Map<String, Object> elementToSave : data) {
 			for (Object element : elementToSave.values()) {

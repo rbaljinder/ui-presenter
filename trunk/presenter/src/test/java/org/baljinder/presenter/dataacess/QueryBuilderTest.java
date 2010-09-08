@@ -16,7 +16,7 @@ import com.google.common.collect.Maps;
 public class QueryBuilderTest extends TestCase {
 
 	public void testBasicDataControl() {
-		IDataControl basicDataControl = DataControlBuilder.getBasicDataControl("basicDataControl",
+		IDataControl basicDataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
 				DataControlBuilder.getModelListForClasses(TestTable.class));
 		assertTrue(basicDataControl.getQuery().equals(" from TestTable testTable "));
 		assertTrue(basicDataControl.getCountQuery().equals(" Select count(*)  from TestTable testTable "));
@@ -25,7 +25,7 @@ public class QueryBuilderTest extends TestCase {
 	public void testDataControlWithFilter() {
 		String expectedQuery = " from TestTable testTable  where  (  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
 		String expectedCountQuery = " Select count(*)  from TestTable testTable  where  (  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
-		IDataControl dataControl = DataControlBuilder.getBasicDataControl("basicDataControl",
+		IDataControl dataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
 				DataControlBuilder.getModelListForClasses(TestTable.class));
 		Map<String, ModelFieldMapping> filterObjectMap = dataControl.getFilterObjectMap();
 		filterObjectMap.get("testTable.testId").setValue("10");
@@ -38,7 +38,7 @@ public class QueryBuilderTest extends TestCase {
 	public void testDataControlWithFilterAndOrderBy() {
 		String expectedQuery = " from TestTable testTable  where  (  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  )  order by testTable.testId ASC";
 		String expectedCountQuery = " Select count(*)  from TestTable testTable  where  (  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
-		IDataControl dataControl = DataControlBuilder.getBasicDataControl("basicDataControl",
+		IDataControl dataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
 				DataControlBuilder.getModelListForClasses(TestTable.class));
 		Map<String, ModelFieldMapping> filterObjectMap = dataControl.getFilterObjectMap();
 		filterObjectMap.get("testTable.testId").setValue("10");
@@ -53,7 +53,7 @@ public class QueryBuilderTest extends TestCase {
 	public void testDataControlWithJoin() {
 		String expectedQuery = " from TestTable testTable , AnotherTestTable anotherTestTable  where  (  ( testTable.testId = anotherTestTable.testId AND testTable.name = anotherTestTable.name )  and  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
 		String expectedCountQuery=" Select count(*)  from TestTable testTable , AnotherTestTable anotherTestTable  where  (  ( testTable.testId = anotherTestTable.testId AND testTable.name = anotherTestTable.name )  and  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
-		IDataControl dataControl = DataControlBuilder.getBasicDataControl("basicDataControl",
+		IDataControl dataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
 				DataControlBuilder.getModelListForClasses(TestTable.class, AnotherTestTable.class));
 		String joiningCriteria = "testTable.testId = anotherTestTable.testId AND testTable.name = anotherTestTable.name";
 		dataControl.setJoinCriteria(joiningCriteria);
@@ -68,7 +68,7 @@ public class QueryBuilderTest extends TestCase {
 	public void testChildDataControl(){
 		String expectedQuery = " from AnotherTestTable anotherTestTable  where  (  (  ( anotherTestTable.testId  = '10' )  )  ) ";
 		String expectedCountQury= " Select count(*)  from AnotherTestTable anotherTestTable  where  (  (  ( anotherTestTable.testId  = '10' )  )  ) ";
-		IDataControl dataControl = DataControlBuilder.getBasicDataControl("basicDataControl",
+		IDataControl dataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
 				DataControlBuilder.getModelListForClasses(AnotherTestTable.class));
 		TestTable parentDataElement = new TestTable();
 		parentDataElement.setTestId(10);

@@ -99,21 +99,27 @@ public interface IDataControl extends SupportsEventHandler {
 
 	public String sortData(SortEvent event);
 
+	public String create();
+	
 	public String insert();
-
+	
+	public List<Map<String, Object>> getNewlyCreatedElement();
+	
 	public String save();
 
 	public String save(Boolean flushChanges);
 
-	public String saveAll();
+	public String saveSelectedElements();
 
-	public String saveAll(Boolean flushChanges);
-
+	public String saveSelectedElements(Boolean flushChanges);
+	
 	public String update();
 
 	public String update(Boolean flushChanges);
 
 	public String delete();
+	
+	public String deleteSelectedElements();
 
 	public List<Map<String, Object>> refresh();
 

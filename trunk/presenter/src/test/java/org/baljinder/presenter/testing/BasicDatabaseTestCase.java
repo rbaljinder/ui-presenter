@@ -60,7 +60,7 @@ public abstract class BasicDatabaseTestCase extends DatabaseTestCase{
 		return DEFAULT_SEED_DATA_FILE ;
 	}
 	
-	public void testMe() throws Exception{
+	public void xxtestMe() throws Exception{
 	  assertNotNull(getConnection());	
 	}
 }

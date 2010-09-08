@@ -118,7 +118,7 @@ public class PageController implements IPageController {
 	public String saveAll() {
 		eventHandler.beforeSave(this);
 		for(IDataControl dataControl :getDataConrolList()){
-			dataControl.saveAll();
+			dataControl.saveSelectedElements();
 		}
 		eventHandler.afterSave(this);
 		return null ; // refresh it 

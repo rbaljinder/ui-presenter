@@ -32,7 +32,7 @@ import com.google.common.collect.Lists;
 public abstract class AbstractDataControl implements IDataControl {
 
 	protected static final Log logger = LogFactory.getLog(AbstractDataControl.class);
-	
+
 	private IPersistenceManager persistenceManager;
 
 	private UIXTable table = null;
@@ -61,10 +61,10 @@ public abstract class AbstractDataControl implements IDataControl {
 
 	private String defaultWhereClaue;
 
-	protected IDataAccessStrategy dataAccessStrategy ;
-	
+	protected IDataAccessStrategy dataAccessStrategy;
+
 	protected IEventHandler eventHandler = EmptyEventHandler.doNothingHandler;
-	
+
 	private IDataControl parentDataControl;
 
 	private List<String> parentChildRelation;
@@ -90,9 +90,9 @@ public abstract class AbstractDataControl implements IDataControl {
 				String[] defintion = StringUtils.split((String) key, ".");
 				String modelName = defintion[0];
 				String fieldName = defintion[1];
-				modelFieldMapping = new ModelFieldMapping(modelName,fieldName);
-				Class<? extends Object> modelClass =  Utils.getModelClassOfDataControl(getDataControl(),modelFieldMapping.getModelName());
-				Class<? extends Object> fieldType  =  ReflectionUtils.getFieldTypeOfClass(modelClass,modelFieldMapping.getFieldName());
+				modelFieldMapping = new ModelFieldMapping(modelName, fieldName);
+				Class<? extends Object> modelClass = Utils.getModelClassOfDataControl(getDataControl(), modelFieldMapping.getModelName());
+				Class<? extends Object> fieldType = ReflectionUtils.getFieldTypeOfClass(modelClass, modelFieldMapping.getFieldName());
 				modelFieldMapping.setModelClass(modelClass);
 				modelFieldMapping.setFieldClass(fieldType);
 				put((String) key, modelFieldMapping);
@@ -109,7 +109,7 @@ public abstract class AbstractDataControl implements IDataControl {
 		orderByList.clear();
 		return true;
 	}
-	
+
 	private IDataControl getDataControl() {
 		return this;
 	}
@@ -206,8 +206,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	}
 
 	/**
-	 * @param dataFetched
-	 *            the dataFetched to set
+	 * @param dataFetched the dataFetched to set
 	 */
 	public void setDataFetched(Boolean dataFetched) {
 		this.dataFetched = dataFetched;
@@ -221,8 +220,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	}
 
 	/**
-	 * @param defaultWhereClaue
-	 *            the defaultWhereClaue to set
+	 * @param defaultWhereClaue the defaultWhereClaue to set
 	 */
 	public void setDefaultWhereClause(String defaultWhereClaue) {
 		this.defaultWhereClaue = defaultWhereClaue;
@@ -244,8 +242,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	}
 
 	/**
-	 * @param queryBuilder
-	 *            the queryBuilder to set
+	 * @param queryBuilder the queryBuilder to set
 	 */
 	public void setQueryBuilder(IQueryBuilder queryBuilder) {
 		this.queryBuilder = queryBuilder;
@@ -259,8 +256,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	}
 
 	/**
-	 * @param countForLastPageFetch
-	 *            the countForLastPageFetch to set
+	 * @param countForLastPageFetch the countForLastPageFetch to set
 	 */
 	protected void setCountForLastPageFetch(Integer countForLastPageFetch) {
 		this.countForLastPageFetch = countForLastPageFetch;
@@ -273,7 +269,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	public String getCountQuery() {
 		return getQueryBuilder().getCountQuery(this);
 	}
-	
+
 	public int getCurrentPageSize() {
 		if (getPageCursor() > 0)
 			return getPageCursor();
@@ -359,8 +355,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	}
 
 	/**
-	 * @param filterObjectMap
-	 *            the filterObjectMap to set
+	 * @param filterObjectMap the filterObjectMap to set
 	 */
 	public void setFilterObjectMap(Map<String, ModelFieldMapping> filterObjectMap) {
 		this.filterObjectMap = filterObjectMap;
@@ -399,8 +394,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	}
 
 	/**
-	 * @param orderByList
-	 *            the orderByList to set
+	 * @param orderByList the orderByList to set
 	 */
 	public void setOrderByList(List<OrderByAttribute> orderByList) {
 		this.orderByList = orderByList;
@@ -436,7 +430,9 @@ public abstract class AbstractDataControl implements IDataControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.extension.IEmbeddableDataControl#setParentDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see
+	 * org.baljinder.presenter.jsf.ui.dataacess.extension.IEmbeddableDataControl#setParentDataControl(org.baljinder.presenter.jsf.ui.dataacess
+	 * .IDataControl)
 	 */
 	public void setParentDataControl(IDataControl parentDataControl) {
 		this.parentDataControl = parentDataControl;
@@ -460,13 +456,13 @@ public abstract class AbstractDataControl implements IDataControl {
 	public void setDataAccessStrategy(IDataAccessStrategy dataAccessStrategy) {
 		this.dataAccessStrategy = dataAccessStrategy;
 	}
-	
-	public boolean shouldFetchData(){
-		return getDataAccessStrategy().shouldFetch(this) ;
+
+	public boolean shouldFetchData() {
+		return getDataAccessStrategy().shouldFetch(this);
 	}
-	
+
 	public void markDataFetched() {
-		getDataAccessStrategy().markFetched(this) ;
+		getDataAccessStrategy().markFetched(this);
 	}
 
 	/**

@@ -48,9 +48,23 @@ public class GenericPresentationDao implements IPresentationDao,SupportsHibernat
     {	   
         getHibernateTemplate().save(object);		
 	}
+	public void create(Map<String, Object> dataObject) 
+    {	   
+		for (Object data : dataObject.values()) {
+			getHibernateTemplate().save(data);
+		}
+	}
+	
 	public void update(Object object) 
     {
 	   getHibernateTemplate().update(object);	
+	}
+	
+	public void update(Map<String, Object> dataObject) 
+    {
+		for (Object data : dataObject.values()) {
+			getHibernateTemplate().update(data);
+		}	
 	}
 	
 	public void delete(Object object)

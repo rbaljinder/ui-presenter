@@ -79,7 +79,7 @@ public class DataModelMetadataProvider {
 	}
 	
 	/**
-	 *  It does not do null checks for existance. so please check existance before using this
+	 *  It does not do null checks for existence. so please check existence before using this
 	 * @param dataModelClass
 	 * @return
 	 */
@@ -95,7 +95,7 @@ public class DataModelMetadataProvider {
 	}
 	
 	/**
-	 *  It does not do null checks for existance. so please check existance before using this
+	 *  It does not do null checks for existence. so please check existence before using this
 	 * @param dataModelClass
 	 * @param fieldName
 	 * @return

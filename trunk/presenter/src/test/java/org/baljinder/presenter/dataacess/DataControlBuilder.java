@@ -1,5 +1,6 @@
 package org.baljinder.presenter.dataacess;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,17 @@ import com.google.common.collect.Lists;
 
 public class DataControlBuilder {
 
-	public static IDataControl getBasicDataControlWithMockedData(String name,List<Class<?>> modelList,final List<Map<String, Object>> dataList) {
+	private static IDataControl getMockedDataControl(final List<Map<String, Object>> dataList){
 		IDataControl dataControl = new DataControl(){
 			public List<java.util.Map<String,Object>> getData() {
 				return dataList ;
 			};
 		};
+		return dataControl ; 
+	}
+	
+	public static IDataControl getBasicDataControlWithMockedData(String name,List<Class<?>> modelList,final List<Map<String, Object>> dataList) {
+		IDataControl dataControl = getMockedDataControl(dataList);
 		dataControl.setDataControlName(name);
 		dataControl.setModelList(modelList);
 		dataControl.setQueryBuilder(getQueryBuilder());
@@ -25,17 +31,8 @@ public class DataControlBuilder {
 	}
 
 	
-	public static IDataControl getBasicDataControl(String name, List<Class<?>> modelList) {
-		IDataControl dataControl = new DataControl(){
-			@Override
-			public List<Map<String, Object>> getData() {
-				return Lists.newArrayList();
-			}
-		};
-		dataControl.setDataControlName(name);
-		dataControl.setQueryBuilder(getQueryBuilder());
-		dataControl.setModelList(modelList);
-		return dataControl;
+	public static IDataControl getBasicDataControlWithMockedData(String name, List<Class<?>> modelList) {
+		return getBasicDataControlWithMockedData(name, modelList,new ArrayList<Map<String,Object>>());
 	}
 
 	public static IQueryBuilder getQueryBuilder() {
