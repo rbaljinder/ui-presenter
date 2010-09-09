@@ -15,7 +15,7 @@ public abstract class BasicDatabaseTestCase extends DatabaseTestCase{
 	
 	public static String DEFAULT_DATABASE_CONNECTION_URL = "jdbc:hsqldb:file:";
 	
-	public static String DEFAULT_DATABASE_NAME = "/test";
+	public static String DEFAULT_DATABASE_NAME = "src/test/resources/test";
 	
 	public static String DEFAULT_USER = "sa";
 	
@@ -27,6 +27,11 @@ public abstract class BasicDatabaseTestCase extends DatabaseTestCase{
 	@Override
 	protected DatabaseOperation getSetUpOperation() throws Exception {
 		return DatabaseOperation.CLEAN_INSERT ;
+	}
+	
+	@Override
+	protected DatabaseOperation getTearDownOperation() throws Exception {
+		return DatabaseOperation.DELETE_ALL;
 	}
 	@Override
 	protected IDatabaseConnection getConnection() throws Exception {

@@ -10,4 +10,11 @@
 		</id>
 		<property name="name" />
 	</class>
+		<class name="org.baljinder.presenter.testing.support.model.AnotherTestTable"
+		table="anotherTest">
+		<id name="testId" column="id" >
+			<generator class="assigned"></generator>
+		</id>
+		<property name="name" />
+	</class>
 </hibernate-mapping>
