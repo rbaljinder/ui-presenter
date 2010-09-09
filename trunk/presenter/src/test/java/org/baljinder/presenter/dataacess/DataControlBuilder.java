@@ -8,6 +8,7 @@ import org.baljinder.presenter.dataacess.filter.Filter;
 import org.baljinder.presenter.dataacess.internal.DataControl;
 import org.baljinder.presenter.dataacess.util.BasicQueryBuilder;
 import org.baljinder.presenter.dataacess.util.IQueryBuilder;
+import org.baljinder.presenter.testing.support.model.TestTable;
 
 import com.google.common.collect.Lists;
 
@@ -51,5 +52,20 @@ public class DataControlBuilder {
 		for (Class<?> clazz : classes)
 			modelList.add(clazz);
 		return modelList;
+	}
+	
+	public static void createDataControlElement(IDataControl dataControl, int howMany, String name, int seedFrom) {
+		for (int i = 0; i < howMany; i++) {
+			dataControl.create();
+		}
+		List<Map<String, Object>> newlyCreatedElements = dataControl.getNewlyCreatedElement();
+		for (Map<String, Object> element : newlyCreatedElements) {
+			for (Map.Entry<String, Object> anEntry : element.entrySet()) {
+				TestTable testTable = (TestTable) anEntry.getValue();
+				testTable.setName("deleteMe" + seedFrom);
+				testTable.setTestId(seedFrom);
+				seedFrom++;
+			}
+		}
 	}
 }

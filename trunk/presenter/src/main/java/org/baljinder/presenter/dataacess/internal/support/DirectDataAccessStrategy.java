@@ -25,6 +25,8 @@ public class DirectDataAccessStrategy implements IDataAccessStrategy {
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataAccessStrategy#shouldFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
 	 */
 	public boolean shouldFetch(IDataControl dataControl) {
+		if(dataControl.getDataFetched())
+			return false ;
 		return true;
 	}
 

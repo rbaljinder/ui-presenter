@@ -29,6 +29,7 @@ public class DataControl extends AbstractDataControl {
 	public boolean initialize() {
 		eventHandler.beforeInitialize(this);
 		newlyCreatedElements.clear();
+		data.clear();
 		boolean toReturn = super.initialize();
 		eventHandler.afterInitialize(this);
 		return toReturn;

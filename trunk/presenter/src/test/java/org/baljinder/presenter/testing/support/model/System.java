@@ -11,14 +11,16 @@ import org.baljinder.presenter.datamodel.config.Field;
  * @author Baljinder Randhawa
  * 
  */
-@DataModel 
+@DataModel
 public class System {
 
 	private Long systemId;
-	
+
+	private String systemName;
+
 	private Long clientId;
-	
-	@Field(Case=Case.UPPER)
+
+	@Field(Case = Case.UPPER)
 	private String name;
 
 	public Long getSystemId() {
@@ -48,6 +50,14 @@ public class System {
 	@Override
 	public String toString() {
 		return "System [systemId=" + systemId + ", clientId=" + clientId + ", name=" + name + "]";
+	}
+
+	public String getSystemName() {
+		return systemName;
+	}
+
+	public void setSystemName(String systemName) {
+		this.systemName = systemName;
 	}
 
 }

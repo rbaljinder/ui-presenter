@@ -10,11 +10,24 @@
 		</id>
 		<property name="name" />
 	</class>
-		<class name="org.baljinder.presenter.testing.support.model.AnotherTestTable"
+	<class name="org.baljinder.presenter.testing.support.model.AnotherTestTable"
 		table="anotherTest">
-		<id name="testId" column="id" >
+		<id name="testId" column="id">
 			<generator class="assigned"></generator>
 		</id>
 		<property name="name" />
+	</class>
+	<class name="org.baljinder.presenter.testing.support.model.System">
+		<id name="systemId">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="systemName" />
+		<property name="clientId" />
+	</class>
+	<class name="org.baljinder.presenter.testing.support.model.Client">
+		<id name="clientId">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="clientName" />
 	</class>
 </hibernate-mapping>

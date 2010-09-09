@@ -3,6 +3,7 @@ package org.baljinder.presenter.namespace;
 import org.baljinder.presenter.dataacess.IDataControl;
 import org.baljinder.presenter.dataacess.IPageController;
 import org.baljinder.presenter.dataacess.ITransitionController;
+import org.baljinder.presenter.dataacess.internal.support.DirectDataAccessStrategy;
 import org.baljinder.presenter.dataacess.internal.support.JSFSupportingDataAccessStrategy;
 import org.baljinder.presenter.testing.SpringContextTestCase;
 import org.baljinder.presenter.testing.support.DoNothingEventHandler;
@@ -27,7 +28,7 @@ public class NameSpaceDefinitionAndBeanConstructionTest extends SpringContextTes
 		IDataControl  allPropertiesConfigurableDataControl = (IDataControl) ac.getBean("All_Properties_Configurable_DataControl");
 		assertNotNull(allPropertiesConfigurableDataControl);
 		assertTrue(allPropertiesConfigurableDataControl.getEventHandler() instanceof DoNothingEventHandler);
-		assertTrue(allPropertiesConfigurableDataControl.getDataAccessStrategy() instanceof JSFSupportingDataAccessStrategy);
+		assertTrue(allPropertiesConfigurableDataControl.getDataAccessStrategy() instanceof DirectDataAccessStrategy);
 		assertTrue(allPropertiesConfigurableDataControl.getPageSize() == 20);
 		
 		//TODO:add more options

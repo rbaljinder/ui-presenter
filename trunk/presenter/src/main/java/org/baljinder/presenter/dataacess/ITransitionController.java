@@ -11,23 +11,21 @@ import java.util.List;
  */
 public interface ITransitionController extends SupportsEventHandler {
 
-	public static final String QUERY = "query";
-
-	public static final String LOAD = "load";
-
-	public static final String INSERT = "insert";
+	public enum TransitionMode {
+		QUERY, LOAD, CREATE
+	};
 
 	public static final String NO_TRANSITION = "refresh";
-	
-	public static final String defaultTransitionMode = LOAD;
+
+	public static final TransitionMode defaultTransitionMode = TransitionMode.LOAD;
 
 	public void setName(String name);
-	
-	public String getName();
-	
-	public void setTransitionMode(String transitionMode);
 
-	public String getTransitionMode();
+	public String getName();
+
+	public void setTransitionMode(TransitionMode transitionMode);
+
+	public TransitionMode getTransitionMode();
 
 	public void setSourceDataControl(IDataControl sourceDataControl);
 
@@ -37,25 +35,19 @@ public interface ITransitionController extends SupportsEventHandler {
 
 	public IDataControl getTargetDataControl();
 
-	/**
-	 * @return the targetPageController
-	 */
-	public IPageController getTargetPageController() ;
+	public IPageController getTargetPageController();
 
-	/**
-	 * @param targetPageController the targetPageController to set
-	 */
-	public void setTargetPageController(IPageController targetPageController) ;
-	
+	public void setTargetPageController(IPageController targetPageController);
+
 	public String performTransition();
-	
+
 	public String selectAndPerformTransition();
 
-	public List<String> getTransitionCriteria() ;
+	public List<String> getTransitionCriteria();
 
-	public void setTransitionCriteria(List<String> transitionCriterion) ;
+	public void setTransitionCriteria(List<String> transitionCriterion);
 
-	public void setTransitionAction(ITransitionAction transitionAction) ;
-	
+	public void setTransitionAction(ITransitionAction transitionAction);
+
 	public ITransitionAction getTransitionAction();
 }

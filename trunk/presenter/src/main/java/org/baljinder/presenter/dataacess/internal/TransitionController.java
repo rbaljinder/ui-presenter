@@ -30,7 +30,7 @@ public class TransitionController implements ITransitionController {
 
 	private String name;
 
-	private String transitionMode = defaultTransitionMode;
+	private TransitionMode transitionMode = defaultTransitionMode;
 
 	private String outcome;
 
@@ -43,7 +43,7 @@ public class TransitionController implements ITransitionController {
 	private ITransitionAction transitionAction;
 
 	private List<String> transitionCriteria = Lists.newArrayList();
-	
+
 	private IEventHandler eventHandler = EmptyEventHandler.doNothingHandler;
 
 	public static final String GET = "get";
@@ -57,9 +57,9 @@ public class TransitionController implements ITransitionController {
 		eventHandler.beforeTransition(this);
 		initlizeTarget();
 		ActionResult actionResult = performTransitionAction();
-		if(ActionResult.CANCEL.equals(actionResult))
-				return NO_TRANSITION ;
-		if(getTransitionCriteria() != null && !getTransitionCriteria().isEmpty())
+		if (ActionResult.CANCEL.equals(actionResult))
+			return NO_TRANSITION;
+		if (getTransitionCriteria() != null && !getTransitionCriteria().isEmpty())
 			setCriteriaOnTargetDataControl();
 		eventHandler.afterTransition(this);
 		return getOutcome();
@@ -69,10 +69,20 @@ public class TransitionController implements ITransitionController {
 		getTargetPageController().initialize();
 		if (!targetPageController.getCached()) {
 			for (IDataControl dataControl : getTargetPageController().getDataConrolList()) {
-				if (QUERY.equalsIgnoreCase(getTransitionMode()))
+				switch (getTransitionMode()) {
+				case QUERY:
 					dataControl.setDataFetched(true);
-				if (LOAD.equalsIgnoreCase(getTransitionMode()) || INSERT.equalsIgnoreCase(getTransitionMode()))
+					break;
+				case CREATE:
+					dataControl.setDataFetched(true);
+					dataControl.create();
+					break;
+				case LOAD:
 					dataControl.setDataFetched(false);
+					break;
+				default:
+					break;
+				}
 				dataControl.clearFilterValues();
 				dataControl.setPageCursor(0);
 				dataControl.setPropagetedClause(null);
@@ -90,15 +100,15 @@ public class TransitionController implements ITransitionController {
 		initlizeTarget();
 		getSourceDataControl().selectData();
 		ActionResult actionResult = performTransitionAction();
-		if(ActionResult.CANCEL.equals(actionResult))
-				return NO_TRANSITION ;
+		if (ActionResult.CANCEL.equals(actionResult))
+			return NO_TRANSITION;
 		setCriteriaOnTargetDataControl();
 		eventHandler.afterTransition(this);
 		return getOutcome();
 	}
 
 	/**
-	 * @return 
+	 * @return
 	 * 
 	 */
 	private ActionResult performTransitionAction() {
@@ -121,13 +131,14 @@ public class TransitionController implements ITransitionController {
 				String[] participatingAttribtue = StringUtils.split(attribute, "=");
 				String sourceAttribute = participatingAttribtue[1].trim();
 				// verify and throw exception if invalid stuff.. or maybe just verify at the construction level only once
-				String[]splittedParentAttribute = StringUtils.split(sourceAttribute, ".");
+				String[] splittedParentAttribute = StringUtils.split(sourceAttribute, ".");
 				Object parentObject = currentlySelectedElement.get(splittedParentAttribute[0]);
 				String parentFieldName = splittedParentAttribute[1];
-				Object sourceAttibuteValue = ReflectionUtils.getFieldValue(parentObject,parentFieldName);
+				Object sourceAttibuteValue = ReflectionUtils.getFieldValue(parentObject, parentFieldName);
 				if (sourceAttibuteValue == null)
 					throw new RuntimeException("Source Property can not be null");
-				return participatingAttribtue[0] + BasicQueryBuilder.EQUALS + BasicQueryBuilder.QT + sourceAttibuteValue + BasicQueryBuilder.QT;
+				return participatingAttribtue[0] + BasicQueryBuilder.EQUALS + BasicQueryBuilder.QT + sourceAttibuteValue
+						+ BasicQueryBuilder.QT;
 			}
 		});
 		clauses = Lists.transform(clauses, BasicQueryBuilder.buildClause);
@@ -143,8 +154,7 @@ public class TransitionController implements ITransitionController {
 	}
 
 	/**
-	 * @param outcome
-	 *            the outcome to set
+	 * @param outcome the outcome to set
 	 */
 	public void setOutcome(String outcome) {
 		this.outcome = outcome;
@@ -155,7 +165,7 @@ public class TransitionController implements ITransitionController {
 	 * 
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#getTransitionMode()
 	 */
-	public String getTransitionMode() {
+	public TransitionMode getTransitionMode() {
 		return transitionMode;
 	}
 
@@ -164,7 +174,7 @@ public class TransitionController implements ITransitionController {
 	 * 
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setTransitionMode(java.lang.String)
 	 */
-	public void setTransitionMode(String transitionMode) {
+	public void setTransitionMode(TransitionMode transitionMode) {
 		this.transitionMode = transitionMode;
 
 	}
@@ -190,7 +200,9 @@ public class TransitionController implements ITransitionController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setSourceDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see
+	 * org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setSourceDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataControl
+	 * )
 	 */
 	public void setSourceDataControl(IDataControl sourceDataControl) {
 		this.sourceDataControl = sourceDataControl;
@@ -200,7 +212,9 @@ public class TransitionController implements ITransitionController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setTargetDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see
+	 * org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setTargetDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataControl
+	 * )
 	 */
 	public void setTargetDataControl(IDataControl targetDataControl) {
 		this.targetDataControl = targetDataControl;
@@ -214,8 +228,7 @@ public class TransitionController implements ITransitionController {
 	}
 
 	/**
-	 * @param targetPageController
-	 *            the targetPageController to set
+	 * @param targetPageController the targetPageController to set
 	 */
 	public void setTargetPageController(IPageController targetPageController) {
 		this.targetPageController = targetPageController;
@@ -248,8 +261,7 @@ public class TransitionController implements ITransitionController {
 	}
 
 	/**
-	 * @param transitionCriterion
-	 *            the transitionCriterion to set
+	 * @param transitionCriterion the transitionCriterion to set
 	 */
 	public void setTransitionCriteria(List<String> transitionCriterion) {
 		this.transitionCriteria = transitionCriterion;
@@ -263,8 +275,7 @@ public class TransitionController implements ITransitionController {
 	}
 
 	/**
-	 * @param transitionAction
-	 *            the transitionAction to set
+	 * @param transitionAction the transitionAction to set
 	 */
 	public void setTransitionAction(ITransitionAction transitionAction) {
 		this.transitionAction = transitionAction;

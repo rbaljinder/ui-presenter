@@ -3,7 +3,10 @@
  */
 package org.baljinder.presenter.namespace;
 
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
+import org.baljinder.presenter.dataacess.ITransitionController.TransitionMode;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
@@ -15,12 +18,23 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
+import com.google.common.collect.Maps;
+
 /**
  * @author Baljinder Randhawa
  * 
  */
 //TODO: get rid of trickery used for transition action
 public class TransitionBeanDefinitionParser extends AbstractBeanDefinitionParser {
+	
+	private static Map<String,TransitionMode> transitionModeMapping = Maps.newHashMap() ;
+	
+	static{
+		transitionModeMapping.put("load", TransitionMode.LOAD);
+		transitionModeMapping.put("query", TransitionMode.QUERY);
+		transitionModeMapping.put("insert", TransitionMode.CREATE);
+	}
+	
 	public BeanDefinition parse(Element transitionElement, ParserContext parserContext) {
 		AbstractBeanDefinition transitionDef = createTransitionBeanDefinition(transitionElement, parserContext);
 		BeanDefinitionRegistry registry = parserContext.getRegistry();
@@ -54,7 +68,7 @@ public class TransitionBeanDefinitionParser extends AbstractBeanDefinitionParser
 		String transitionActionBeanName = getTransitionActionBeanName(transitionElement);
 		if (transitionActionBeanName != null) 
 			mpvs.addPropertyValue(TRANSITIONACTION, new RuntimeBeanReference(transitionActionBeanName));
-		mpvs.addPropertyValue(TRANSITIONMODE, transitionElement.getAttribute(MODE));
+		mpvs.addPropertyValue(TRANSITIONMODE, transitionModeMapping.get(transitionElement.getAttribute(MODE)));
 		Element transitionCriteria = DomUtils.getChildElementByTagName(transitionElement, TRANSITIONCRITERIA_XSD);
 		if (transitionCriteria != null) {
 			mpvs.addPropertyValue(TRANSITIONCRITERIA, getAttributeCollectionFromChilds(transitionCriteria, TRANSITIONCRITERION_XSD, CRITERION));
