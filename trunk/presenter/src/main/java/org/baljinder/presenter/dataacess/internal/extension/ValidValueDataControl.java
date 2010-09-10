@@ -23,7 +23,7 @@ public class ValidValueDataControl extends DataController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.internal.DataControl#initialize()
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.internal.DataController#initialize()
 	 */
 	@Override
 	public boolean initialize() {
@@ -35,7 +35,7 @@ public class ValidValueDataControl extends DataController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.internal.DataControl#fetchData()
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.internal.DataController#fetchData()
 	 */
 	@Override
 	protected List<Map<String, Object>> fetchData() {

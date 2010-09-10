@@ -21,8 +21,8 @@ public class PageController implements IPageController {
 
 	public void initialize() {
 		eventHandler.beforeInitialize(this);
-		for (IDataController dataControl : dataControlList)
-			dataControl.initialize();
+		for (IDataController dataController : dataControlList)
+			dataController.initialize();
 		eventHandler.afterInitialize(this);
 	}
 
@@ -41,10 +41,10 @@ public class PageController implements IPageController {
 		eventHandler.beforeTransition(this);
 		initialize();
 		if (!getCached()) {
-			for (IDataController dataControl : getDataConrolList()) {
-				dataControl.setDataFetched(false);
-				dataControl.clearFilterValues();
-				dataControl.setPageCursor(0);
+			for (IDataController dataController : getDataConrolList()) {
+				dataController.setDataFetched(false);
+				dataController.clearFilterValues();
+				dataController.setPageCursor(0);
 			}
 		}
 		eventHandler.afterTransition(this);
@@ -67,9 +67,9 @@ public class PageController implements IPageController {
 	}
 
 	public IDataController getDataControl(String dataControlName) {
-		for (IDataController dataControl : dataControlList) {
-			if (dataControlName.equals(dataControl.getDataControlName()))
-				return dataControl;
+		for (IDataController dataController : dataControlList) {
+			if (dataControlName.equals(dataController.getDataControlName()))
+				return dataController;
 		}
 		return null;
 	}
@@ -110,15 +110,15 @@ public class PageController implements IPageController {
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.IPageController#saveAll()
 	 */
 	public String save() {
-		for(IDataController dataControl :getDataConrolList()){
-			dataControl.save();
+		for(IDataController dataController :getDataConrolList()){
+			dataController.save();
 		}
 		return null ; // refresh it 
 	}
 	public String saveAll() {
 		eventHandler.beforeSave(this);
-		for(IDataController dataControl :getDataConrolList()){
-			dataControl.saveSelectedElements();
+		for(IDataController dataController :getDataConrolList()){
+			dataController.saveSelectedElements();
 		}
 		eventHandler.afterSave(this);
 		return null ; // refresh it 

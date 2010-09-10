@@ -17,17 +17,17 @@ public class JSFSupportingDataAccessStrategy implements IDataAccessStrategy {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataAccessStrategy#shouldFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataAccessStrategy#shouldFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public boolean shouldFetch(IDataController dataControl) {
-		Boolean initialized = (Boolean) FacesContextUtil.getInstance().getScopeUtil().getFromRequest(dataControl.getDataControlName() + "Intilized");
-		if (FacesContextUtil.getInstance().getFacesContext().getRenderResponse() && !dataControl.getDataFetched()
+	public boolean shouldFetch(IDataController dataController) {
+		Boolean initialized = (Boolean) FacesContextUtil.getInstance().getScopeUtil().getFromRequest(dataController.getDataControlName() + "Intilized");
+		if (FacesContextUtil.getInstance().getFacesContext().getRenderResponse() && !dataController.getDataFetched()
 				&& (initialized == null || !initialized))
 			return true;
 		return false;
 	}
 
-	public void markFetched(IDataController dataControl) {
-		FacesContextUtil.getInstance().getScopeUtil().storeOnRequest(dataControl.getDataControlName() + "Intilized", true);
+	public void markFetched(IDataController dataController) {
+		FacesContextUtil.getInstance().getScopeUtil().storeOnRequest(dataController.getDataControlName() + "Intilized", true);
 	}
 }

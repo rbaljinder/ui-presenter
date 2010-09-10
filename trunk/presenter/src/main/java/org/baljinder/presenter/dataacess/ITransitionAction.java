@@ -38,8 +38,8 @@ public interface ITransitionAction {
 			return getTransitionController().getTargetDataControl();
 		}
 
-		public IDataController getDataControlOfTargetPage(String dataControlName) {
-			return getTransitionController().getTargetPageController().getDataControl(dataControlName);
+		public IDataController getDataControlOfTargetPage(String dataControllerName) {
+			return getTransitionController().getTargetPageController().getDataControl(dataControllerName);
 		}
 
 		public IPageController getTargetPageController() {

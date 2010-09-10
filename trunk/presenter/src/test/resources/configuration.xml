@@ -55,6 +55,10 @@
 		access-strategy="direct" scope="singleton">
 		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
 	</ps:data-control>
+	<ps:data-control name="another_dataControl_dataAccess_test"
+		access-strategy="direct" scope="singleton">
+		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+	</ps:data-control>
 	<ps:data-control name="multiple_model_dataControl_dataAccess_test"
 		access-strategy="direct" scope="singleton">
 		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />

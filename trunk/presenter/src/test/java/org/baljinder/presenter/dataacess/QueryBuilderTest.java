@@ -16,8 +16,8 @@ import com.google.common.collect.Maps;
 public class QueryBuilderTest extends TestCase {
 
 	public void testBasicDataControl() {
-		IDataController basicDataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
-				DataControlBuilder.getModelListForClasses(TestTable.class));
+		IDataController basicDataControl = DataControllerBuilder.getBasicDataControlWithMockedData("basicDataControl",
+				DataControllerBuilder.getModelListForClasses(TestTable.class));
 		assertTrue(basicDataControl.getQuery().equals(" from TestTable testTable "));
 		assertTrue(basicDataControl.getCountQuery().equals(" Select count(*)  from TestTable testTable "));
 	}
@@ -25,8 +25,8 @@ public class QueryBuilderTest extends TestCase {
 	public void testDataControlWithFilter() {
 		String expectedQuery = " from TestTable testTable  where  (  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
 		String expectedCountQuery = " Select count(*)  from TestTable testTable  where  (  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
-		IDataController dataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
-				DataControlBuilder.getModelListForClasses(TestTable.class));
+		IDataController dataControl = DataControllerBuilder.getBasicDataControlWithMockedData("basicDataControl",
+				DataControllerBuilder.getModelListForClasses(TestTable.class));
 		Map<String, ModelFieldMapping> filterObjectMap = dataControl.getFilterObjectMap();
 		filterObjectMap.get("testTable.testId").setValue("10");
 		filterObjectMap.get("testTable.name").setValue("name");
@@ -38,8 +38,8 @@ public class QueryBuilderTest extends TestCase {
 	public void testDataControlWithFilterAndOrderBy() {
 		String expectedQuery = " from TestTable testTable  where  (  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  )  order by testTable.testId ASC";
 		String expectedCountQuery = " Select count(*)  from TestTable testTable  where  (  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
-		IDataController dataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
-				DataControlBuilder.getModelListForClasses(TestTable.class));
+		IDataController dataControl = DataControllerBuilder.getBasicDataControlWithMockedData("basicDataControl",
+				DataControllerBuilder.getModelListForClasses(TestTable.class));
 		Map<String, ModelFieldMapping> filterObjectMap = dataControl.getFilterObjectMap();
 		filterObjectMap.get("testTable.testId").setValue("10");
 		filterObjectMap.get("testTable.name").setValue("name");
@@ -53,8 +53,8 @@ public class QueryBuilderTest extends TestCase {
 	public void testDataControlWithJoin() {
 		String expectedQuery = " from TestTable testTable , AnotherTestTable anotherTestTable  where  (  ( testTable.testId = anotherTestTable.testId AND testTable.name = anotherTestTable.name )  and  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
 		String expectedCountQuery=" Select count(*)  from TestTable testTable , AnotherTestTable anotherTestTable  where  (  ( testTable.testId = anotherTestTable.testId AND testTable.name = anotherTestTable.name )  and  (  ( testTable.name = 'name' )  and  ( testTable.testId = '10' )  )  ) ";
-		IDataController dataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
-				DataControlBuilder.getModelListForClasses(TestTable.class, AnotherTestTable.class));
+		IDataController dataControl = DataControllerBuilder.getBasicDataControlWithMockedData("basicDataControl",
+				DataControllerBuilder.getModelListForClasses(TestTable.class, AnotherTestTable.class));
 		String joiningCriteria = "testTable.testId = anotherTestTable.testId AND testTable.name = anotherTestTable.name";
 		dataControl.setJoinCriteria(joiningCriteria);
 		Map<String, ModelFieldMapping> filterObjectMap = dataControl.getFilterObjectMap();
@@ -68,8 +68,8 @@ public class QueryBuilderTest extends TestCase {
 	public void testChildDataControl(){
 		String expectedQuery = " from AnotherTestTable anotherTestTable  where  (  (  ( anotherTestTable.testId  = '10' )  )  ) ";
 		String expectedCountQury= " Select count(*)  from AnotherTestTable anotherTestTable  where  (  (  ( anotherTestTable.testId  = '10' )  )  ) ";
-		IDataController dataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
-				DataControlBuilder.getModelListForClasses(AnotherTestTable.class));
+		IDataController dataControl = DataControllerBuilder.getBasicDataControlWithMockedData("basicDataControl",
+				DataControllerBuilder.getModelListForClasses(AnotherTestTable.class));
 		TestTable parentDataElement = new TestTable();
 		parentDataElement.setTestId(10);
 		parentDataElement.setName("name");
@@ -77,8 +77,8 @@ public class QueryBuilderTest extends TestCase {
 		Map<String,Object> dataMap = Maps.newHashMap();
 		dataMap.put("testTable", parentDataElement);
 		parentdataList.add(dataMap);
-		IDataController parentdataControl = DataControlBuilder.getBasicDataControlWithMockedData("basicDataControl",
-				DataControlBuilder.getModelListForClasses(TestTable.class),parentdataList);
+		IDataController parentdataControl = DataControllerBuilder.getBasicDataControlWithMockedData("basicDataControl",
+				DataControllerBuilder.getModelListForClasses(TestTable.class),parentdataList);
 		dataControl.setParentDataControl(parentdataControl);
 		dataControl.setParentChildRelation(Lists.newArrayList("anotherTestTable.testId = testTable.testId"));
 		assertTrue(dataControl.getQuery().equals(expectedQuery));

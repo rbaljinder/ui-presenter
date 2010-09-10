@@ -68,24 +68,24 @@ public class TransitionController implements ITransitionController {
 	private void initlizeTarget() {
 		getTargetPageController().initialize();
 		if (!targetPageController.getCached()) {
-			for (IDataController dataControl : getTargetPageController().getDataConrolList()) {
+			for (IDataController dataController : getTargetPageController().getDataConrolList()) {
 				switch (getTransitionMode()) {
 				case QUERY:
-					dataControl.setDataFetched(true);
+					dataController.setDataFetched(true);
 					break;
 				case CREATE:
-					dataControl.setDataFetched(true);
-					dataControl.create();
+					dataController.setDataFetched(true);
+					dataController.create();
 					break;
 				case LOAD:
-					dataControl.setDataFetched(false);
+					dataController.setDataFetched(false);
 					break;
 				default:
 					break;
 				}
-				dataControl.clearFilterValues();
-				dataControl.setPageCursor(0);
-				dataControl.setPropagetedClause(null);
+				dataController.clearFilterValues();
+				dataController.setPageCursor(0);
+				dataController.setPropagetedClause(null);
 			}
 		}
 	}
@@ -201,7 +201,7 @@ public class TransitionController implements ITransitionController {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setSourceDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataControl
+	 * org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setSourceDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataController
 	 * )
 	 */
 	public void setSourceDataControl(IDataController sourceDataControl) {
@@ -213,7 +213,7 @@ public class TransitionController implements ITransitionController {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setTargetDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataControl
+	 * org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setTargetDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataController
 	 * )
 	 */
 	public void setTargetDataControl(IDataController targetDataControl) {

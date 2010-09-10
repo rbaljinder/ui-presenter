@@ -62,16 +62,16 @@ public class Utils {
 	/**
 	 * This seems tricky
 	 * 
-	 * @param dataControl
+	 * @param dataController
 	 * @param modelName
 	 * @return
 	 */
-	public static Class<? extends Object> getModelClassOfDataControl(IDataController dataControl, String modelName) {
-		for (Class<? extends Object> clazz : dataControl.getModelList()) {
+	public static Class<? extends Object> getModelClassOfDataControl(IDataController dataController, String modelName) {
+		for (Class<? extends Object> clazz : dataController.getModelList()) {
 			if (getShortName(clazz).equalsIgnoreCase(modelName))
 				return clazz;
 		}
-		throw new RuntimeException("Could not resolve Class name from a supplied model name[" + modelName + "] in data control[" + dataControl + "]");
+		throw new RuntimeException("Could not resolve Class name from a supplied model name[" + modelName + "] in data control[" + dataController + "]");
 	}
 
 }

@@ -12,23 +12,23 @@ import org.baljinder.presenter.testing.support.model.TestTable;
 
 import com.google.common.collect.Lists;
 
-public class DataControlBuilder {
+public class DataControllerBuilder {
 
 	private static IDataController getMockedDataControl(final List<Map<String, Object>> dataList){
-		IDataController dataControl = new DataController(){
+		IDataController dataController = new DataController(){
 			public List<java.util.Map<String,Object>> getData() {
 				return dataList ;
 			};
 		};
-		return dataControl ; 
+		return dataController ; 
 	}
 	
 	public static IDataController getBasicDataControlWithMockedData(String name,List<Class<?>> modelList,final List<Map<String, Object>> dataList) {
-		IDataController dataControl = getMockedDataControl(dataList);
-		dataControl.setDataControlName(name);
-		dataControl.setModelList(modelList);
-		dataControl.setQueryBuilder(getQueryBuilder());
-		return dataControl;
+		IDataController dataController = getMockedDataControl(dataList);
+		dataController.setDataControlName(name);
+		dataController.setModelList(modelList);
+		dataController.setQueryBuilder(getQueryBuilder());
+		return dataController;
 	}
 
 	
@@ -54,11 +54,11 @@ public class DataControlBuilder {
 		return modelList;
 	}
 	
-	public static void createDataControlElement(IDataController dataControl, int howMany, String name, int seedFrom) {
+	public static void createDataControlElement(IDataController dataController, int howMany, String name, int seedFrom) {
 		for (int i = 0; i < howMany; i++) {
-			dataControl.create();
+			dataController.create();
 		}
-		List<Map<String, Object>> newlyCreatedElements = dataControl.getNewlyCreatedElement();
+		List<Map<String, Object>> newlyCreatedElements = dataController.getNewlyCreatedElement();
 		for (Map<String, Object> element : newlyCreatedElements) {
 			for (Map.Entry<String, Object> anEntry : element.entrySet()) {
 				TestTable testTable = (TestTable) anEntry.getValue();

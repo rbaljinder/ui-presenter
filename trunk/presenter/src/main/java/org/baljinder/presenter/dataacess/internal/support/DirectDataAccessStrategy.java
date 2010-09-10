@@ -15,17 +15,17 @@ import org.baljinder.presenter.dataacess.IDataController;
 public class DirectDataAccessStrategy implements IDataAccessStrategy {
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataAccessStrategy#markFetched(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataAccessStrategy#markFetched(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void markFetched(IDataController dataControl) {
+	public void markFetched(IDataController dataController) {
 		//OKAY 
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataAccessStrategy#shouldFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataAccessStrategy#shouldFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public boolean shouldFetch(IDataController dataControl) {
-		if(dataControl.getDataFetched())
+	public boolean shouldFetch(IDataController dataController) {
+		if(dataController.getDataFetched())
 			return false ;
 		return true;
 	}

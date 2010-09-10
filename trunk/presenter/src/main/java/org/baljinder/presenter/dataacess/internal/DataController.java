@@ -313,6 +313,7 @@ public class DataController extends AbstractDataController {
 	}
 
 	public List<Map<String, Object>> refresh() {
+		setDataFetched(false);
 		IDataController parentDataControl = getParentDataControl();
 		if (parentDataControl != null && getParentChildRelation() != null) {
 			parentDataControl.refresh();

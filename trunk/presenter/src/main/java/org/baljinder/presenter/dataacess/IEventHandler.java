@@ -18,35 +18,35 @@ public interface IEventHandler {
 	//just after transition action, but only when its render phase
 	public void afterTransition(ITransitionController transitionController);
 	
-	public void beforeInitialize(IDataController dataControl);
+	public void beforeInitialize(IDataController dataController);
 	
-	public void afterInitialize(IDataController dataControl);
+	public void afterInitialize(IDataController dataController);
 	
-	public void beforeDataFetch(IDataController dataControl);
+	public void beforeDataFetch(IDataController dataController);
 	
-	public void afterDataFetch(IDataController dataControl);
+	public void afterDataFetch(IDataController dataController);
 	
-	public void beforeSave(IDataController dataControl);
+	public void beforeSave(IDataController dataController);
 	
-	public void afterSave(IDataController dataControl);
+	public void afterSave(IDataController dataController);
 	
-	public void beforeDelete(IDataController dataControl);
+	public void beforeDelete(IDataController dataController);
 	
-	public void afterDelete(IDataController dataControl);
+	public void afterDelete(IDataController dataController);
 	
-	public void beforeUpdate(IDataController dataControl);
+	public void beforeUpdate(IDataController dataController);
 	
-	public void afterUpdate(IDataController dataControl);
+	public void afterUpdate(IDataController dataController);
 
 	/**
-	 * @param dataControl
+	 * @param dataController
 	 */
-	public void beforeInsert(IDataController dataControl);
+	public void beforeInsert(IDataController dataController);
 
 	/**
-	 * @param dataControl
+	 * @param dataController
 	 */
-	public void afterInsert(IDataController dataControl);
+	public void afterInsert(IDataController dataController);
 
 	/**
 	 * @param pageController
@@ -73,13 +73,13 @@ public interface IEventHandler {
 	public void afterSave(IPageController pageController);
 
 	/**
-	 * @param dataControl
+	 * @param dataController
 	 */
-	public void beforeRefresh(IDataController dataControl);
+	public void beforeRefresh(IDataController dataController);
 
 	/**
-	 * @param dataControl
+	 * @param dataController
 	 */
-	public void afterRefresh(IDataController dataControl);
+	public void afterRefresh(IDataController dataController);
 
 }

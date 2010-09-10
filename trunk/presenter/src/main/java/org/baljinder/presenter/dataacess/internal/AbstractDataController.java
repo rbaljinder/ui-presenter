@@ -279,7 +279,7 @@ public abstract class AbstractDataController implements IDataController {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataControl#isNextPossible()
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataController#isNextPossible()
 	 */
 	public boolean getNextPossible() {
 		return data.size() > getPageSize();

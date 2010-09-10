@@ -19,25 +19,25 @@ public class EmptyEventHandler implements IEventHandler {
 	public static EmptyEventHandler doNothingHandler = new EmptyEventHandler();
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterDataFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterDataFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void afterDataFetch(IDataController dataControl) {
+	public void afterDataFetch(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterDelete(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterDelete(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void afterDelete(IDataController dataControl) {
+	public void afterDelete(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterInitialize(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterInitialize(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void afterInitialize(IDataController dataControl) {
+	public void afterInitialize(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -53,15 +53,15 @@ public class EmptyEventHandler implements IEventHandler {
 	/* (non-Javadoc)
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterInsert(org.baljinder.presenter.jsf.ui.dataacess.internal.DataControl)
 	 */
-	public void afterInsert(DataController dataControl) {
+	public void afterInsert(DataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterSave(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterSave(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void afterSave(IDataController dataControl) {
+	public void afterSave(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -83,33 +83,33 @@ public class EmptyEventHandler implements IEventHandler {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterUpdate(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterUpdate(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void afterUpdate(IDataController dataControl) {
+	public void afterUpdate(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeDataFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeDataFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void beforeDataFetch(IDataController dataControl) {
+	public void beforeDataFetch(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeDelete(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeDelete(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void beforeDelete(IDataController dataControl) {
+	public void beforeDelete(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeInitialize(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeInitialize(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void beforeInitialize(IDataController dataControl) {
+	public void beforeInitialize(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -125,15 +125,15 @@ public class EmptyEventHandler implements IEventHandler {
 	/* (non-Javadoc)
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeInsert(org.baljinder.presenter.jsf.ui.dataacess.internal.DataControl)
 	 */
-	public void beforeInsert(DataController dataControl) {
+	public void beforeInsert(DataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeSave(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeSave(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void beforeSave(IDataController dataControl) {
+	public void beforeSave(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -155,9 +155,9 @@ public class EmptyEventHandler implements IEventHandler {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeUpdate(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeUpdate(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void beforeUpdate(IDataController dataControl) {
+	public void beforeUpdate(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -171,9 +171,9 @@ public class EmptyEventHandler implements IEventHandler {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterInsert(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterInsert(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void afterInsert(IDataController dataControl) {
+	public void afterInsert(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -203,9 +203,9 @@ public class EmptyEventHandler implements IEventHandler {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeInsert(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeInsert(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void beforeInsert(IDataController dataControl) {
+	public void beforeInsert(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -227,17 +227,17 @@ public class EmptyEventHandler implements IEventHandler {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterRefresh(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#afterRefresh(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void afterRefresh(IDataController dataControl) {
+	public void afterRefresh(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeRefresh(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
+	 * @see org.baljinder.presenter.jsf.ui.dataacess.IEventHandler#beforeRefresh(org.baljinder.presenter.jsf.ui.dataacess.IDataController)
 	 */
-	public void beforeRefresh(IDataController dataControl) {
+	public void beforeRefresh(IDataController dataController) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -7,7 +7,7 @@ package org.baljinder.presenter.dataacess.internal;
  * @author Baljinder Randhawa
  *
  */
-public class DataControlException extends RuntimeException {
+public class DataControllerException extends RuntimeException {
 	/**
 	 * 
 	 */
@@ -16,11 +16,11 @@ public class DataControlException extends RuntimeException {
 	/**
 	 * 
 	 */
-	public DataControlException() {
+	public DataControllerException() {
 
 	}
 	
-	public DataControlException(String message, Throwable throwable) {
+	public DataControllerException(String message, Throwable throwable) {
 		super(message,throwable);
 	}
 }
