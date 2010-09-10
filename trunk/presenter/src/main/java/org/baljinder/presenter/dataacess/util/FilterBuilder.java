@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 
 import org.baljinder.presenter.datamodel.DataModelMetadataProvider;
 import org.baljinder.presenter.datamodel.config.Config.Case;
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.ModelFieldMapping;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -34,7 +34,7 @@ public class FilterBuilder implements SQLConstants {
 	/**
 	 * @param dataControl
 	 */
-	public String buildFilteringCriteria(IDataControl dataControl) {
+	public String buildFilteringCriteria(IDataController dataControl) {
 		Map<String, ModelFieldMapping> filterMap = dataControl.getFilterObjectMap();
 		String criteria = "";
 		List<String> critriaList = Lists.newArrayList();
@@ -52,7 +52,7 @@ public class FilterBuilder implements SQLConstants {
 		return StringUtils.isEmpty(criteria) ? null : criteria;
 	}
 
-	private List<String> handleRangeFilters(IDataControl dataControl, List<ModelFieldMapping> filterRanges) {
+	private List<String> handleRangeFilters(IDataController dataControl, List<ModelFieldMapping> filterRanges) {
 		Map<String, ModelFieldMapping> filterMap = dataControl.getFilterObjectMap();
 		List<String> critriaList = Lists.newArrayList();
 		List<ModelFieldMapping> alreadyMapped = Lists.newArrayList();
@@ -109,7 +109,7 @@ public class FilterBuilder implements SQLConstants {
 	 * @param modelFieldMapping
 	 * @return
 	 */
-	private String getClause(IDataControl dataControl, ModelFieldMapping modelFieldMapping) {
+	private String getClause(IDataController dataControl, ModelFieldMapping modelFieldMapping) {
 		if (modelFieldMapping.getFieldClass().isAssignableFrom(Date.class))
 			return handleDate(modelFieldMapping, null);
 		String leftValue = modelFieldMapping.getModelName() + DOT + modelFieldMapping.getFieldName();

@@ -2,7 +2,7 @@ package org.baljinder.presenter.dataacess.internal;
 
 import java.util.List;
 
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.IEventHandler;
 import org.baljinder.presenter.dataacess.IPageController;
 import org.baljinder.presenter.dataacess.internal.support.EmptyEventHandler;
@@ -17,11 +17,11 @@ public class PageController implements IPageController {
 	private IEventHandler eventHandler = EmptyEventHandler.doNothingHandler;
 	
 	
-	private List<IDataControl> dataControlList = Lists.newArrayList();
+	private List<IDataController> dataControlList = Lists.newArrayList();
 
 	public void initialize() {
 		eventHandler.beforeInitialize(this);
-		for (IDataControl dataControl : dataControlList)
+		for (IDataController dataControl : dataControlList)
 			dataControl.initialize();
 		eventHandler.afterInitialize(this);
 	}
@@ -41,7 +41,7 @@ public class PageController implements IPageController {
 		eventHandler.beforeTransition(this);
 		initialize();
 		if (!getCached()) {
-			for (IDataControl dataControl : getDataConrolList()) {
+			for (IDataController dataControl : getDataConrolList()) {
 				dataControl.setDataFetched(false);
 				dataControl.clearFilterValues();
 				dataControl.setPageCursor(0);
@@ -58,16 +58,16 @@ public class PageController implements IPageController {
 		this.name = name;
 	}
 
-	public void setDataControlList(List<IDataControl> dataControlList) {
+	public void setDataControlList(List<IDataController> dataControlList) {
 		this.dataControlList = dataControlList;
 	}
 
-	public List<IDataControl> getDataConrolList() {
+	public List<IDataController> getDataConrolList() {
 		return dataControlList;
 	}
 
-	public IDataControl getDataControl(String dataControlName) {
-		for (IDataControl dataControl : dataControlList) {
+	public IDataController getDataControl(String dataControlName) {
+		for (IDataController dataControl : dataControlList) {
 			if (dataControlName.equals(dataControl.getDataControlName()))
 				return dataControl;
 		}
@@ -110,14 +110,14 @@ public class PageController implements IPageController {
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.IPageController#saveAll()
 	 */
 	public String save() {
-		for(IDataControl dataControl :getDataConrolList()){
+		for(IDataController dataControl :getDataConrolList()){
 			dataControl.save();
 		}
 		return null ; // refresh it 
 	}
 	public String saveAll() {
 		eventHandler.beforeSave(this);
-		for(IDataControl dataControl :getDataConrolList()){
+		for(IDataController dataControl :getDataConrolList()){
 			dataControl.saveSelectedElements();
 		}
 		eventHandler.afterSave(this);

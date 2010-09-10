@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.IEventHandler;
 import org.baljinder.presenter.dataacess.IPageController;
 import org.baljinder.presenter.dataacess.ITransitionAction;
@@ -36,9 +36,9 @@ public class TransitionController implements ITransitionController {
 
 	private IPageController targetPageController;
 
-	private IDataControl sourceDataControl;
+	private IDataController sourceDataControl;
 
-	private IDataControl targetDataControl;
+	private IDataController targetDataControl;
 
 	private ITransitionAction transitionAction;
 
@@ -68,7 +68,7 @@ public class TransitionController implements ITransitionController {
 	private void initlizeTarget() {
 		getTargetPageController().initialize();
 		if (!targetPageController.getCached()) {
-			for (IDataControl dataControl : getTargetPageController().getDataConrolList()) {
+			for (IDataController dataControl : getTargetPageController().getDataConrolList()) {
 				switch (getTransitionMode()) {
 				case QUERY:
 					dataControl.setDataFetched(true);
@@ -184,7 +184,7 @@ public class TransitionController implements ITransitionController {
 	 * 
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#getSourceDataControl()
 	 */
-	public IDataControl getSourceDataControl() {
+	public IDataController getSourceDataControl() {
 		return sourceDataControl;
 	}
 
@@ -193,7 +193,7 @@ public class TransitionController implements ITransitionController {
 	 * 
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#getTargetDataControl()
 	 */
-	public IDataControl getTargetDataControl() {
+	public IDataController getTargetDataControl() {
 		return targetDataControl;
 	}
 
@@ -204,7 +204,7 @@ public class TransitionController implements ITransitionController {
 	 * org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setSourceDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataControl
 	 * )
 	 */
-	public void setSourceDataControl(IDataControl sourceDataControl) {
+	public void setSourceDataControl(IDataController sourceDataControl) {
 		this.sourceDataControl = sourceDataControl;
 
 	}
@@ -216,7 +216,7 @@ public class TransitionController implements ITransitionController {
 	 * org.baljinder.presenter.jsf.ui.dataacess.ITransitionController#setTargetDataControl(org.baljinder.presenter.jsf.ui.dataacess.IDataControl
 	 * )
 	 */
-	public void setTargetDataControl(IDataControl targetDataControl) {
+	public void setTargetDataControl(IDataController targetDataControl) {
 		this.targetDataControl = targetDataControl;
 	}
 

@@ -21,7 +21,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import org.baljinder.presenter.dataacess.IPresentationDao;
-import org.baljinder.presenter.dataacess.internal.DataControl;
+import org.baljinder.presenter.dataacess.internal.DataController;
 import org.baljinder.presenter.dataacess.internal.PageController;
 import org.baljinder.presenter.dataacess.internal.TransitionController;
 import com.google.common.collect.Maps;
@@ -155,7 +155,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	protected final static String EVENT_HANDLER_REF = "event-handler-ref";
 
 	static {
-		defaultClasses.put(DATACONTROLCLASS, DataControl.class);
+		defaultClasses.put(DATACONTROLCLASS, DataController.class);
 		defaultClasses.put(PAGECLASS, PageController.class);
 		defaultClasses.put(DAOKEYNAME, IPresentationDao.class);
 		defaultClasses.put(TRANSITIONCLASS, TransitionController.class);

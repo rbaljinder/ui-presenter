@@ -19,7 +19,7 @@ import org.w3c.dom.Element;
  */
 public class DataControlBeanDefinitionParser extends AbsractDataControlOrPageParser {
 	static {
-		defaults.put(DATACONTROLCLASS, "org.baljinder.presenter.dataacess.internal.DataControl");
+		defaults.put(DATACONTROLCLASS, "org.baljinder.presenter.dataacess.internal.DataController");
 		defaults.put(PAGECLASS, "org.baljinder.presenter.dataacess.internal.PageController");
 		defaults.put(QUERYBUILDER, "defaultQueryBuilder");
 		defaults.put(PERSISTANCEMANAGER, "presentationPersistence");

@@ -27,13 +27,13 @@ public interface ITransitionController extends SupportsEventHandler {
 
 	public TransitionMode getTransitionMode();
 
-	public void setSourceDataControl(IDataControl sourceDataControl);
+	public void setSourceDataControl(IDataController sourceDataControl);
 
-	public IDataControl getSourceDataControl();
+	public IDataController getSourceDataControl();
 
-	public void setTargetDataControl(IDataControl targetDataControl);
+	public void setTargetDataControl(IDataController targetDataControl);
 
-	public IDataControl getTargetDataControl();
+	public IDataController getTargetDataControl();
 
 	public IPageController getTargetPageController();
 

@@ -14,7 +14,7 @@ import org.apache.myfaces.trinidad.component.UIXTable;
 
 import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.IDataAccessStrategy;
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.IEventHandler;
 import org.baljinder.presenter.dataacess.ModelFieldMapping;
 import org.baljinder.presenter.dataacess.IPersistenceManager;
@@ -29,9 +29,9 @@ import com.google.common.collect.Lists;
  * @author Baljinder Randhawa
  * 
  */
-public abstract class AbstractDataControl implements IDataControl {
+public abstract class AbstractDataControlller implements IDataController {
 
-	protected static final Log logger = LogFactory.getLog(AbstractDataControl.class);
+	protected static final Log logger = LogFactory.getLog(AbstractDataControlller.class);
 
 	private IPersistenceManager persistenceManager;
 
@@ -65,7 +65,7 @@ public abstract class AbstractDataControl implements IDataControl {
 
 	protected IEventHandler eventHandler = EmptyEventHandler.doNothingHandler;
 
-	private IDataControl parentDataControl;
+	private IDataController parentDataControl;
 
 	private List<String> parentChildRelation;
 
@@ -110,7 +110,7 @@ public abstract class AbstractDataControl implements IDataControl {
 		return true;
 	}
 
-	private IDataControl getDataControl() {
+	private IDataController getDataControl() {
 		return this;
 	}
 
@@ -423,7 +423,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	 * 
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.extension.IEmbeddableDataControl#getParentDataControl()
 	 */
-	public IDataControl getParentDataControl() {
+	public IDataController getParentDataControl() {
 		return parentDataControl;
 	}
 
@@ -434,7 +434,7 @@ public abstract class AbstractDataControl implements IDataControl {
 	 * org.baljinder.presenter.jsf.ui.dataacess.extension.IEmbeddableDataControl#setParentDataControl(org.baljinder.presenter.jsf.ui.dataacess
 	 * .IDataControl)
 	 */
-	public void setParentDataControl(IDataControl parentDataControl) {
+	public void setParentDataControl(IDataController parentDataControl) {
 		this.parentDataControl = parentDataControl;
 	}
 

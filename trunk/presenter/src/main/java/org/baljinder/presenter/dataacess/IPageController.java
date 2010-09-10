@@ -14,11 +14,11 @@ public interface IPageController extends SupportsEventHandler {
 
 	public boolean getCached();
 
-	public void setDataControlList(List<IDataControl> dataControlList);
+	public void setDataControlList(List<IDataController> dataControlList);
 
-	public List<IDataControl> getDataConrolList();
+	public List<IDataController> getDataConrolList();
 
-	public IDataControl getDataControl(String dataControlName);
+	public IDataController getDataControl(String dataControlName);
 	
 	public String transition() ;
 	

@@ -18,35 +18,35 @@ public interface IEventHandler {
 	//just after transition action, but only when its render phase
 	public void afterTransition(ITransitionController transitionController);
 	
-	public void beforeInitialize(IDataControl dataControl);
+	public void beforeInitialize(IDataController dataControl);
 	
-	public void afterInitialize(IDataControl dataControl);
+	public void afterInitialize(IDataController dataControl);
 	
-	public void beforeDataFetch(IDataControl dataControl);
+	public void beforeDataFetch(IDataController dataControl);
 	
-	public void afterDataFetch(IDataControl dataControl);
+	public void afterDataFetch(IDataController dataControl);
 	
-	public void beforeSave(IDataControl dataControl);
+	public void beforeSave(IDataController dataControl);
 	
-	public void afterSave(IDataControl dataControl);
+	public void afterSave(IDataController dataControl);
 	
-	public void beforeDelete(IDataControl dataControl);
+	public void beforeDelete(IDataController dataControl);
 	
-	public void afterDelete(IDataControl dataControl);
+	public void afterDelete(IDataController dataControl);
 	
-	public void beforeUpdate(IDataControl dataControl);
+	public void beforeUpdate(IDataController dataControl);
 	
-	public void afterUpdate(IDataControl dataControl);
+	public void afterUpdate(IDataController dataControl);
 
 	/**
 	 * @param dataControl
 	 */
-	public void beforeInsert(IDataControl dataControl);
+	public void beforeInsert(IDataController dataControl);
 
 	/**
 	 * @param dataControl
 	 */
-	public void afterInsert(IDataControl dataControl);
+	public void afterInsert(IDataController dataControl);
 
 	/**
 	 * @param pageController
@@ -75,11 +75,11 @@ public interface IEventHandler {
 	/**
 	 * @param dataControl
 	 */
-	public void beforeRefresh(IDataControl dataControl);
+	public void beforeRefresh(IDataController dataControl);
 
 	/**
 	 * @param dataControl
 	 */
-	public void afterRefresh(IDataControl dataControl);
+	public void afterRefresh(IDataController dataControl);
 
 }

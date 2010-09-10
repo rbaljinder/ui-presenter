@@ -5,7 +5,7 @@ package org.baljinder.presenter.util;
 
 import java.util.List;
 
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 
 /**
  * @author Baljinder Randhawa
@@ -66,7 +66,7 @@ public class Utils {
 	 * @param modelName
 	 * @return
 	 */
-	public static Class<? extends Object> getModelClassOfDataControl(IDataControl dataControl, String modelName) {
+	public static Class<? extends Object> getModelClassOfDataControl(IDataController dataControl, String modelName) {
 		for (Class<? extends Object> clazz : dataControl.getModelList()) {
 			if (getShortName(clazz).equalsIgnoreCase(modelName))
 				return clazz;

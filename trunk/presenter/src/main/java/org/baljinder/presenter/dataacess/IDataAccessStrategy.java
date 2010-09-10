@@ -9,8 +9,8 @@ package org.baljinder.presenter.dataacess;
  */
 public interface IDataAccessStrategy {
 	
-	public boolean shouldFetch(IDataControl dataControl);
+	public boolean shouldFetch(IDataController dataControl);
 	
-	public void markFetched(IDataControl dataControl) ;
+	public void markFetched(IDataController dataControl) ;
 
 }

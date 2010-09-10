@@ -5,7 +5,7 @@ package org.baljinder.presenter.dataacess.util;
 
 import java.util.Map;
 
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.filter.Filter;
 /**
  * @author Baljinder Randhawa
@@ -17,10 +17,10 @@ public interface IQueryBuilder {
 
 	public void setFilters(Map<String, Map<String,Filter>> filters) ;
 	
-	public String buildWhereClause(IDataControl dataControl);
+	public String buildWhereClause(IDataController dataControl);
 	
-	public String buildQuery(IDataControl dataControl);
+	public String buildQuery(IDataController dataControl);
 	
-	public String getCountQuery(IDataControl dataControl) ;
+	public String getCountQuery(IDataController dataControl) ;
 	
 }

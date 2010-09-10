@@ -11,7 +11,7 @@ import org.apache.myfaces.trinidad.event.SortEvent;
 import org.apache.myfaces.trinidad.model.RowKeySet;
 import org.apache.myfaces.trinidad.model.SortCriterion;
 import org.baljinder.presenter.dataacess.IPresentationDao;
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.util.FacesUtils;
 import org.baljinder.presenter.util.ClassUtils;
 import org.baljinder.presenter.util.Utils;
@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 //TODO: get rid of JSF components and reliance of JSF life-cycle to determine when to fetch data(if possible)
-public class DataControl extends AbstractDataControl {
+public class DataController extends AbstractDataControlller {
 
 	protected List<Integer> selectedElementsIndex = Lists.newArrayList();
 
@@ -63,7 +63,7 @@ public class DataControl extends AbstractDataControl {
 	 * Also determines if we even need to fetch data for this data control or not
 	 */
 	protected boolean fetchParentIfAny() {
-		IDataControl parentDataControl = getParentDataControl();
+		IDataController parentDataControl = getParentDataControl();
 		if (parentDataControl != null && getParentChildRelation() != null) {
 			List<Map<String, Object>> parentData = parentDataControl.getData();
 			if (parentData.size() == 0) {
@@ -313,7 +313,7 @@ public class DataControl extends AbstractDataControl {
 	}
 
 	public List<Map<String, Object>> refresh() {
-		IDataControl parentDataControl = getParentDataControl();
+		IDataController parentDataControl = getParentDataControl();
 		if (parentDataControl != null && getParentChildRelation() != null) {
 			parentDataControl.refresh();
 			if (parentDataControl.getData().size() == 0) {

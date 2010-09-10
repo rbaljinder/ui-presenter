@@ -30,15 +30,15 @@ public interface ITransitionAction {
 
 		private ITransitionController transitionController;
 
-		public IDataControl getSourceDataControl() {
+		public IDataController getSourceDataControl() {
 			return getTransitionController().getSourceDataControl();
 		}
 
-		public IDataControl getTargetDataControl() {
+		public IDataController getTargetDataControl() {
 			return getTransitionController().getTargetDataControl();
 		}
 
-		public IDataControl getDataControlOfTargetPage(String dataControlName) {
+		public IDataController getDataControlOfTargetPage(String dataControlName) {
 			return getTransitionController().getTargetPageController().getDataControl(dataControlName);
 		}
 

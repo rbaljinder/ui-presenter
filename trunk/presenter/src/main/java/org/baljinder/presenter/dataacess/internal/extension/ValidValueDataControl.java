@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.baljinder.presenter.dataacess.extension.ValidValueGenricDao;
-import org.baljinder.presenter.dataacess.internal.DataControl;
+import org.baljinder.presenter.dataacess.internal.DataController;
 import org.baljinder.presenter.util.Utils;
 import com.google.common.collect.Lists;
 
@@ -16,7 +16,7 @@ import com.google.common.collect.Lists;
  * 
  */
 //TODO: FIX ME 
-public class ValidValueDataControl extends DataControl {
+public class ValidValueDataControl extends DataController {
 
 	private List<Object> objectsIDFromDB = Lists.newArrayList();
 

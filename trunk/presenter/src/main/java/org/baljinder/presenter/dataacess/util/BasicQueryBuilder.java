@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.filter.Filter;
 import org.baljinder.presenter.dataacess.internal.OrderByAttribute;
 import org.baljinder.presenter.datamodel.DataModelMetadataProvider;
@@ -46,7 +46,7 @@ public class BasicQueryBuilder implements IQueryBuilder, SQLConstants {
 		return null;
 	}
 
-	public String buildQuery(IDataControl dataControl) {
+	public String buildQuery(IDataController dataControl) {
 		List<String> resolvedFromList = Lists.transform(dataControl.getModelList(), new Function<Class<?>, String>() {
 			public String apply(Class<?> modelClass) {
 				return Utils.getShortName(modelClass) + SPACE + Utils.getAlias(modelClass) + SPACE;
@@ -61,7 +61,7 @@ public class BasicQueryBuilder implements IQueryBuilder, SQLConstants {
 			return queryString + WHERE + whereClause + orderBy;
 	}
 
-	public String buildWhereClause(final IDataControl dataControl) {
+	public String buildWhereClause(final IDataController dataControl) {
 		String filterClause = Joiner.on(AND).skipNulls().join(Lists.transform(dataControl.getModelList(), new Function<Class<?>, String>() {
 			public String apply(Class<?> modelClassName) {
 				return getFilter(dataControl.getDataControlName(), modelClassName);
@@ -80,14 +80,14 @@ public class BasicQueryBuilder implements IQueryBuilder, SQLConstants {
 	 * @param dataControl
 	 * @return
 	 */
-	private String buildOrderBy(IDataControl dataControl) {
+	private String buildOrderBy(IDataController dataControl) {
 		List<OrderByAttribute> orderByList = dataControl.getOrderByList();
 		if (orderByList.isEmpty())
 			return EMPTY_STRING;
 		return ORDER_BY + Joiner.on(COMMA + SPACE).join(orderByList);
 	}
 
-	public String getCountQuery(final IDataControl dataControl) {
+	public String getCountQuery(final IDataController dataControl) {
 		List<String> resolvedFromList = Lists.transform(dataControl.getModelList(), new Function<Class<?>, String>() {
 			public String apply(Class<?> modelClass) {
 				return Utils.getShortName(modelClass) + SPACE + Utils.getAlias(modelClass) + SPACE;
@@ -118,9 +118,9 @@ public class BasicQueryBuilder implements IQueryBuilder, SQLConstants {
 	 * @param dataControl
 	 * @return
 	 */
-	public String getClauseFromParentIfApplicable(IDataControl dataControl) {
+	public String getClauseFromParentIfApplicable(IDataController dataControl) {
 		String whereClauseWithParentProperty = "";
-		final IDataControl parentDataControl = dataControl.getParentDataControl();
+		final IDataController parentDataControl = dataControl.getParentDataControl();
 		List<String> parentChildRelation = dataControl.getParentChildRelation();
 		if (dataControl.getParentDataControl() != null && parentChildRelation != null) {
 			// Consider Only first row. Ideally in case of parent- child,the parent should have only one row selected

@@ -64,14 +64,14 @@
 			<xsd:element name="type" minOccurs="0" maxOccurs="1">
 				<xsd:complexType mixed="true">
 					<xsd:attribute name="class" type="xsd:string"
-						default="org.baljinder.presenter.dataacess.internal.DataControl"
+						default="org.baljinder.presenter.dataacess.internal.DataController"
 						use="optional">
 						<xsd:annotation>
 							<xsd:appinfo>
 								<tool:annotation>
 									<tool:expected-type type="java.lang.Class" />
 									<tool:assignable-to
-										type="org.baljinder.presenter.dataacess.IDataControl" />
+										type="org.baljinder.presenter.dataacess.IDataController" />
 								</tool:annotation>
 							</xsd:appinfo>
 						</xsd:annotation>

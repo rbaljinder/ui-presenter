@@ -4,7 +4,7 @@
 package org.baljinder.presenter.dataacess.internal.support;
 
 import org.baljinder.presenter.dataacess.IDataAccessStrategy;
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.jsf.util.FacesContextUtil;
 
 /**
@@ -19,7 +19,7 @@ public class JSFSupportingDataAccessStrategy implements IDataAccessStrategy {
 	 * 
 	 * @see org.baljinder.presenter.jsf.ui.dataacess.IDataAccessStrategy#shouldFetch(org.baljinder.presenter.jsf.ui.dataacess.IDataControl)
 	 */
-	public boolean shouldFetch(IDataControl dataControl) {
+	public boolean shouldFetch(IDataController dataControl) {
 		Boolean initialized = (Boolean) FacesContextUtil.getInstance().getScopeUtil().getFromRequest(dataControl.getDataControlName() + "Intilized");
 		if (FacesContextUtil.getInstance().getFacesContext().getRenderResponse() && !dataControl.getDataFetched()
 				&& (initialized == null || !initialized))
@@ -27,7 +27,7 @@ public class JSFSupportingDataAccessStrategy implements IDataAccessStrategy {
 		return false;
 	}
 
-	public void markFetched(IDataControl dataControl) {
+	public void markFetched(IDataController dataControl) {
 		FacesContextUtil.getInstance().getScopeUtil().storeOnRequest(dataControl.getDataControlName() + "Intilized", true);
 	}
 }

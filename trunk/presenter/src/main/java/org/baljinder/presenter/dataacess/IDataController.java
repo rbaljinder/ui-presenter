@@ -30,7 +30,7 @@ import org.baljinder.presenter.dataacess.util.IQueryBuilder;
 //TODO:Elaborate the use cases and how to of teh above lis of operations 
 //TODO: add support for default order by for data control; as of now its just run time
 //TODO: verify insert new/create works or not
-public interface IDataControl extends SupportsEventHandler {
+public interface IDataController extends SupportsEventHandler {
 
 	/**
 	 * Set the name of the data control. This will be the bean-name/bean-id/managed-bean-name(for jsf) for the data
@@ -187,9 +187,9 @@ public interface IDataControl extends SupportsEventHandler {
 
 	public String getCountQuery();
 
-	public void setParentDataControl(IDataControl parentDataControl);
+	public void setParentDataControl(IDataController parentDataControl);
 
-	public IDataControl getParentDataControl();
+	public IDataController getParentDataControl();
 
 	public void setParentChildRelation(List<String> parentChildRelation);
 

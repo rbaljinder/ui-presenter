@@ -35,7 +35,7 @@
 		<ps:data-control name="All_Properties_Configurable_DataControl"
 			init-method="initialize" scope="singleton" size="20" access-strategy="direct"
 			event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
-			<ps:type class="org.baljinder.presenter.dataacess.internal.DataControl" />
+			<ps:type class="org.baljinder.presenter.dataacess.internal.DataController" />
 			<ps:default-where-clause clause="system.systemId = 1" />
 			<ps:dao-key-name
 				key="org.baljinder.presenter.dataacess.internal.GenericPresentationDao" />
