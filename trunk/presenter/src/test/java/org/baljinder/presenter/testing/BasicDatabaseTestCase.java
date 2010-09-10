@@ -28,11 +28,11 @@ public abstract class BasicDatabaseTestCase extends DatabaseTestCase{
 	protected DatabaseOperation getSetUpOperation() throws Exception {
 		return DatabaseOperation.CLEAN_INSERT ;
 	}
-	
+	/*
 	@Override
 	protected DatabaseOperation getTearDownOperation() throws Exception {
 		return DatabaseOperation.DELETE_ALL;
-	}
+	}*/
 	@Override
 	protected IDatabaseConnection getConnection() throws Exception {
 		Class.forName("org.hsqldb.jdbcDriver");

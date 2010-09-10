@@ -17,7 +17,7 @@ public class TransitionTest extends BasicIntegrationTestCase  {
 	public void testMode(){
 		ApplicationContext applicationContext = getApplicationContext();
 		ITransitionController transitionController = (ITransitionController) applicationContext.getBean("TransitionAction_Supporting_Transition");
-		IDataControl targetDataControl = transitionController.getTargetPageController().getDataControl("All_Properties_Configurable_DataControl");
+		IDataController targetDataControl = transitionController.getTargetPageController().getDataControl("All_Properties_Configurable_DataControl");
 		transitionController.setTransitionMode(TransitionMode.LOAD);
 		transitionController.performTransition();
 		assertTrue(targetDataControl.getData().size()==1);

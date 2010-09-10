@@ -8,7 +8,7 @@ public class DataControlCRUDOperationTest extends BasicIntegrationTestCase {
 
 	public void testCreate() {
 		ApplicationContext applicationContext = getApplicationContext();
-		IDataControl dataControl = (IDataControl) applicationContext.getBean("dataControl_dataAccess_test");
+		IDataController dataControl = (IDataController) applicationContext.getBean("dataControl_dataAccess_test");
 		assertTrue(dataControl.getData().size() == 1);
 		DataControlBuilder.createDataControlElement(dataControl, 3, "TestName", 10);
 		dataControl.save();
@@ -17,16 +17,18 @@ public class DataControlCRUDOperationTest extends BasicIntegrationTestCase {
 
 	public void testDelete() {
 		ApplicationContext applicationContext = getApplicationContext();
-		IDataControl dataControl = (IDataControl) applicationContext.getBean("dataControl_dataAccess_test");
+		IDataController dataControl = (IDataController) applicationContext.getBean("dataControl_dataAccess_test");
 		int sizeBeforeCreation = dataControl.getData().size();
 		DataControlBuilder.createDataControlElement(dataControl, 2, "deleteMe", 100);
 		dataControl.save();
 		int sizeAfterCreation = dataControl.getData().size();
+		dataControl.setDataFetched(false);
 		assertTrue(sizeAfterCreation - sizeBeforeCreation == 2);
 		dataControl.getFilterObjectMap().get("testTable.name").setValue("deleteMe*");
 		assertTrue(dataControl.getData().size() == 2); // should fetch only two records
 		dataControl.delete();
 		dataControl.clearFilterValues();
+		dataControl.setDataFetched(false);
 		assertTrue(dataControl.getData().size() == sizeBeforeCreation);
 	}
 
@@ -34,7 +36,7 @@ public class DataControlCRUDOperationTest extends BasicIntegrationTestCase {
 	//I have varified it with Oracle though
 	public void xxtestCreateForMultipleModelDataControl() {
 		ApplicationContext applicationContext = getApplicationContext();
-		IDataControl dataControl = (IDataControl) applicationContext.getBean("multiple_model_dataControl_dataAccess_test");
+		IDataController dataControl = (IDataController) applicationContext.getBean("multiple_model_dataControl_dataAccess_test");
 		int sizeBeforeCreation = dataControl.getData().size();
 		assertTrue(sizeBeforeCreation == 0);
 		

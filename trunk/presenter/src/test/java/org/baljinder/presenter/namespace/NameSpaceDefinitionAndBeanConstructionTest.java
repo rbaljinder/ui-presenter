@@ -1,6 +1,6 @@
 package org.baljinder.presenter.namespace;
 
-import org.baljinder.presenter.dataacess.IDataControl;
+import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.IPageController;
 import org.baljinder.presenter.dataacess.ITransitionController;
 import org.baljinder.presenter.dataacess.internal.support.DirectDataAccessStrategy;
@@ -20,19 +20,19 @@ public class NameSpaceDefinitionAndBeanConstructionTest extends SpringContextTes
 
 	public void testDataControlDefinitionConstruction() {
 		ApplicationContext ac = getApplicationContext();
-		IDataControl  eventHandlerSupportingDataControl = (IDataControl) ac.getBean("EventHandler_Supporting_DataControl");
+		IDataController  eventHandlerSupportingDataControl = (IDataController) ac.getBean("EventHandler_Supporting_DataControl");
 		assertNotNull(eventHandlerSupportingDataControl);
 		assertTrue(eventHandlerSupportingDataControl.getEventHandler() instanceof DoNothingEventHandler);
 		
 		//TODO: test all configurable options
-		IDataControl  allPropertiesConfigurableDataControl = (IDataControl) ac.getBean("All_Properties_Configurable_DataControl");
+		IDataController  allPropertiesConfigurableDataControl = (IDataController) ac.getBean("All_Properties_Configurable_DataControl");
 		assertNotNull(allPropertiesConfigurableDataControl);
 		assertTrue(allPropertiesConfigurableDataControl.getEventHandler() instanceof DoNothingEventHandler);
 		assertTrue(allPropertiesConfigurableDataControl.getDataAccessStrategy() instanceof DirectDataAccessStrategy);
 		assertTrue(allPropertiesConfigurableDataControl.getPageSize() == 20);
 		
 		//TODO:add more options
-		IDataControl basicChildDataControl = (IDataControl)ac.getBean("Basic_Child_DataControl");
+		IDataController basicChildDataControl = (IDataController)ac.getBean("Basic_Child_DataControl");
 		assertNotNull(basicChildDataControl);
 		assertTrue(basicChildDataControl.getParentDataControl().getDataControlName().equals("All_Properties_Configurable_DataControl"));
 	}

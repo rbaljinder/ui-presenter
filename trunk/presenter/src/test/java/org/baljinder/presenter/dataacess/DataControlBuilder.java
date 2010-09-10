@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.baljinder.presenter.dataacess.filter.Filter;
-import org.baljinder.presenter.dataacess.internal.DataControl;
+import org.baljinder.presenter.dataacess.internal.DataController;
 import org.baljinder.presenter.dataacess.util.BasicQueryBuilder;
 import org.baljinder.presenter.dataacess.util.IQueryBuilder;
 import org.baljinder.presenter.testing.support.model.TestTable;
@@ -14,8 +14,8 @@ import com.google.common.collect.Lists;
 
 public class DataControlBuilder {
 
-	private static IDataControl getMockedDataControl(final List<Map<String, Object>> dataList){
-		IDataControl dataControl = new DataControl(){
+	private static IDataController getMockedDataControl(final List<Map<String, Object>> dataList){
+		IDataController dataControl = new DataController(){
 			public List<java.util.Map<String,Object>> getData() {
 				return dataList ;
 			};
@@ -23,8 +23,8 @@ public class DataControlBuilder {
 		return dataControl ; 
 	}
 	
-	public static IDataControl getBasicDataControlWithMockedData(String name,List<Class<?>> modelList,final List<Map<String, Object>> dataList) {
-		IDataControl dataControl = getMockedDataControl(dataList);
+	public static IDataController getBasicDataControlWithMockedData(String name,List<Class<?>> modelList,final List<Map<String, Object>> dataList) {
+		IDataController dataControl = getMockedDataControl(dataList);
 		dataControl.setDataControlName(name);
 		dataControl.setModelList(modelList);
 		dataControl.setQueryBuilder(getQueryBuilder());
@@ -32,7 +32,7 @@ public class DataControlBuilder {
 	}
 
 	
-	public static IDataControl getBasicDataControlWithMockedData(String name, List<Class<?>> modelList) {
+	public static IDataController getBasicDataControlWithMockedData(String name, List<Class<?>> modelList) {
 		return getBasicDataControlWithMockedData(name, modelList,new ArrayList<Map<String,Object>>());
 	}
 
@@ -54,7 +54,7 @@ public class DataControlBuilder {
 		return modelList;
 	}
 	
-	public static void createDataControlElement(IDataControl dataControl, int howMany, String name, int seedFrom) {
+	public static void createDataControlElement(IDataController dataControl, int howMany, String name, int seedFrom) {
 		for (int i = 0; i < howMany; i++) {
 			dataControl.create();
 		}
