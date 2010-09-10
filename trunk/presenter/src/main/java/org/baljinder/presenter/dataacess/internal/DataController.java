@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 //TODO: get rid of JSF components and reliance of JSF life-cycle to determine when to fetch data(if possible)
-public class DataController extends AbstractDataControlller {
+public class DataController extends AbstractDataController {
 
 	protected List<Integer> selectedElementsIndex = Lists.newArrayList();
 

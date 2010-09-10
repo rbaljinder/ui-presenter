@@ -29,9 +29,9 @@ import com.google.common.collect.Lists;
  * @author Baljinder Randhawa
  * 
  */
-public abstract class AbstractDataControlller implements IDataController {
+public abstract class AbstractDataController implements IDataController {
 
-	protected static final Log logger = LogFactory.getLog(AbstractDataControlller.class);
+	protected static final Log logger = LogFactory.getLog(AbstractDataController.class);
 
 	private IPersistenceManager persistenceManager;
 
