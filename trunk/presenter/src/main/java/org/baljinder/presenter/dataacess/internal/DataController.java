@@ -50,8 +50,7 @@ public class DataController extends AbstractDataController {
 		eventHandler.beforeDataFetch(this);
 		logger.info("Fetching data for Data Control[" + getDataControlName() + "]");
 		data = getDao().getAllEntities(getModelList(), getPageSize(), calculateFirstResultToFetch(), getQuery());
-		setCountForLastPageFetch(-1);
-		clearSelectedIndexesOfUITable();
+		resetDataControllerAfterDataFetch();
 		if (data.size() > 0)
 			setCurrentElementIndex(0);
 		else
@@ -59,6 +58,10 @@ public class DataController extends AbstractDataController {
 		eventHandler.afterDataFetch(this);
 	}
 
+	private void resetDataControllerAfterDataFetch(){
+		setCountForLastPageFetch(-1);
+		clearSelectedIndexesOfUITable();
+	}
 	/**
 	 * Also determines if we even need to fetch data for this data control or not
 	 */
