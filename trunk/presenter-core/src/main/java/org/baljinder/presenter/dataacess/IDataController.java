@@ -20,35 +20,44 @@ import org.baljinder.presenter.dataacess.util.IQueryBuilder;
  * </ul>
  * 
  * 
- *Spring Configuration(using the namespace provided with this framework):
+ * Spring Configuration(using the namespace provided with this framework):
  * 
- * <code>
+ * <pre>
+ * {@code
  * A fully configured data controller can look like this
  * <ps:data-control name="All_Properties_Configurable_DataControl"
-			init-method="initialize" scope="singleton" size="20" access-strategy="direct"
-			event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
-			<ps:type class="org.baljinder.presenter.dataacess.internal.DataController" />
-			<ps:default-where-clause clause="system.systemId = 1" />
-			<ps:dao-key-name
-				key="org.baljinder.presenter.dataacess.internal.GenericPresentationDao" />
-			<ps:persistence-manager manager="presentationPersistence" />
-			<ps:query-builder builder="defaultQueryBuilder" />
-			<ps:model class="org.baljinder.presenter.testing.support.model.System" />
-			<ps:model class="org.baljinder.presenter.testing.support.model.AnotherSystem" />
-			<ps:join-criteria criteria="system.systemId = anotherSystem.systemId"/>
-			<ps:data-control name="Basic_Child_DataControl"
-				access-strategy="direct" scope="singleton">
-				<ps:model class="org.baljinder.presenter.testing.support.model.Client" />
-				<ps:parent-relations>
-					<ps:parent-relation relation="client.clientId = system.clientId" />
-				</ps:parent-relations>
-			</ps:data-control>
-		</ps:data-control>
-	</code>
- * But only following configuration is enough with some sensible defaults( set by the Namespace hanlder while building bean definition)
- * 	<ps:data-control name="another_dataControl_dataAccess_test">
-		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
-	</ps:data-control> 
+ * 		init-method="initialize" scope="singleton" size="20" access-strategy="direct"
+ * 		event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
+ * 		<ps:type class="org.baljinder.presenter.dataacess.internal.DataController" />
+ * 		<ps:default-where-clause clause="system.systemId = 1" />
+ * 		<ps:dao-key-name
+ * 			key="org.baljinder.presenter.dataacess.internal.GenericPresentationDao" />
+ * 		<ps:persistence-manager manager="presentationPersistence" />
+ * 		<ps:query-builder builder="defaultQueryBuilder" />
+ * 		<ps:model class="org.baljinder.presenter.testing.support.model.System" />
+ * 		<ps:model class="org.baljinder.presenter.testing.support.model.AnotherSystem" />
+ * 		<ps:join-criteria criteria="system.systemId = anotherSystem.systemId"/>
+ * 		<ps:data-control name="Basic_Child_DataControl"
+ * 			access-strategy="direct" scope="singleton">
+ * 			<ps:model class="org.baljinder.presenter.testing.support.model.Client" />
+ * 			<ps:parent-relations>
+ * 				<ps:parent-relation relation="client.clientId = system.clientId" />
+ * 			</ps:parent-relations>
+ * 		</ps:data-control>
+ * 	</ps:data-control>
+ * }
+ * </pre>
+ * 
+ * But only following configuration is enough with some sensible defaults( set by the Namespace handler while building bean definition)
+ * 
+ * <pre>
+ * {@code
+ * <ps:data-control name="another_dataControl_dataAccess_test">
+ * 		 <ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+ * </ps:data-control>
+ * }
+ * </pre>
+ * 
  * @author baljinder
  * 
  */
@@ -82,16 +91,28 @@ public interface IDataController extends SupportsEventHandler {
 	 * list set for this controller) and the value is the object instance of the same model.
 	 * <p>
 	 * A Data Controller supports data from multiple domain object(based on some join criteria usually). And that is the reason for having
-	 * map for each data element, so that each row(database) can be loaded in one data element (Data Controller), where row can have data from multiple
-	 * table.
+	 * map for each data element, so that each row(database) can be loaded in one data element (Data Controller), where row can have data
+	 * from multiple table.
 	 * </p>
-	 * Usage: 
+	 * 
+	 * Usage:
+	 * 
+	 * <pre>
 	 * <code>
 	 * 		List<Map<String, Object>> data = dataController.getData() ;
 	 * 		Map<String, Object> firstRow = data.get(0); 
 	 * 		System someSystem = (System)firstRow.get("system"); 
 	 * 		Client someClient = (Client)firstRow.get("client");
-	 * </code> No type safety here.
+	 * </code>
+	 * </pre>
+	 * 
+	 * No type safety here.
+	 * 
+	 * <pre>
+	 * Whenever this method is called, controller will try to figure out whether it needs to fetch data from database or not. {@link DataAccessStartegy} is used to determine this.
+	 * The default strategy {@link org.baljinder.presenter.dataacess.internal.support.DirectDataAccessStrategy} will only check for dataFetch variable. if its false then data will be loaded 
+	 * through the {@link IPresentationDao}.And the variable will be marked false until some other operations needs to fetch data from database
+	 * </pre>
 	 * 
 	 * @return
 	 */
@@ -102,8 +123,14 @@ public interface IDataController extends SupportsEventHandler {
 	 * all depends on the model class being set.
 	 * 
 	 * Configuration(As per ps: namespace)
-	 * 		<ps:model class="org.baljinder.presenter.testing.support.model.System" />
-			<ps:model class="org.baljinder.presenter.testing.support.model.AnotherSystem" />
+	 * 
+	 * <pre>
+	 * {@code
+	 *  <ps:model class="org.baljinder.presenter.testing.support.model.System" /> 
+	 *  <ps:model class="org.baljinder.presenter.testing.support.model.AnotherSystem" />
+	 * }
+	 * </pre>
+	 * 
 	 * @param modelClassList
 	 */
 	public void setModelList(List<Class<? extends Object>> modelClassList);
@@ -120,14 +147,20 @@ public interface IDataController extends SupportsEventHandler {
 	 * There is a restriction on the naming convention.
 	 * 
 	 * Configuration(As per ps: namespace)
-	 *  <ps:join-criteria criteria="system.systemId = anotherSystem.systemId"/>
+	 * 
+	 * <pre>
+	 * {@code
+	 * <ps:join-criteria criteria="system.systemId = anotherSystem.systemId"/>
+	 * }
+	 * </pre>
+	 * 
 	 * @param joinCriteria
 	 */
-	// TODO: elaborate this with example
 	public void setJoinCriteria(String joinCriteria);
 
 	/**
 	 * Get the join criteria for this data control
+	 * 
 	 * @return
 	 */
 	public String getJoinCriteria();
@@ -180,36 +213,125 @@ public interface IDataController extends SupportsEventHandler {
 
 	public List<Map<String, Object>> getSelectedElements();
 
+	// List of standard pagination operations
+	/**
+	 * Are there elements present in the data controller loaded earlier. Simply put from UI we usually want to get to the previous data
+	 * loaded by the controller. Depends on the page size.
+	 * 
+	 * @return
+	 */
 	public boolean getPrevPossible();
 
+	/**
+	 * Are there more elements present then what we have currently fetched.
+	 * 
+	 * @return
+	 */
 	public boolean getNextPossible();
 
+	/**
+	 * Move to the beginning data list (based on the no of elements to be loaded by controller)
+	 * 
+	 * @return
+	 */
 	public String first();
 
+	/**
+	 * Move to the end of the data list (based on the no of elements to be loaded by controller)
+	 * 
+	 * @return
+	 */
 	public String last();
 
+	/**
+	 * Move to the previous data set loaded by controller.
+	 * 
+	 * @return
+	 */
 	public String prev();
 
+	/**
+	 * Move to next data set to be loaded by controller.
+	 * 
+	 * @return
+	 */
 	public String next();
 
-	public Boolean getDataFetched();
-
+	/**
+	 * This is sort of marker for figuring out whether data has been fetched or not. This is used in various operations of data controller.
+	 * 
+	 * @return
+	 */
 	public void setDataFetched(Boolean dataFetched);
 
+	/**
+	 * Is the data fetched form database.
+	 * 
+	 * @return
+	 */
+	public Boolean getDataFetched();
+
+	/**
+	 * The no of elements to be loaded (fetched) at a time by the controller. More appropriately its the size.
+	 * 
+	 * @return
+	 */
 	public Integer getPageSize();
 
+	/**
+	 * Set the no of elements to be fetched by the controller in one go.
+	 * 
+	 * @param pageSize
+	 */
 	public void setPageSize(Integer pageSize);
 
+	/**
+	 * Controller keeps track of a page cursor which is utilized for pagination.
+	 * 
+	 * @return
+	 */
 	public Integer getPageCursor();
 
+	/**
+	 * Set the page cursor.
+	 * 
+	 * @param pageCursor
+	 */
 	public void setPageCursor(Integer pageCursor);
 
+	/**
+	 * Get the default where clause. This field is set during the data controller configuration and it gets appended to the query(as it as).
+	 * 
+	 * @return
+	 */
 	public String getDefaultWhereClause();
 
+	/**
+	 * Set the default where clause.
+	 * 
+	 * @param whereClause
+	 */
 	public void setDefaultWhereClause(String whereClause);
 
+	/**
+	 * Sort the data elements of the data controller based on this property. As each element is actually a map of model name and
+	 * corresponding objects, we need to pass in fully qualified property name. e.g
+	 * 
+	 * <pre>
+	 * dataController.sort(&quot;system.systemName&quot;); // where system is the model alias and system name is the property on which sorting will be done.
+	 * </pre>
+	 * 
+	 * @param propertyName
+	 * @return
+	 */
 	public String sort(String propertyName);
 
+	/**
+	 * Sort the data elements based on the list of properties.
+	 * 
+	 * @param proprties
+	 * @return
+	 */
 	public String sort(String[] proprties);
 
 	/**
