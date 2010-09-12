@@ -27,14 +27,14 @@ import com.google.common.collect.Maps;
 //TODO: get rid of trickery used for transition action
 public class TransitionBeanDefinitionParser extends AbstractBeanDefinitionParser {
 	
-	private static Map<String,TransitionMode> transitionModeMapping = Maps.newHashMap() ;
+	protected Map<String,TransitionMode> transitionModeMapping = Maps.newHashMap() ;
 	
-	static{
+	public TransitionBeanDefinitionParser() {
 		transitionModeMapping.put("load", TransitionMode.LOAD);
 		transitionModeMapping.put("query", TransitionMode.QUERY);
 		transitionModeMapping.put("insert", TransitionMode.CREATE);
 	}
-	
+
 	public BeanDefinition parse(Element transitionElement, ParserContext parserContext) {
 		AbstractBeanDefinition transitionDef = createTransitionBeanDefinition(transitionElement, parserContext);
 		BeanDefinitionRegistry registry = parserContext.getRegistry();
@@ -73,6 +73,7 @@ public class TransitionBeanDefinitionParser extends AbstractBeanDefinitionParser
 		if (transitionCriteria != null) {
 			mpvs.addPropertyValue(TRANSITIONCRITERIA, getAttributeCollectionFromChilds(transitionCriteria, TRANSITIONCRITERION_XSD, CRITERION));
 		}
+		addPropertyToBeanDefinition(getChildElementCollection(transitionElement, PROPERTY),mpvs);
 		transitionDefinition.setPropertyValues(mpvs);
 		return transitionDefinition;
 	}

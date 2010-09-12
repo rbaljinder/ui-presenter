@@ -59,6 +59,7 @@ public class PageBeanDefinitionParser extends AbsractDataControlOrPageParser {
 		addEventHandlerDefinitionIfAny(pageElement,parserContext,mpvs,pageElement.getAttribute(SCOPE));
 		mpvs.addPropertyValue(NAME, pageElement.getAttribute(NAME));
 		mpvs.addPropertyValue(CACHED, pageElement.getAttribute(CACHED));
+		addPropertyToBeanDefinition(getChildElementCollection(pageElement, PROPERTY),mpvs);
 		pageDefinition.setPropertyValues(mpvs);
 		return pageDefinition;
 	}

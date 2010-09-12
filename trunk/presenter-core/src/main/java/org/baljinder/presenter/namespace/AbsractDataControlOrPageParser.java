@@ -45,12 +45,17 @@ public abstract class AbsractDataControlOrPageParser extends AbstractBeanDefinit
 
 	protected final static String DAOKEYNAMEFORCODEDVALUE = "org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl";
 
-	static {
+	public AbsractDataControlOrPageParser() {
 		defaults.put(JSFBASED, "jsfBasedDataAccessStrategy");//TODO: remove me
 		defaults.put(DIRECT, "directDataAccessStrategy");
 		defaultClasses.put(DATACONTROLCLASSFORCODEDVALUE, ValidValueDataControl.class);
 		defaultClasses.put(DAOKEYNAMEFORCODEDVALUE, ValidValueGenericDaoImpl.class);
 		defaultClasses.put(DAOKEYNAME, GenericPresentationDao.class);
+		defaults.put(DATACONTROLCLASS, "org.baljinder.presenter.dataacess.internal.DataController");
+		defaults.put(PAGECLASS, "org.baljinder.presenter.dataacess.internal.PageController");
+		defaults.put(QUERYBUILDER, "defaultQueryBuilder");
+		defaults.put(PERSISTANCEMANAGER, "presentationPersistence");
+		defaults.put(DAOKEYNAME, "org.baljinder.presenter.dataacess.internal.GenericPresentationDao");
 	}
 
 	/**
@@ -125,6 +130,7 @@ public abstract class AbsractDataControlOrPageParser extends AbstractBeanDefinit
 			Element relations = DomUtils.getChildElementByTagName(dataControlElement, PARENTRELATIONS_XSD);
 			mpvs.addPropertyValue(PARENTCHILDRELATION, getAttributeCollectionFromChilds(relations, PARENTRELATION_XSD, RELATION));
 		}
+		addPropertyToBeanDefinition(getChildElementCollection(dataControlElement, PROPERTY),mpvs);
 		dataControlDefinition.setPropertyValues(mpvs);
 		return dataControlDefinition;
 	}

@@ -25,12 +25,8 @@ public class PresenterNameSpaceHandler extends NamespaceHandlerSupport {
 		registerBeanDefinitionParser("event-handler", new EventHandlerBeanDefinitionParser());
 	}
 
-	public static class EventHandlerBeanDefinitionParser extends AbstractBeanDefinitionParser {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.springframework.beans.factory.xml.BeanDefinitionParser#parse(org.w3c.dom.Element, org.springframework.beans.factory.xml.ParserContext)
-		 */
+	public class EventHandlerBeanDefinitionParser extends AbstractBeanDefinitionParser {
+
 		public BeanDefinition parse(Element eventHandlerElement, ParserContext parserContext) {
 			AbstractBeanDefinition eventHandlerDef = createEventHandlerBeanDefinition(eventHandlerElement, parserContext);
 			BeanDefinitionRegistry registry = parserContext.getRegistry();

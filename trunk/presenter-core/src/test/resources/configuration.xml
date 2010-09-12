@@ -48,6 +48,7 @@
 				<ps:parent-relations>
 					<ps:parent-relation relation="client.clientId = system.clientId" />
 				</ps:parent-relations>
+				<ps:property name="pageSize" value="20"/>
 			</ps:data-control>
 		</ps:data-control>
 	</ps:page>

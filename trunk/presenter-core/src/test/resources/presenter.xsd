@@ -28,6 +28,15 @@
 				<xsd:sequence minOccurs="0" maxOccurs="unbounded">
 					<xsd:element name="data-control" type="data-control" />
 				</xsd:sequence>
+				<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="property">
+						<xsd:complexType>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+							<xsd:attribute name="value" type="xsd:string" use="optional" />
+							<xsd:attribute name="ref" type="xsd:string" use="optional" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
 			</xsd:sequence>
 			<xsd:attribute name="name" type="xsd:ID" use="required" />
 			<xsd:attribute name="cached" type="xsd:boolean"
@@ -154,6 +163,15 @@
 			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
 				<xsd:element name="data-control" type="data-control" />
 			</xsd:sequence>
+			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="property">
+					<xsd:complexType>
+						<xsd:attribute name="name" type="xsd:string" use="required" />
+						<xsd:attribute name="value" type="xsd:string" use="optional" />
+						<xsd:attribute name="ref" type="xsd:string" use="optional" />
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
 		</xsd:sequence>
 		<xsd:attribute name="name" type="xsd:ID" use="required" />
 		<xsd:attribute name="size" type="xsd:integer" default="10"
@@ -270,6 +288,15 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
+			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="property">
+					<xsd:complexType>
+						<xsd:attribute name="name" type="xsd:string" use="required" />
+						<xsd:attribute name="value" type="xsd:string" use="optional" />
+						<xsd:attribute name="ref" type="xsd:string" use="optional" />
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
 		</xsd:sequence>
 		<xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
 		<xsd:attribute name="mode" use="optional" default="load">
@@ -300,6 +327,17 @@
 	</xsd:complexType>
 	<xsd:element name="event-handler">
 		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="property">
+						<xsd:complexType>
+						    <xsd:attribute name="name" type="xsd:string" use="required" />
+							<xsd:attribute name="value" type="xsd:string" use="optional" />
+							<xsd:attribute name="ref" type="xsd:string" use="optional" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:sequence>
 			<xsd:attribute name="name" type="xsd:ID" use="required" />
 			<xsd:attribute name="scope" type="xsd:string" default="singleton"
 				use="optional" />

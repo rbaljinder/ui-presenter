@@ -3,9 +3,14 @@
  */
 package org.baljinder.presenter.namespace;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.baljinder.presenter.dataacess.IPresentationDao;
+import org.baljinder.presenter.dataacess.internal.DataController;
+import org.baljinder.presenter.dataacess.internal.PageController;
+import org.baljinder.presenter.dataacess.internal.TransitionController;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -20,10 +25,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import org.baljinder.presenter.dataacess.IPresentationDao;
-import org.baljinder.presenter.dataacess.internal.DataController;
-import org.baljinder.presenter.dataacess.internal.PageController;
-import org.baljinder.presenter.dataacess.internal.TransitionController;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
@@ -32,9 +34,9 @@ import com.google.common.collect.Maps;
  */
 public abstract class AbstractBeanDefinitionParser implements BeanDefinitionParser {
 
-	protected static Map<String, String> defaults = Maps.newHashMap();
-	
-	protected static Map<String, Class<? extends Object>> defaultClasses = Maps.newHashMap();
+	protected Map<String, String> defaults = Maps.newHashMap();
+
+	protected Map<String, Class<? extends Object>> defaultClasses = Maps.newHashMap();
 
 	protected static final String TYPE = "type";
 
@@ -47,29 +49,29 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	protected static final String SCOPE = "scope";
 
 	protected static final String DATACONTROL_XSD = "data-control";
-	
+
 	protected static final String DATACONTROL = "dataControl";
 
 	protected static final String DEFAULTWHERECLAUSE_XSD = "default-where-clause";
-	
+
 	protected static final String DEFAULTWHERECLAUSE = "defaultWhereClause";
 
 	protected static final String CLAUSE = "clause";
 
 	protected static final String DAOKEYNAME_XSD = "dao-key-name";
-	
+
 	protected static final String DAOKEYNAME = "daoKeyName";
 
 	protected static final String KEY = "key";
 
 	protected static final String PERSISTANCEMANAGER_XSD = "persistence-manager";
-	
+
 	protected static final String PERSISTANCEMANAGER = "persistenceManager";
 
 	protected static final String MANAGER = "manager";
 
 	protected static final String QUERYBUILDER_XSD = "query-builder";
-	
+
 	protected static final String QUERYBUILDER = "queryBuilder";
 
 	protected static final String BUILDER = "builder";
@@ -79,7 +81,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	protected static final String MODELLIST = "modelList";
 
 	protected static final String JOINCRITERIA_XSD = "join-criteria";
-	
+
 	protected static final String JOINCRITERIA = "joinCriteria";
 
 	protected static final String CRITERIA = "criteria";
@@ -99,13 +101,13 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	protected static final String PARENTDATACONTROL = "parentDataControl";
 
 	protected static final String PARENTRELATIONS_XSD = "parent-relations";
-	
+
 	protected static final String PARENTRELATIONS = "parentRelations";
 
 	protected static final String PARENTCHILDRELATION = "parentChildRelation";
 
 	protected static final String PARENTRELATION = "parentRelation";
-	
+
 	protected static final String PARENTRELATION_XSD = "parent-relation";
 
 	protected static final String RELATION = "relation";
@@ -121,19 +123,19 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	protected static final String SOURCEDATACONTROL = "sourceDataControl";
 
 	protected static final String TARGETDATACONTROL_XSD = "target-data-control";
-	
+
 	protected static final String TARGETDATACONTROL = "targetDataControl";
 
 	protected static final String TRANSITIONCRITERIA_XSD = "transition-criteria";
-	
+
 	protected static final String TRANSITIONCRITERIA = "transitionCriteria";
 
 	protected static final String TRANSITIONCRITERION_XSD = "transition-criterion";
-	
+
 	protected static final String TRANSITIONCRITERION = "transitionCriterion";
 
 	protected static final String TRANSITIONACTION_XSD = "transition-action";
-	
+
 	protected static final String TRANSITIONACTION = "transitionAction";
 
 	protected static final String CRITERION = "criterion";
@@ -141,7 +143,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	protected static final String PAGE = "page";
 
 	protected static final String TARGETPAGE_XSD = "target-page";
-	
+
 	protected static final String TARGETPAGE = "targetPage";
 
 	protected static final String TARGETPAGECONTROLLER = "targetPageController";
@@ -154,7 +156,13 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 
 	protected final static String EVENT_HANDLER_REF = "event-handler-ref";
 
-	static {
+	protected static final String PROPERTY = "property";
+
+	protected static final String PROPERTY_VALUE = "value";
+
+	protected static final String PROPERTY_REF = "ref";
+
+	public AbstractBeanDefinitionParser() {
 		defaultClasses.put(DATACONTROLCLASS, DataController.class);
 		defaultClasses.put(PAGECLASS, PageController.class);
 		defaultClasses.put(DAOKEYNAME, IPresentationDao.class);
@@ -162,7 +170,28 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 
 		defaults.put(QUERYBUILDER, "defaultQueryBuilder");
 		defaults.put(PERSISTANCEMANAGER, "presentationPersistence");
-		
+
+	}
+
+	/**
+	 * @param element
+	 * @return
+	 */
+	protected static List<Node> getChildElementCollection(Element element, String childElement) {
+		List<Node> elementList = Lists.newArrayList();
+		NodeList childNodes = element.getChildNodes();
+		if (childNodes == null)
+			return elementList;
+		for (int i = 0; i < childNodes.getLength(); i++) {
+			Node node = childNodes.item(i);
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				String localName = node.getLocalName();
+				if (childElement.equals(localName)) {
+					elementList.add(node);
+				}
+			}
+		}
+		return elementList;
 	}
 
 	/**
@@ -196,7 +225,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 		return clazz;
 	}
 
-	protected static Class<? extends Object> getBeanClassFromChildOrDefault(Element element, String childElementName, String attribute,
+	protected Class<? extends Object> getBeanClassFromChildOrDefault(Element element, String childElementName, String attribute,
 			String defaultKey) {
 		Class<? extends Object> clazz = null;
 		try {
@@ -218,7 +247,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	 * @param defaultwhereclause2
 	 * @param clause2
 	 */
-	protected static void addProprtyOfChild(MutablePropertyValues mpvs, Element element, String childElementName, String attribute,
+	protected void addProprtyOfChild(MutablePropertyValues mpvs, Element element, String childElementName, String attribute,
 			String propertyNameToSet) {
 		addProprtyOfChild(mpvs, element, childElementName, attribute, propertyNameToSet, false);
 	}
@@ -230,7 +259,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	 * @param defaultwhereclause2
 	 * @param clause2
 	 */
-	protected static void addProprtyOfChild(MutablePropertyValues mpvs, Element element, String childElementName, String attribute,
+	protected void addProprtyOfChild(MutablePropertyValues mpvs, Element element, String childElementName, String attribute,
 			String propertyNameToSet, boolean runtimeReference) {
 		if (element == null || DomUtils.getChildElementByTagName(element, childElementName) == null)
 			return;
@@ -241,7 +270,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 			mpvs.addPropertyValue(propertyNameToSet, DomUtils.getChildElementByTagName(element, childElementName).getAttribute(attribute));
 	}
 
-	protected static void addProprtyFromChildOrDefault(MutablePropertyValues mpvs, Element element, String childElementName, String attribute,
+	protected void addProprtyFromChildOrDefault(MutablePropertyValues mpvs, Element element, String childElementName, String attribute,
 			String defaultKey) {
 		addProprtyFromChildOrDefault(mpvs, element, childElementName, attribute, defaultKey, false);
 	}
@@ -253,7 +282,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	 * @param defaultwhereclause2
 	 * @param clause2
 	 */
-	protected static void addProprtyFromChildOrDefault(MutablePropertyValues mpvs, Element element, String childElementName, String attribute,
+	protected void addProprtyFromChildOrDefault(MutablePropertyValues mpvs, Element element, String childElementName, String attribute,
 			String defaultKey, boolean runtimeReference) {
 		if (element == null || DomUtils.getChildElementByTagName(element, childElementName) == null) {
 			if (runtimeReference)
@@ -263,13 +292,13 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 			return;
 		}
 		if (runtimeReference)
-			mpvs.addPropertyValue(defaultKey, new RuntimeBeanReference(DomUtils.getChildElementByTagName(element, childElementName).getAttribute(
-					attribute)));
+			mpvs.addPropertyValue(defaultKey, new RuntimeBeanReference(DomUtils.getChildElementByTagName(element, childElementName)
+					.getAttribute(attribute)));
 		else
 			mpvs.addPropertyValue(defaultKey, DomUtils.getChildElementByTagName(element, childElementName).getAttribute(attribute));
 	}
 
-	protected static String getAttributeOrDefault(Element element, String attribute, String defaultKey) {
+	protected String getAttributeOrDefault(Element element, String attribute, String defaultKey) {
 		if (element == null)
 			return defaults.get(defaultKey);
 		String value = element.getAttribute(attribute);
@@ -281,7 +310,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 			mpvs.addPropertyValue(EVENTHANDLER, new RuntimeBeanReference(element.getAttribute(EVENT_HANDLER_REF)));
 		if (!StringUtils.isEmpty(element.getAttribute(EVENT_HANDLER))) {
 			String eventhandlerBeanName = getEventHandlerBeanName(element, "EVENT_HANDLER");
-			parserContext.getRegistry().registerBeanDefinition(eventhandlerBeanName, createEventHandlerBeanDefinition(element,scope));
+			parserContext.getRegistry().registerBeanDefinition(eventhandlerBeanName, createEventHandlerBeanDefinition(element, scope));
 			mpvs.addPropertyValue(EVENTHANDLER, new RuntimeBeanReference(eventhandlerBeanName));
 		}
 	}
@@ -296,6 +325,21 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	protected BeanDefinition createEventHandlerBeanDefinition(Element element, String scope) {
 		RootBeanDefinition eventHandlerDefinition = new RootBeanDefinition(getBeanClass(element.getAttribute(EVENT_HANDLER)));
 		eventHandlerDefinition.setScope(scope);
+		MutablePropertyValues mpvs = eventHandlerDefinition.getPropertyValues();
+		addPropertyToBeanDefinition(getChildElementCollection(element, PROPERTY), mpvs);
+		eventHandlerDefinition.setPropertyValues(mpvs);
 		return eventHandlerDefinition;
+	}
+
+	// ref has precedence over value, or should have
+	protected void addPropertyToBeanDefinition(List<Node> propertyList, MutablePropertyValues mpvs) {
+		for (Node aProperty : propertyList) {
+			if (aProperty.getAttributes().getNamedItem(PROPERTY_VALUE) != null)
+				mpvs.addPropertyValue(aProperty.getAttributes().getNamedItem(NAME).getNodeValue(),
+						aProperty.getAttributes().getNamedItem(PROPERTY_VALUE).getNodeValue());
+			if (aProperty.getAttributes().getNamedItem(PROPERTY_REF) != null)
+				mpvs.addPropertyValue(aProperty.getAttributes().getNamedItem(NAME).getNodeValue(), new RuntimeBeanReference(aProperty
+						.getAttributes().getNamedItem(PROPERTY_REF).getNodeValue()));
+		}
 	}
 }

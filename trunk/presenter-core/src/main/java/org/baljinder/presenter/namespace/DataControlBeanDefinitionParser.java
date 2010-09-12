@@ -15,16 +15,9 @@ import org.w3c.dom.Element;
 
 /**
  * @author Baljinder Randhawa
- *
+ * 
  */
 public class DataControlBeanDefinitionParser extends AbsractDataControlOrPageParser {
-	static {
-		defaults.put(DATACONTROLCLASS, "org.baljinder.presenter.dataacess.internal.DataController");
-		defaults.put(PAGECLASS, "org.baljinder.presenter.dataacess.internal.PageController");
-		defaults.put(QUERYBUILDER, "defaultQueryBuilder");
-		defaults.put(PERSISTANCEMANAGER, "presentationPersistence");
-		defaults.put(DAOKEYNAME, "org.baljinder.presenter.dataacess.internal.GenericPresentationDao");
-	}
 
 	public BeanDefinition parse(Element dataControlElement, ParserContext parserContext) {
 		AbstractBeanDefinition dataControlDef = createDataControlBeanDefinition(dataControlElement, parserContext);
@@ -32,7 +25,6 @@ public class DataControlBeanDefinitionParser extends AbsractDataControlOrPagePar
 		String dataControlBeanName = dataControlElement.getAttribute(NAME);
 		if (StringUtils.isEmpty(dataControlBeanName))
 			dataControlBeanName = BeanDefinitionReaderUtils.generateBeanName(dataControlDef, registry);
-		
 		registry.registerBeanDefinition(dataControlBeanName, dataControlDef);
 		List<Element> childDataControlsElements = getChildDataControlElements(dataControlElement);
 		for (Element aDataControlElement : childDataControlsElements) {
