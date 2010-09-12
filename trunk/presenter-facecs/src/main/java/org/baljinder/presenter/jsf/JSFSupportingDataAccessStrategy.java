@@ -1,4 +1,4 @@
-package org.baljinder.presenter.dataacess.internal.support;
+package org.baljinder.presenter.jsf;
 /**
  * 
  */
