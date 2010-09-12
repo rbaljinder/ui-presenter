@@ -3,7 +3,7 @@ package org.baljinder.presenter.dataacess;
 import java.util.Map;
 
 import org.baljinder.presenter.dataacess.ITransitionController.TransitionMode;
-import org.baljinder.presenter.testing.BasicIntegrationTestCase;
+import org.baljinder.presenter.testing.support.BasicIntegrationTestCase;
 import org.springframework.context.ApplicationContext;
 
 public class TransitionTest extends BasicIntegrationTestCase  {

@@ -1,6 +1,6 @@
 package org.baljinder.presenter.dataacess;
 
-import org.baljinder.presenter.testing.BasicIntegrationTestCase;
+import org.baljinder.presenter.testing.support.BasicIntegrationTestCase;
 import org.baljinder.presenter.testing.support.model.TestTable;
 import org.springframework.context.ApplicationContext;
 

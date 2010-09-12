@@ -75,4 +75,32 @@
 
 	<util:map id="dataControlFilters">
 	</util:map>
+		<bean id="genericValidValueDao"
+		class="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl">
+	</bean>
+
+	<bean id="genericPresentationDao"
+		class="org.baljinder.presenter.dataacess.internal.GenericPresentationDao" />
+
+	<bean id="codedValueDAO" class="org.baljinder.presenter.dataacess.cvl.CodedValueDAO" />
+
+	<bean id="presentationPersistence"
+		class="org.baljinder.presenter.dataacess.internal.PersistenceManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="daoAssociations">
+			<map>
+				<entry
+					key="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl"
+					value-ref="genericValidValueDao" />
+				<entry
+					key="org.baljinder.presenter.dataacess.internal.GenericPresentationDao"
+					value-ref="genericPresentationDao" />
+				<entry key="org.baljinder.presenter.dataacess.cvl.CodedValueDAO"
+					value-ref="codedValueDAO" />
+			</map>
+		</property>
+	</bean>
+	<util:list id="hibernate_mappings">
+		<value>/org/baljinder/presenter/testing/support/model/mapping.hbm.xml</value>
+	</util:list>
 </beans>
