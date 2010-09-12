@@ -65,7 +65,7 @@
 		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
 		<ps:model class="org.baljinder.presenter.testing.support.model.AnotherTestTable" />
 		<ps:join-criteria criteria="testTalbe.testId = anotherTestTable.testId"/>
-	</ps:data-control>
+	</ps:data-control> 
 	<bean id="defaultQueryBuilder" 
 		class="org.baljinder.presenter.dataacess.util.BasicQueryBuilder">
 		<property name="filters" ref="dataControlFilters" />
