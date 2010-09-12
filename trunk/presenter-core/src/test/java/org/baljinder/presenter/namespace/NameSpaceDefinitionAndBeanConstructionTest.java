@@ -4,7 +4,6 @@ import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.IPageController;
 import org.baljinder.presenter.dataacess.ITransitionController;
 import org.baljinder.presenter.dataacess.internal.support.DirectDataAccessStrategy;
-import org.baljinder.presenter.dataacess.internal.support.JSFSupportingDataAccessStrategy;
 import org.baljinder.presenter.testing.SpringContextTestCase;
 import org.baljinder.presenter.testing.support.DoNothingEventHandler;
 import org.springframework.context.ApplicationContext;
