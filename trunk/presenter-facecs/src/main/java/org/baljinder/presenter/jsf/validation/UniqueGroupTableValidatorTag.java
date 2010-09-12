@@ -1,4 +1,7 @@
-package org.baljinder.presenter.jsf.ui.validation;
+/**
+ * 
+ */
+package org.baljinder.presenter.jsf.validation;
 
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
@@ -9,11 +12,10 @@ import javax.servlet.jsp.JspException;
 import org.apache.myfaces.validator.ValidatorBaseTag;
 
 /**
- * 
  * @author Baljinder Randhawa
  * 
  */
-public class UniqueGroupValueValidatorTag extends ValidatorBaseTag {
+public class UniqueGroupTableValidatorTag extends ValidatorBaseTag {
 
 	private static final long serialVersionUID = -1L;
 
@@ -26,19 +28,19 @@ public class UniqueGroupValueValidatorTag extends ValidatorBaseTag {
 	}
 
 	public String getGroupComponentIds() {
-		return _groupComponentIds ;
+		return _groupComponentIds;
 	}
 
 	protected Validator createValidator() throws JspException {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		setValidatorId("org.baljinder.presenter.jsf.ui.validation.UniqueGroupValidator");
-		UniqueGroupValidator validator = (UniqueGroupValidator) super.createValidator();
-		if (this._groupComponentIds != null) {
-			if (UIComponentTag.isValueReference(this._groupComponentIds)) {
-				ValueBinding vb = facesContext.getApplication().createValueBinding(this._groupComponentIds);
+		setValidatorId("org.baljinder.presenter.jsf.ui.validation.UniqueGroupInTableValidator");
+		UniqueGroupInTableValidator validator = (UniqueGroupInTableValidator) super.createValidator();
+		if (getGroupComponentIds() != null) {
+			if (UIComponentTag.isValueReference(getGroupComponentIds())) {
+				ValueBinding vb = facesContext.getApplication().createValueBinding(getGroupComponentIds());
 				validator.setGroupComponentIds(vb.getValue(facesContext).toString());
 			} else {
-				validator.setGroupComponentIds(this._groupComponentIds);
+				validator.setGroupComponentIds(getGroupComponentIds());
 				validator.setMessage(getMessage());
 			}
 		}
@@ -50,7 +52,6 @@ public class UniqueGroupValueValidatorTag extends ValidatorBaseTag {
 		super.release();
 		this._groupComponentIds = null;
 	}
-	
 
 	/**
 	 * @return the message

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.baljinder.presenter.jsf.ui.validation;
+package org.baljinder.presenter.jsf.validation;
 
 import java.util.Arrays;
 import java.util.List;

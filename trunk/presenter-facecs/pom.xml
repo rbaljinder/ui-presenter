@@ -15,6 +15,21 @@
   </properties>
 
   <dependencies>
+ 	  <dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>1.1_02</version>
+		</dependency> 
+        <dependency>
+			<groupId>org.apache.myfaces.trinidad</groupId>
+			<artifactId>trinidad-api</artifactId>
+			<version>1.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.myfaces.tomahawk</groupId>
+			<artifactId>tomahawk</artifactId>
+			<version>1.1.6</version>
+		</dependency> 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

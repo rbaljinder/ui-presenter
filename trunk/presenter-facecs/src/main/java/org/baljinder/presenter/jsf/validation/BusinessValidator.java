@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.baljinder.presenter.jsf.ui.validation;
+package org.baljinder.presenter.jsf.validation;
 
 /**
  * @author Baljinder Randhawa
