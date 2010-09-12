@@ -10,19 +10,18 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.myfaces.trinidad.component.UIXTable;
-
-import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.IDataAccessStrategy;
 import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.IEventHandler;
-import org.baljinder.presenter.dataacess.ModelFieldMapping;
 import org.baljinder.presenter.dataacess.IPersistenceManager;
+import org.baljinder.presenter.dataacess.IPresentationDao;
+import org.baljinder.presenter.dataacess.ModelFieldMapping;
 import org.baljinder.presenter.dataacess.internal.support.EmptyEventHandler;
 import org.baljinder.presenter.dataacess.util.IQueryBuilder;
 import org.baljinder.presenter.dataacess.util.PresentationConstants;
 import org.baljinder.presenter.util.ReflectionUtils;
 import org.baljinder.presenter.util.Utils;
+
 import com.google.common.collect.Lists;
 
 /**
@@ -34,8 +33,6 @@ public abstract class AbstractDataController implements IDataController {
 	protected static final Log logger = LogFactory.getLog(AbstractDataController.class);
 
 	private IPersistenceManager persistenceManager;
-
-	private UIXTable table = null;
 
 	private Integer pageSize = PresentationConstants.PAGESIZE;
 
@@ -164,14 +161,6 @@ public abstract class AbstractDataController implements IDataController {
 
 	public void setDaoKeyName(String daoKeyName) {
 		this.daoKeyName = daoKeyName;
-	}
-
-	public UIXTable getTable() {
-		return table;
-	}
-
-	public void setTable(UIXTable table) {
-		this.table = table;
 	}
 
 	public IPersistenceManager getPersistenceManager() {

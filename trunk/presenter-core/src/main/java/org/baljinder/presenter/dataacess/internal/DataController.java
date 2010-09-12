@@ -1,25 +1,18 @@
 package org.baljinder.presenter.dataacess.internal;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.myfaces.trinidad.component.UIXTable;
-import org.apache.myfaces.trinidad.event.SortEvent;
-import org.apache.myfaces.trinidad.model.RowKeySet;
-import org.apache.myfaces.trinidad.model.SortCriterion;
-import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.IDataController;
-import org.baljinder.presenter.dataacess.util.FacesUtils;
+import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.util.ClassUtils;
 import org.baljinder.presenter.util.Utils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-//TODO: get rid of JSF components and reliance of JSF life-cycle to determine when to fetch data(if possible)
 public class DataController extends AbstractDataController {
 
 	protected List<Integer> selectedElementsIndex = Lists.newArrayList();
@@ -60,7 +53,7 @@ public class DataController extends AbstractDataController {
 
 	private void resetDataControllerAfterDataFetch(){
 		setCountForLastPageFetch(-1);
-		clearSelectedIndexesOfUITable();
+		clearSelectedElementsIndexes();
 	}
 	/**
 	 * Also determines if we even need to fetch data for this data control or not
@@ -83,16 +76,11 @@ public class DataController extends AbstractDataController {
 	/** 
 	 * 
 	 */
-	public void clearSelectedIndexesOfUITable() {
+	//TODO: get it out to view specific framework ;
+	
+	public void clearSelectedElementsIndexes() {
 		selectedElementsIndex.clear();
-		if (getTable() != null) {
-			if (FacesUtils.isSingleSelect(getTable()) && data.size() > 0) {
-				RowKeySet rowKeySet = getTable().getSelectedRowKeys();
-				rowKeySet.clear();
-				rowKeySet.add(0);
-				getTable().setSelectedRowKeys(rowKeySet);
-			}
-		}
+		performAfterEvent(Event.CLEAR_SELECTED_UI_ELEMENTS);
 	}
 
 	protected Integer calculateFirstResultToFetch() {
@@ -197,7 +185,7 @@ public class DataController extends AbstractDataController {
 		for(Map<String, Object> removeMe : elementsToRemove)
 			data.remove(removeMe);
 		markDataFetched();
-		clearSelectedIndexesOfUITable();
+		clearSelectedElementsIndexes();
 		return null;
 	}
 //TODO:Merge methods insert/delete with their selected parts
@@ -211,7 +199,7 @@ public class DataController extends AbstractDataController {
 		for(Map<String, Object> removeMe : elementsToRemove)
 			data.remove(removeMe);
 		markDataFetched();
-		clearSelectedIndexesOfUITable();
+		clearSelectedElementsIndexes();
 		return null;
 	}
 	
@@ -243,25 +231,36 @@ public class DataController extends AbstractDataController {
 		return getCurrentElementInternal();
 	}
 
+	//TODO: move this to jsf specific part 
 	public List<Map<String, Object>> getSelectedElements() {
 		List<Map<String, Object>> selectedElements = Lists.newArrayList();
-		if (getTable() == null) {
+		List<Integer> selectedElementsIndex = getSelectedElementsIndex();
+		//TODO: what to with this
+		/*RowKeySet selectedIndexs = getTable().getSelectedRowKeys();
+		Iterator<Object> iter = selectedIndexs.iterator();
+		while (iter.hasNext()) {
+			Integer index = (Integer) iter.next();
+			selectedElementsIndex.add(index);
+		}*/
+		if(selectedElementsIndex.size() == 0){
 			if (data.size() > 0) {
 				setCurrentElementIndex(0);
 				selectedElements.add(getCurrentElementInternal());
 			}
 			return selectedElements;
 		}
-		RowKeySet selectedIndexs = getTable().getSelectedRowKeys();
-		Iterator<Object> iter = selectedIndexs.iterator();
-		while (iter.hasNext()) {
-			Integer index = (Integer) iter.next();
-			selectedElementsIndex.add(index);
-		}
 		for (Integer selectedIndex : selectedElementsIndex)
 			selectedElements.add(data.get(selectedIndex));
-		selectedElementsIndex.clear();
+		//selectedElementsIndex.clear(); //TODO: why clearing
 		return selectedElements;
+	}
+
+	public void getSelectedElementsIndex(List<Integer> indices) {
+		this.selectedElementsIndex= indices;
+	}
+	
+	public List<Integer> getSelectedElementsIndex() {
+		return selectedElementsIndex;
 	}
 
 	protected Map<String, Object> getCurrentElementInternal() {
@@ -273,41 +272,43 @@ public class DataController extends AbstractDataController {
 		}
 		return Maps.newHashMap();
 	}
-
+	
+	//If somebody calls this method, then the datacontroller has no information about how to figure out which elements are selected
+	//so just raise calling performAfterEvent(), so someone know how to do it, then have a hook to do that
 	public String selectData() {
-		UIXTable table = getTable();
-		if (table == null) {
-			if (getData().size() > 0)
-				setCurrentElementIndex(0);
-		} else
-			setCurrentElementIndex(table.getRowIndex());
+		//at least select something
+		if (getData().size() > 0)
+			setCurrentElementIndex(0);
+		performAfterEvent(Event.SELECT_DATA);
 		return null;
 	}
 
-	public String sortData(SortEvent event) {
-		if (event.getSortCriteria().size() > 0) {
-			String sortCriterionSelected = ((SortCriterion) event.getSortCriteria().get(0)).getProperty();
-			boolean requiresOrdering = true;
-			List<OrderByAttribute> orderByAttributes = getOrderByList();
-			OrderByAttribute orderByAttributeToRemove = null;
-			String[] sortModelAttribute = StringUtils.split(sortCriterionSelected, ".");
-			for (OrderByAttribute attribute : orderByAttributes) {
-				if (attribute.getModel().equals(sortModelAttribute[0]) && attribute.getAttribute().equals(sortModelAttribute[1])) {
-					requiresOrdering = false;
-					orderByAttributeToRemove = attribute;
-					orderByAttributeToRemove.flipOrder();
-					break;
-				}
+	public String sort(String propertyName){
+		boolean requiresOrdering = true;
+		List<OrderByAttribute> orderByAttributes = getOrderByList();
+		OrderByAttribute orderByAttributeToRemove = null;
+		String[] sortModelAttribute = StringUtils.split(propertyName, ".");
+		for (OrderByAttribute attribute : orderByAttributes) {
+			if (attribute.getModel().equals(sortModelAttribute[0]) && attribute.getAttribute().equals(sortModelAttribute[1])) {
+				requiresOrdering = false;
+				orderByAttributeToRemove = attribute;
+				orderByAttributeToRemove.flipOrder();
+				break;
 			}
-			if (requiresOrdering)
-				orderByAttributes.add(new OrderByAttribute(sortModelAttribute[0], sortModelAttribute[1], OrderByAttribute.ASC));
-			dataFetched = false;
-			fetchData();
 		}
+		if (requiresOrdering)
+			orderByAttributes.add(new OrderByAttribute(sortModelAttribute[0], sortModelAttribute[1], OrderByAttribute.ASC));
+		dataFetched = false;
+		fetchData();
 		return null;
 	}
-
-		public String update(Boolean flushChanges) {
+	
+	public String sort(String []properties){
+		throw new UnsupportedOperationException("Sortnig on mulitple properties is not implemented yet");
+	}
+	
+	
+	public String update(Boolean flushChanges) {
 		eventHandler.beforeUpdate(this);
 		getDao().update(getCurrentElementInternal(), true);
 		markDataFetched();
@@ -332,7 +333,7 @@ public class DataController extends AbstractDataController {
 		logger.info("Refreshing data for Data Control[" + getDataControlName() + "]");
 		data = getDao().getAllEntities(getModelList(), getPageSize(), calculateFirstResultToFetch(), getQuery());
 		setCountForLastPageFetch(-1);
-		clearSelectedIndexesOfUITable();
+		clearSelectedElementsIndexes();
 		if (data.size() > 0)
 			setCurrentElementIndex(0);
 		else
@@ -348,5 +349,8 @@ public class DataController extends AbstractDataController {
 	public List<Map<String, Object>> getNewlyCreatedElement() {
 		return newlyCreatedElements;
 
+	}
+	
+	public void performAfterEvent(Event event) {
 	}
 }

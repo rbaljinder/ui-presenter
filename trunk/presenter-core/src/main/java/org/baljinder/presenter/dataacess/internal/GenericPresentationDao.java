@@ -165,9 +165,7 @@ public class GenericPresentationDao implements IPresentationDao, SupportsHiberna
 			public Object doInHibernate(Session session) throws HibernateException, SQLException {
 				logger.info("Query generated: [" + queryString + "]" + ", No of records to fetch[" + (maxResult) + "]");
 				List<Map<String, Object>> result = Lists.newArrayList();
-				Query query = session.createQuery(queryString);
-				query = query.setFirstResult(firstResult);
-				query.setMaxResults(maxResult + prefetchCount);
+				Query query = session.createQuery(queryString).setFirstResult(firstResult).setMaxResults(maxResult + prefetchCount);
 				List<Object> response = query.list();
 				for (Object object : response) {
 					if (object instanceof Object[])

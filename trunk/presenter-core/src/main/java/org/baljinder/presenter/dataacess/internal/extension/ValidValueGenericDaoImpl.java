@@ -8,10 +8,8 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.baljinder.presenter.dataacess.extension.ValidValueGenricDao;
 import org.baljinder.presenter.dataacess.internal.GenericPresentationDao;
-import org.baljinder.presenter.dataacess.util.FacesUtils;
 import org.baljinder.presenter.util.ReflectionUtils;
 import org.baljinder.presenter.util.Utils;
 import org.springframework.orm.hibernate.HibernateTemplate;
@@ -21,7 +19,7 @@ import org.springframework.orm.hibernate.HibernateTemplate;
  * 
  */
 
-// TODO: requires refactoring use generics 
+// TODO: requires refactoring use generics //  mes
 // FIXME:
 
 
@@ -96,7 +94,8 @@ public class ValidValueGenericDaoImpl extends GenericPresentationDao implements 
 					"Select count(*) from " + entitiyName.getName() + " " + Utils.getAlias(entitiyName) + " where " + Utils.getAlias(entitiyName) + "."
 							+ idetifierPropertyName + "=" + "'" + peroprtyValue + "'");
 			if (Integer.valueOf(countList.get(0).toString()) > 0) {
-				FacesUtils.addErrorMessage("PK_Violation");
+				//TODO: raise exception
+				//FacesUtils.addErrorMessage("PK_Violation");
 				return false;
 			} else {
 				create(currentElementInternal);
@@ -104,7 +103,8 @@ public class ValidValueGenericDaoImpl extends GenericPresentationDao implements 
 			}
 
 		} catch (Throwable th) {
-			FacesUtils.addErrorMessage("PK_Violation");
+			//TODO: raise exception
+			//FacesUtils.addErrorMessage("PK_Violation");
 			logger.error(th);
 		}
 		return false;

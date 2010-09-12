@@ -69,10 +69,6 @@
 		class="org.baljinder.presenter.dataacess.util.BasicQueryBuilder">
 		<property name="filters" ref="dataControlFilters" />
 	</bean>
-
-	<bean id="jsfBasedDataAccessStrategy"
-		class="org.baljinder.presenter.dataacess.internal.support.JSFSupportingDataAccessStrategy" />
-
 	<bean id="directDataAccessStrategy"
 		class="org.baljinder.presenter.dataacess.internal.support.DirectDataAccessStrategy" />
 

@@ -35,7 +35,7 @@ public abstract class AbsractDataControlOrPageParser extends AbstractBeanDefinit
 
 	protected final static String ACCESSSTRATEGY = "access-strategy";
 
-	protected final static String JSFBASED = "jsf-based";
+	protected final static String JSFBASED = "jsf-based"; //TODO: remove me
 
 	protected final static String DIRECT = "direct";
 
@@ -46,7 +46,7 @@ public abstract class AbsractDataControlOrPageParser extends AbstractBeanDefinit
 	protected final static String DAOKEYNAMEFORCODEDVALUE = "org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl";
 
 	static {
-		defaults.put(JSFBASED, "jsfBasedDataAccessStrategy");
+		defaults.put(JSFBASED, "jsfBasedDataAccessStrategy");//TODO: remove me
 		defaults.put(DIRECT, "directDataAccessStrategy");
 		defaultClasses.put(DATACONTROLCLASSFORCODEDVALUE, ValidValueDataControl.class);
 		defaultClasses.put(DAOKEYNAMEFORCODEDVALUE, ValidValueGenericDaoImpl.class);
