@@ -11,8 +11,7 @@
 	<!--Keeping the scope of the beans as prototype(for some of the beans its 
 		session/request out of the box), as i am not using WebApplicationContext -->
 	<ps:data-control name="EventHandler_Supporting_DataControl"
-		scope="singleton" access-strategy="direct"
-		event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
+		scope="singleton" access-strategy="direct">
 		<ps:model class="org.baljinder.presenter.testing.support.model.System" />
 	</ps:data-control>
 	<bean id="defaultQueryBuilder"
