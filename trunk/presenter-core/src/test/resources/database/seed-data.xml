@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-	<Test id="1" name="test" />
-	<AnotherTest id="1" name="test" />
-	<Client clientId = "1" clientName = "Test"/>
-	<System systemId = "1" clientId="1" systemName = "TestSystem"/>
-</dataset>
