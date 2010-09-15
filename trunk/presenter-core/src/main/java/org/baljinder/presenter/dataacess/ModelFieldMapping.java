@@ -35,13 +35,13 @@ public class ModelFieldMapping {
 	public ModelFieldMapping(String modelName, String fieldName) {
 		this.modelName = modelName;
 		this.fieldName = fieldName;
-		checkIfPartOfRangeAndModiy();
+		checkIfPartOfRangeAndModify();
 	}
 
 	/**
 	 * 
 	 */
-	private void checkIfPartOfRangeAndModiy() {
+	private void checkIfPartOfRangeAndModify() {
 		if (StringUtils.indexOf(fieldName, FROM) != -1) {
 			this.fieldName = StringUtils.substring(fieldName, 0, StringUtils.indexOf(fieldName, FROM));
 			isPartOfRange = true;

@@ -90,7 +90,7 @@ public class CodedValueListProvider {
 		cachedValidValueMaps.put(codeValueObject, codedValueMap);
 		return codedValueMap;
 	}
-	@SuppressWarnings( { "unchecked" })
+	@SuppressWarnings( { "unchecked","rawtypes"})
 	public Map getValidValueMap(Class<?> codeValueObject, String keyColumn, String descriptionColumn) {
 		Map codedValueMap = Maps.newHashMap();
 		// Empty option
