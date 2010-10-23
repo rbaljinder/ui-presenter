@@ -2,15 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.baljinder</groupId>
-	<artifactId>presenter-core</artifactId>
+	<artifactId>presenter-core-sota</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
 	<name>yet another presentation framework</name>
 	<properties>
 		<SpringVersion>3.0.4.RELEASE</SpringVersion>
-	</properties> 
+	</properties>
 	<dependencies>
-	<!-- Spring dependencies -->
+		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
@@ -42,10 +42,35 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-		      <groupId>org.hibernate</groupId>
-		      <artifactId>hibernate-core</artifactId>
-		      <version>3.5.5-Final</version>
-    	</dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.5.5-Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.5.5-Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
 		<!-- Commons/utilities dependencies -->
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -66,18 +91,12 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.0.4</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.google.collections</groupId>
 			<artifactId>google-collections</artifactId>
 			<version>1.0-rc2</version>
 			<scope>compile</scope>
 		</dependency>
-		<!--  -->
+		<!-- -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -102,12 +121,12 @@
 		</dependency>
 		<dependency>
 			<groupId>cglib</groupId>
-			<artifactId>cglib-full</artifactId>
-			<version>2.0.2</version>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.baljinder</groupId>
-			<artifactId>testing-support</artifactId>
+			<artifactId>testing-support-sota</artifactId>
 			<version>1.0</version>
 			<scope>test</scope>
 		</dependency>
