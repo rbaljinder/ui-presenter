@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.baljinder</groupId>
-	<artifactId>presenter-demo</artifactId>
+	<artifactId>presenter-demo-sota</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<dependencies>
@@ -13,14 +13,14 @@
 		</dependency>
 		<dependency>
 			<groupId>org.baljinder</groupId>
-			<artifactId>presenter-faces</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<artifactId>presenter-faces-sota</artifactId>
+			<version>1.0</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.baljinder</groupId>
-			<artifactId>testing-support</artifactId>
+			<artifactId>testing-support-sota</artifactId>
 			<version>1.0</version>
 			<type>jar</type>
 			<scope>compile</scope>
