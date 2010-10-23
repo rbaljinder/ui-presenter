@@ -3,7 +3,7 @@ package org.baljinder.presenter.dataacess.cvl;
 import java.util.List;
 
 import org.baljinder.presenter.dataacess.internal.GenericPresentationDao;
-import org.springframework.orm.hibernate.HibernateTemplate;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public class CodedValueDAO extends GenericPresentationDao {
 

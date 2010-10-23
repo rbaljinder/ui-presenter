@@ -12,7 +12,7 @@ import org.baljinder.presenter.dataacess.extension.ValidValueGenricDao;
 import org.baljinder.presenter.dataacess.internal.GenericPresentationDao;
 import org.baljinder.presenter.util.ReflectionUtils;
 import org.baljinder.presenter.util.Utils;
-import org.springframework.orm.hibernate.HibernateTemplate;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 
 /**
  * @author Baljinder Randhawa

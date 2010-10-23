@@ -3,15 +3,14 @@
  */
 package org.baljinder.presenter.dataacess.internal;
 
-import net.sf.hibernate.FlushMode;
-import net.sf.hibernate.HibernateException;
-import net.sf.hibernate.Session;
-import net.sf.hibernate.SessionFactory;
-
+import org.hibernate.FlushMode;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.dao.CleanupFailureDataAccessException;
 import org.springframework.dao.DataAccessResourceFailureException;
-import org.springframework.orm.hibernate.SessionFactoryUtils;
-import org.springframework.orm.hibernate.support.OpenSessionInViewFilter;
+import org.springframework.orm.hibernate3.SessionFactoryUtils;
+import org.springframework.orm.hibernate3.support.OpenSessionInViewFilter;
 
 public class HibernateFilter extends OpenSessionInViewFilter {
 

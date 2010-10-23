@@ -5,20 +5,19 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.hibernate.HibernateException;
-import net.sf.hibernate.Query;
-import net.sf.hibernate.Session;
-import net.sf.hibernate.SessionFactory;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.extension.SupportsHibernate;
 import org.baljinder.presenter.dataacess.util.PresentationConstants;
 import org.baljinder.presenter.util.Utils;
-import org.springframework.orm.hibernate.HibernateCallback;
-import org.springframework.orm.hibernate.HibernateTemplate;
-import org.springframework.orm.hibernate.SessionFactoryUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.SessionFactoryUtils;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -92,7 +91,7 @@ public class GenericPresentationDao implements IPresentationDao, SupportsHiberna
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Object> getAllEntities(Class<? extends Object> enttityName) {
+	public List<? extends Object> getAllEntities(Class<? extends Object> enttityName) {
 		return getHibernateTemplate().loadAll(enttityName);
 
 	}

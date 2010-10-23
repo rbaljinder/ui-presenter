@@ -2,12 +2,12 @@ package org.baljinder.presenter.dataacess.internal;
 
 import java.util.Map;
 
-import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.IPersistenceManager;
+import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.extension.SupportsHibernate;
 import org.baljinder.presenter.dataacess.extension.SupportsJDBCTemplating;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.orm.hibernate.HibernateTemplate;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 
 /**
  * This is out of my learning of a framework i use at work. Nothing special

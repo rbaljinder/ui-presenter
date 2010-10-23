@@ -1,8 +1,7 @@
 package org.baljinder.presenter.dataacess.extension;
 
-import net.sf.hibernate.Session;
-
-import org.springframework.orm.hibernate.HibernateTemplate;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public interface SupportsHibernate {
 

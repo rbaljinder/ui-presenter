@@ -6,9 +6,10 @@ package org.baljinder.presenter.persistance.interceptor;
 import java.io.Serializable;
 import java.util.List;
 
-import net.sf.hibernate.CallbackException;
-import net.sf.hibernate.Interceptor;
-import net.sf.hibernate.type.Type;
+import org.hibernate.CallbackException;
+import org.hibernate.EmptyInterceptor;
+import org.hibernate.Interceptor;
+import org.hibernate.type.Type;
 
 import com.google.common.collect.Lists;
 
