@@ -13,9 +13,15 @@
 		coded-value="true" scope="singleton" access-strategy="direct"
 		event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
 		<ps:model class="org.baljinder.presenter.testing.support.model.System" />
+		<ps:transition name="EventHandler_Supporting_DataControl_Transition" scope="prototype">
+			<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
+		</ps:transition>
+		<ps:transition name="EventHandler_Supporting_DataControl_AnotherTransition" scope="prototype">
+			<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
+		</ps:transition>
 	</ps:data-control>
-	<ps:transition name="EventHandler_TransitionAction_Supporting_Transition" mode="insert"
-		scope="prototype" event-handler-ref="doNothingEventHandler">
+	<ps:transition name="EventHandler_TransitionAction_Supporting_Transition"
+		mode="insert" scope="prototype" event-handler-ref="doNothingEventHandler">
 		<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
 		<ps:transition-action
 			class="org.baljinder.presenter.testing.support.DoNothingTransitionAction"
@@ -48,9 +54,15 @@
 				<ps:parent-relations>
 					<ps:parent-relation relation="client.clientId = system.clientId" />
 				</ps:parent-relations>
-				<ps:property name="pageSize" value="20"/>
+				<ps:property name="pageSize" value="20" />
 			</ps:data-control>
 		</ps:data-control>
+		<ps:transition name="All_Properties_Configurable_Supporting_Page_Transition" scope="prototype">
+			<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
+		</ps:transition>
+		<ps:transition name="All_Properties_Configurable_Supporting_Page_AnotherTransition" scope="prototype">
+			<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
+		</ps:transition>
 	</ps:page>
 	<ps:data-control name="dataControl_dataAccess_test"
 		access-strategy="direct" scope="singleton">
@@ -63,10 +75,11 @@
 	<ps:data-control name="multiple_model_dataControl_dataAccess_test"
 		access-strategy="direct" scope="singleton">
 		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
-		<ps:model class="org.baljinder.presenter.testing.support.model.AnotherTestTable" />
-		<ps:join-criteria criteria="testTalbe.testId = anotherTestTable.testId"/>
-	</ps:data-control> 
-	<bean id="defaultQueryBuilder" 
+		<ps:model
+			class="org.baljinder.presenter.testing.support.model.AnotherTestTable" />
+		<ps:join-criteria criteria="testTalbe.testId = anotherTestTable.testId" />
+	</ps:data-control>
+	<bean id="defaultQueryBuilder"
 		class="org.baljinder.presenter.dataacess.util.BasicQueryBuilder">
 		<property name="filters" ref="dataControlFilters" />
 	</bean>
@@ -75,7 +88,7 @@
 
 	<util:map id="dataControlFilters">
 	</util:map>
-		<bean id="genericValidValueDao"
+	<bean id="genericValidValueDao"
 		class="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl">
 	</bean>
 
@@ -101,6 +114,7 @@
 		</property>
 	</bean>
 	<util:list id="hibernate_mappings">
-		<value>/org/baljinder/presenter/testing/support/model/mapping.hbm.xml</value>
+		<value>/org/baljinder/presenter/testing/support/model/mapping.hbm.xml
+		</value>
 	</util:list>
 </beans>

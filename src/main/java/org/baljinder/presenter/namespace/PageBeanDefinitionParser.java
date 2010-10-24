@@ -3,6 +3,8 @@
  */
 package org.baljinder.presenter.namespace;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -60,6 +62,14 @@ public class PageBeanDefinitionParser extends AbsractDataControlOrPageParser {
 		mpvs.addPropertyValue(NAME, pageElement.getAttribute(NAME));
 		mpvs.addPropertyValue(CACHED, pageElement.getAttribute(CACHED));
 		addPropertyToBeanDefinition(getChildElementCollection(pageElement, PROPERTY),mpvs);
+		List<Node> dataControlTransitions = getChildElementCollection(pageElement, TRANSITION_XSD);
+		for (Node aDataControlTransition : dataControlTransitions) {
+			Element pageTransition = (Element) aDataControlTransition ; 
+			AbstractBeanDefinition transitionDef = createTransitionBeanDefintionForOtherElements(pageTransition, parserContext);
+			String transitionBeanName = pageTransition.getAttribute(NAME);
+			BeanDefinitionRegistry registry = parserContext.getRegistry();
+			registry.registerBeanDefinition(transitionBeanName, transitionDef);
+		}	
 		pageDefinition.setPropertyValues(mpvs);
 		return pageDefinition;
 	}
