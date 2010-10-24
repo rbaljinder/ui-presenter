@@ -131,10 +131,34 @@ public abstract class AbsractDataControlOrPageParser extends AbstractBeanDefinit
 			mpvs.addPropertyValue(PARENTCHILDRELATION, getAttributeCollectionFromChilds(relations, PARENTRELATION_XSD, RELATION));
 		}
 		addPropertyToBeanDefinition(getChildElementCollection(dataControlElement, PROPERTY),mpvs);
+		List<Node> dataControlTransitions = getChildElementCollection(dataControlElement, TRANSITION_XSD);
+		for (Node aDataControlTransition : dataControlTransitions) {
+			Element dataControlTransition = (Element) aDataControlTransition ; 
+			String transitionBeanName = dataControlTransition.getAttributes().getNamedItem(NAME).getNodeValue();
+			AbstractBeanDefinition transitionDef = createTransitionBeanDefintionForOtherElements(dataControlTransition, parserContext);
+			 dataControlTransition.getAttribute(NAME);
+			BeanDefinitionRegistry registry = parserContext.getRegistry();
+			MutablePropertyValues mpvsOfTransition = transitionDef.getPropertyValues();
+			mpvsOfTransition.add(SOURCEDATACONTROL, new RuntimeBeanReference(dataControlElement.getAttribute(NAME)));
+			transitionDef.setPropertyValues(mpvsOfTransition);
+			registry.registerBeanDefinition(transitionBeanName, transitionDef);
+		}
 		dataControlDefinition.setPropertyValues(mpvs);
 		return dataControlDefinition;
 	}
 
+	protected AbstractBeanDefinition createTransitionBeanDefintionForOtherElements(Element dataControlTransition,ParserContext parserContext){
+		AbstractBeanDefinition transitionDef = createTransitionBeanDefinition(dataControlTransition, parserContext);
+		BeanDefinitionRegistry registry = parserContext.getRegistry();
+		String transitionBeanName = dataControlTransition.getAttribute(NAME);
+		if (StringUtils.isEmpty(transitionBeanName)) {
+			transitionBeanName = BeanDefinitionReaderUtils.generateBeanName(transitionDef, registry);
+		}
+		String transitionActionBeanName = getTransitionActionBeanName(dataControlTransition);
+		if(transitionActionBeanName != null)
+			registry.registerBeanDefinition(transitionActionBeanName, createTransitionActionBeanDefinition(dataControlTransition));
+		return transitionDef ;
+	}
 	/**
 	 * @param dataControlElement
 	 * @return

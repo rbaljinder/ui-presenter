@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.baljinder.presenter.dataacess.IPresentationDao;
+import org.baljinder.presenter.dataacess.ITransitionController.TransitionMode;
 import org.baljinder.presenter.dataacess.internal.DataController;
 import org.baljinder.presenter.dataacess.internal.PageController;
 import org.baljinder.presenter.dataacess.internal.TransitionController;
@@ -15,6 +16,7 @@ import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.ManagedList;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.BeanDefinitionParser;
@@ -37,6 +39,8 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	protected Map<String, String> defaults = Maps.newHashMap();
 
 	protected Map<String, Class<? extends Object>> defaultClasses = Maps.newHashMap();
+	
+	protected Map<String,TransitionMode> transitionModeMapping = Maps.newHashMap() ;
 
 	protected static final String TYPE = "type";
 
@@ -116,6 +120,8 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 
 	protected static final String MODE = "mode";
 
+	protected static final String TRANSITION_XSD = "transition";
+	
 	protected static final String TRANSITIONMODE = "transitionMode";
 
 	protected static final String SOURCEDATACONTROL_XSD = "source-data-control";
@@ -171,6 +177,9 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 		defaults.put(QUERYBUILDER, "defaultQueryBuilder");
 		defaults.put(PERSISTANCEMANAGER, "presentationPersistence");
 
+		transitionModeMapping.put("load", TransitionMode.LOAD);
+		transitionModeMapping.put("query", TransitionMode.QUERY);
+		transitionModeMapping.put("insert", TransitionMode.CREATE);
 	}
 
 	/**
@@ -342,4 +351,49 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 						.getAttributes().getNamedItem(PROPERTY_REF).getNodeValue()));
 		}
 	}
+	
+	/**
+	 * @param transitionElement
+	 * @param parserContext
+	 * @return
+	 */
+	protected AbstractBeanDefinition createTransitionBeanDefinition(Element transitionElement, ParserContext parserContext) {
+		Class<? extends Object> clazz = getBeanClassFromChildOrDefault(transitionElement, TYPE, CLASS, TRANSITIONCLASS);
+		RootBeanDefinition transitionDefinition = new RootBeanDefinition(clazz);
+		transitionDefinition.setScope(transitionElement.getAttribute(SCOPE));
+		transitionDefinition.setSource(parserContext.extractSource(transitionElement));
+		MutablePropertyValues mpvs = transitionDefinition.getPropertyValues();
+		mpvs.addPropertyValue(NAME, transitionElement.getAttribute(NAME));
+		addProprtyOfChild(mpvs, transitionElement, TARGETPAGE_XSD, PAGE, TARGETPAGECONTROLLER, true);
+		addProprtyOfChild(mpvs, transitionElement, SOURCEDATACONTROL_XSD, DATACONTROL_XSD, SOURCEDATACONTROL, true);
+		addProprtyOfChild(mpvs, transitionElement, TARGETDATACONTROL_XSD, DATACONTROL_XSD, TARGETDATACONTROL, true);
+		addEventHandlerDefinitionIfAny(transitionElement,parserContext,mpvs,transitionElement.getAttribute(SCOPE));
+		String transitionActionBeanName = getTransitionActionBeanName(transitionElement);
+		if (transitionActionBeanName != null) 
+			mpvs.addPropertyValue(TRANSITIONACTION, new RuntimeBeanReference(transitionActionBeanName));
+		mpvs.addPropertyValue(TRANSITIONMODE, transitionModeMapping.get(transitionElement.getAttribute(MODE)));
+		Element transitionCriteria = DomUtils.getChildElementByTagName(transitionElement, TRANSITIONCRITERIA_XSD);
+		if (transitionCriteria != null) {
+			mpvs.addPropertyValue(TRANSITIONCRITERIA, getAttributeCollectionFromChilds(transitionCriteria, TRANSITIONCRITERION_XSD, CRITERION));
+		}
+		addPropertyToBeanDefinition(getChildElementCollection(transitionElement, PROPERTY),mpvs);
+		transitionDefinition.setPropertyValues(mpvs);
+		return transitionDefinition;
+	}
+	
+	protected String getTransitionActionBeanName(Element transitionElement){
+		Element transitionActionElement = DomUtils.getChildElementByTagName(transitionElement, TRANSITIONACTION_XSD);
+		if(transitionActionElement == null)
+			return null;
+		return transitionElement.getAttribute(NAME)+"TransitionAction";
+	}
+	// TODO : there must be some other way of doing it .. may be FactoryBean
+	protected BeanDefinition createTransitionActionBeanDefinition(Element transitionElement) {
+		Element transitionActionElement = DomUtils.getChildElementByTagName(transitionElement, TRANSITIONACTION_XSD);
+		String clazz = transitionActionElement.getAttribute(CLASS);
+		RootBeanDefinition transitionActionDefinition = new RootBeanDefinition(getBeanClass(clazz));
+		transitionActionDefinition.setScope(transitionActionElement.getAttribute(SCOPE));
+		return transitionActionDefinition;
+	}
+
 }

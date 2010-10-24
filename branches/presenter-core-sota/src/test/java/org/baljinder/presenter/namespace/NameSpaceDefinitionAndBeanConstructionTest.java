@@ -52,4 +52,25 @@ public class NameSpaceDefinitionAndBeanConstructionTest extends SpringContextTes
 		assertNotNull(transitionActionSupportingTransition.getTransitionAction());
 		assertTrue(transitionActionSupportingTransition.getTargetPageController().getName().equals("All_Properties_Configurable_Supporting_Page"));
 	}
+	
+	public void testEmbeddedTransitionDefinition(){
+		ApplicationContext applicationContext = getApplicationContext();
+		ITransitionController transitionController = (ITransitionController) applicationContext.getBean("EventHandler_Supporting_DataControl_Transition");
+		assertNotNull(transitionController);
+		assertNotNull(transitionController.getSourceDataControl());
+		assertNotNull(transitionController.getTargetPageController());
+		
+		ITransitionController anotherTransitionController = (ITransitionController) applicationContext.getBean("EventHandler_Supporting_DataControl_AnotherTransition");
+		assertNotNull(anotherTransitionController);
+		assertNotNull(anotherTransitionController.getSourceDataControl());
+		assertNotNull(anotherTransitionController.getTargetPageController()); 
+		
+		ITransitionController pageTransitionController = (ITransitionController) applicationContext.getBean("All_Properties_Configurable_Supporting_Page_Transition");
+		assertNotNull(pageTransitionController);
+		assertNotNull(pageTransitionController.getTargetPageController());
+		
+		ITransitionController pageAnotherTransitionController = (ITransitionController) applicationContext.getBean("All_Properties_Configurable_Supporting_Page_AnotherTransition");
+		assertNotNull(pageAnotherTransitionController);
+		assertNotNull(anotherTransitionController.getTargetPageController()); 
+	}
 }
