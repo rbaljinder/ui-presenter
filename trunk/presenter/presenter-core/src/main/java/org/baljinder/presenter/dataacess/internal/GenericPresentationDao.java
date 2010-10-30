@@ -146,9 +146,9 @@ public class GenericPresentationDao implements IPresentationDao, SupportsHiberna
 	public Integer getCountOfRecords(String countQuery) {
 		int count = 0;
 		logger.info("Count Query generated: [" + countQuery + "]");
-		List<Integer> countList = getHibernateTemplate().find(countQuery);
+		List<Object> countList = getHibernateTemplate().find(countQuery);
 		if (countList != null && !countList.isEmpty()) {
-			count = ((Integer) countList.get(0)).intValue();
+			count =Integer.valueOf(countList.get(0).toString());
 		}
 		return count;
 	}
