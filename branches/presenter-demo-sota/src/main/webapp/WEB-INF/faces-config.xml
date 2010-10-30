@@ -4,21 +4,27 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/
 ns/javaee/web-facesconfig_1_2.xsd">
 	<application>
+		<view-handler>
+			com.sun.facelets.FaceletViewHandler
+    </view-handler>
 		<variable-resolver>
 			org.springframework.web.jsf.DelegatingVariableResolver
 		</variable-resolver>
 	</application>
-	
-	
-	<managed-bean>
-		<description>UsernName Bean</description>
-		<managed-bean-name>user</managed-bean-name>
-		<managed-bean-class>demo.user</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-		<managed-property>
-			<property-name>name</property-name>
-			<property-class>java.lang.String</property-class>
-			<value />
-		</managed-property>
-	</managed-bean>
+	<!-- <navigation-rule> <from-view-id>/welcome.xhtml</from-view-id> <navigation-case> 
+		<from-outcome>TestTable_Create</from-outcome> <to-view-id>/WEB-INF/views/testtable/create.xhtml</to-view-id> 
+		</navigation-case> <navigation-case> <from-outcome>TestTable_List</from-outcome> 
+		<to-view-id>/WEB-INF/views/testtable/list.xhtml</to-view-id> </navigation-case> 
+		</navigation-rule> -->
+	<navigation-rule>
+	<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>TestTable_Create</from-outcome>
+			<to-view-id>/views/testtable/create.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>TestTable_List</from-outcome>
+			<to-view-id>/views/testtable/list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>

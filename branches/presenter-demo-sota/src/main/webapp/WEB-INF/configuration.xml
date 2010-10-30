@@ -7,63 +7,9 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
 		http://www.rbaljinder.org/schema/presenter classpath:/org/baljinder/presenter/namespace/presenter.xsd">
 	<import resource="/persistence.xml" />
-	<!--Keeping the scope of the beans as prototype(for some of the beans its 
-		session/request out of the box), as i am not using WebApplicationContext -->
-<!-- 	<ps:data-control name="EventHandler_Supporting_DataControl"
-		coded-value="true" scope="singleton" access-strategy="direct"
-		event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
-		<ps:model class="org.baljinder.presenter.testing.support.model.System" />
-	</ps:data-control>
-	<ps:transition name="EventHandler_TransitionAction_Supporting_Transition" mode="insert"
-		scope="prototype" event-handler-ref="doNothingEventHandler">
-		<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
-		<ps:transition-action
-			class="org.baljinder.presenter.testing.support.DoNothingTransitionAction"
-			scope="prototype" />
-	</ps:transition>
-	<ps:event-handler name="doNothingEventHandler"
-		class="org.baljinder.presenter.testing.support.DoNothingEventHandler" />
-	<ps:transition name="TransitionAction_Supporting_Transition"
-		scope="prototype">
-		<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
-		<ps:transition-action
-			class="org.baljinder.presenter.testing.support.DoNothingTransitionAction"
-			scope="prototype" />
-	</ps:transition>
-	<ps:page name="All_Properties_Configurable_Supporting_Page"
-		scope="prototype" event-handler-ref="doNothingEventHandler">
-		<ps:data-control name="All_Properties_Configurable_DataControl"
-			init-method="initialize" scope="singleton" size="20" access-strategy="direct"
-			event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
-			<ps:type class="org.baljinder.presenter.dataacess.internal.DataController" />
-			<ps:default-where-clause clause="system.systemId = 1" />
-			<ps:dao-key-name
-				key="org.baljinder.presenter.dataacess.internal.GenericPresentationDao" />
-			<ps:persistence-manager manager="presentationPersistence" />
-			<ps:query-builder builder="defaultQueryBuilder" />
-			<ps:model class="org.baljinder.presenter.testing.support.model.System" />
-			<ps:data-control name="Basic_Child_DataControl"
-				access-strategy="direct" scope="singleton">
-				<ps:model class="org.baljinder.presenter.testing.support.model.Client" />
-				<ps:parent-relations>
-					<ps:parent-relation relation="client.clientId = system.clientId" />
-				</ps:parent-relations>
-			</ps:data-control>
-		</ps:data-control>
-	</ps:page> -->
 	<ps:data-control name="dataControl_dataAccess_test" scope="singleton">
 		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
 	</ps:data-control>
-	<!-- <ps:data-control name="another_dataControl_dataAccess_test"
-		access-strategy="direct" scope="singleton">
-		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
-	</ps:data-control>
-	<ps:data-control name="multiple_model_dataControl_dataAccess_test"
-		access-strategy="direct" scope="singleton">
-		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
-		<ps:model class="org.baljinder.presenter.testing.support.model.AnotherTestTable" />
-		<ps:join-criteria criteria="testTalbe.testId = anotherTestTable.testId"/>
-	</ps:data-control> -->
 	<bean id="defaultQueryBuilder" 
 		class="org.baljinder.presenter.dataacess.util.BasicQueryBuilder">
 		<property name="filters" ref="dataControlFilters" />
