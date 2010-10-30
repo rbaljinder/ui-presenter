@@ -1,7 +1,7 @@
 package org.baljinder.presenter.dataacess;
 
 import org.baljinder.presenter.testing.support.BasicIntegrationTestCase;
-import org.baljinder.presenter.testing.support.model.TestTable;
+import org.baljinder.presenter.testing.support.model.DomainModel;
 import org.springframework.context.ApplicationContext;
 
 //TODO: test insertion/deletion/search and related stuff
@@ -25,16 +25,16 @@ public class DataControlTest extends BasicIntegrationTestCase {
 		String seededName = "test";
 		String newName = "newTest";
 		IDataController dataControlToRefresh = (IDataController)ac.getBean("dataControl_dataAccess_test") ;
-		dataControlToRefresh.getFilterObjectMap().get("testTable.testId").setValue(1);
-		assertTrue(((TestTable)dataControlToRefresh.getData().get(0).get("testTable")).getName().equals(seededName));
+		dataControlToRefresh.getFilterObjectMap().get("domainModel.testId").setValue(1);
+		assertTrue(((DomainModel)dataControlToRefresh.getData().get(0).get("domainModel")).getName().equals(seededName));
 		IDataController dataController = (IDataController)ac.getBean("dataControl_dataAccess_test") ;
-		dataController.getFilterObjectMap().get("testTable.testId").setValue(1);
-		((TestTable)dataController.getData().get(0).get("testTable")).setName(newName);
+		dataController.getFilterObjectMap().get("domainModel.testId").setValue(1);
+		((DomainModel)dataController.getData().get(0).get("domainModel")).setName(newName);
 		dataController.save();
 		dataControlToRefresh.refresh();
-		assertTrue(((TestTable)dataControlToRefresh.getData().get(0).get("testTable")).getName().equals(newName));
+		assertTrue(((DomainModel)dataControlToRefresh.getData().get(0).get("domainModel")).getName().equals(newName));
 		//revert back
-		((TestTable)dataController.getData().get(0).get("testTable")).setName(seededName);
+		((DomainModel)dataController.getData().get(0).get("domainModel")).setName(seededName);
 		dataController.save();
 	}
 }

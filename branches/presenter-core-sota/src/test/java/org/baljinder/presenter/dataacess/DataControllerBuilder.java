@@ -8,7 +8,7 @@ import org.baljinder.presenter.dataacess.filter.Filter;
 import org.baljinder.presenter.dataacess.internal.DataController;
 import org.baljinder.presenter.dataacess.util.BasicQueryBuilder;
 import org.baljinder.presenter.dataacess.util.IQueryBuilder;
-import org.baljinder.presenter.testing.support.model.TestTable;
+import org.baljinder.presenter.testing.support.model.DomainModel;
 
 import com.google.common.collect.Lists;
 
@@ -61,7 +61,7 @@ public class DataControllerBuilder {
 		List<Map<String, Object>> newlyCreatedElements = dataController.getNewlyCreatedElement();
 		for (Map<String, Object> element : newlyCreatedElements) {
 			for (Map.Entry<String, Object> anEntry : element.entrySet()) {
-				TestTable testTable = (TestTable) anEntry.getValue();
+				DomainModel testTable = (DomainModel) anEntry.getValue();
 				testTable.setName("deleteMe" + seedFrom);
 				testTable.setTestId(seedFrom);
 				seedFrom++;

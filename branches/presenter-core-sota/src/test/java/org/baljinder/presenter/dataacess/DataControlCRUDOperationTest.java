@@ -1,7 +1,7 @@
 package org.baljinder.presenter.dataacess;
 
 import org.baljinder.presenter.testing.support.BasicIntegrationTestCase;
-import org.baljinder.presenter.testing.support.model.TestTable;
+import org.baljinder.presenter.testing.support.model.DomainModel;
 import org.springframework.context.ApplicationContext;
 
 //TODO: read some good book man seriously .. this cant be how you write test cases
@@ -25,7 +25,7 @@ public class DataControlCRUDOperationTest extends BasicIntegrationTestCase {
 		int sizeAfterCreation = dataControl.getData().size();
 		dataControl.setDataFetched(false);
 		assertTrue(sizeAfterCreation - sizeBeforeCreation == 2);
-		dataControl.getFilterObjectMap().get("testTable.name").setValue("deleteMe*");
+		dataControl.getFilterObjectMap().get("domainModel.name").setValue("deleteMe*");
 		assertTrue(dataControl.getData().size() == 2); // should fetch only two records
 		dataControl.delete();
 		dataControl.clearFilterValues();
@@ -38,17 +38,22 @@ public class DataControlCRUDOperationTest extends BasicIntegrationTestCase {
 		String seededName = "test";
 		String newName = "newTest";
 		IDataController dataController = (IDataController) ac.getBean("dataControl_dataAccess_test");
-		dataController.getFilterObjectMap().get("testTable.testId").setValue(1);
-		assertTrue(((TestTable) dataController.getData().get(0).get("testTable")).getName().equals(seededName));
-		((TestTable) dataController.getData().get(0).get("testTable")).setName(newName);
+		dataController.getFilterObjectMap().get("domainModel.testId").setValue(1);
+		assertTrue(((DomainModel) dataController.getData().get(0).get("domainModel")).getName().equals(seededName));
+		((DomainModel) dataController.getData().get(0).get("domainModel")).setName(newName);
 		dataController.update();
 		dataController.setDataFetched(false);
-		assertTrue(((TestTable) dataController.getData().get(0).get("testTable")).getName().equals(newName));
+		assertTrue(((DomainModel) dataController.getData().get(0).get("domainModel")).getName().equals(newName));
 		// revert back
-		((TestTable) dataController.getData().get(0).get("testTable")).setName(seededName);
+		((DomainModel) dataController.getData().get(0).get("domainModel")).setName(seededName);
 		dataController.save();
 	}
 
+	public void testOperationOutcome(){
+		ApplicationContext ac = getApplicationContext();
+		IDataController  allPropertiesConfigurableDataControl = (IDataController) ac.getBean("All_Properties_Configurable_DataControl");
+		allPropertiesConfigurableDataControl.create().equals("All_Properties_Configurable_DataControl_Create");
+	}
 	// FIXME : this dont work.. looks like some problem with HSQLDB .. or the dialect
 	// I have varified it with Oracle though
 	public void xxtestCreateForMultipleModelDataControl() {
