@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
 <hibernate-mapping>
-	<class name="org.baljinder.presenter.testing.support.model.TestTable"
+	<class name="org.baljinder.presenter.testing.support.model.DomainModel"
 		table="test">
 		<id name="testId" column="id">
 			<generator class="assigned"></generator>

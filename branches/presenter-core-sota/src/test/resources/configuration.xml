@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
-		http://www.rbaljinder.org/schema/presenter presenter.xsd">
+		http://www.rbaljinder.org/schema/presenter presenter-sota.xsd">
 	<import resource="persistence.xml" />
 	<!--Keeping the scope of the beans as prototype(for some of the beans its 
 		session/request out of the box), as i am not using WebApplicationContext -->
@@ -13,10 +13,12 @@
 		coded-value="true" scope="singleton" access-strategy="direct"
 		event-handler="org.baljinder.presenter.testing.support.DoNothingEventHandler">
 		<ps:model class="org.baljinder.presenter.testing.support.model.System" />
-		<ps:transition name="EventHandler_Supporting_DataControl_Transition" scope="prototype">
+		<ps:transition name="EventHandler_Supporting_DataControl_Transition"
+			scope="prototype">
 			<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
 		</ps:transition>
-		<ps:transition name="EventHandler_Supporting_DataControl_AnotherTransition" scope="prototype">
+		<ps:transition name="EventHandler_Supporting_DataControl_AnotherTransition"
+			scope="prototype">
 			<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
 		</ps:transition>
 	</ps:data-control>
@@ -56,28 +58,33 @@
 				</ps:parent-relations>
 				<ps:property name="pageSize" value="20" />
 			</ps:data-control>
+			<ps:action-outcome create="All_Properties_Configurable_DataControl_Create"
+				delete="All_Properties_Configurable_DataControl_delete" save="All_Properties_Configurable_DataControl_Save" />
 		</ps:data-control>
-		<ps:transition name="All_Properties_Configurable_Supporting_Page_Transition" scope="prototype">
+		<ps:transition
+			name="All_Properties_Configurable_Supporting_Page_Transition" scope="prototype">
 			<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
 		</ps:transition>
-		<ps:transition name="All_Properties_Configurable_Supporting_Page_AnotherTransition" scope="prototype">
+		<ps:transition
+			name="All_Properties_Configurable_Supporting_Page_AnotherTransition"
+			scope="prototype">
 			<ps:target-page page="All_Properties_Configurable_Supporting_Page" />
 		</ps:transition>
 	</ps:page>
 	<ps:data-control name="dataControl_dataAccess_test"
 		access-strategy="direct" scope="singleton">
-		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+		<ps:model class="org.baljinder.presenter.testing.support.model.DomainModel" />
 	</ps:data-control>
 	<ps:data-control name="another_dataControl_dataAccess_test"
 		access-strategy="direct" scope="singleton">
-		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+		<ps:model class="org.baljinder.presenter.testing.support.model.DomainModel" />
 	</ps:data-control>
 	<ps:data-control name="multiple_model_dataControl_dataAccess_test"
 		access-strategy="direct" scope="singleton">
-		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+		<ps:model class="org.baljinder.presenter.testing.support.model.DomainModel" />
 		<ps:model
 			class="org.baljinder.presenter.testing.support.model.AnotherTestTable" />
-		<ps:join-criteria criteria="testTalbe.testId = anotherTestTable.testId" />
+		<ps:join-criteria criteria="domainModel.testId = anotherTestTable.testId" />
 	</ps:data-control>
 	<bean id="defaultQueryBuilder"
 		class="org.baljinder.presenter.dataacess.util.BasicQueryBuilder">
