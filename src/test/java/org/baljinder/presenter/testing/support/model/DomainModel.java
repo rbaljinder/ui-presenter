@@ -1,6 +1,7 @@
 package org.baljinder.presenter.testing.support.model;
 
-public class TestTable {
+
+public class DomainModel {
 
 	private Integer testId;
 	
@@ -24,6 +25,6 @@ public class TestTable {
 
 	@Override
 	public String toString() {
-		return "TestTable [testId=" + testId + ", name=" + name + "]";
+		return "DomainModel [testId=" + testId + ", name=" + name + "]";
 	}
 }

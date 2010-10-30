@@ -1,6 +1,7 @@
 package org.baljinder.presenter.namespace;
 
 import org.baljinder.presenter.dataacess.IDataController;
+import org.baljinder.presenter.dataacess.IDataController.Operation;
 import org.baljinder.presenter.dataacess.IPageController;
 import org.baljinder.presenter.dataacess.ITransitionController;
 import org.baljinder.presenter.dataacess.internal.support.DirectDataAccessStrategy;
@@ -72,5 +73,14 @@ public class NameSpaceDefinitionAndBeanConstructionTest extends SpringContextTes
 		ITransitionController pageAnotherTransitionController = (ITransitionController) applicationContext.getBean("All_Properties_Configurable_Supporting_Page_AnotherTransition");
 		assertNotNull(pageAnotherTransitionController);
 		assertNotNull(anotherTransitionController.getTargetPageController()); 
+	}
+	
+	public void testActionOutcomeDefinition(){
+		ApplicationContext ac = getApplicationContext();
+		IDataController  allPropertiesConfigurableDataControl = (IDataController) ac.getBean("All_Properties_Configurable_DataControl");
+		assertTrue(allPropertiesConfigurableDataControl.getActionOutcome().get(Operation.CREATE).equals("All_Properties_Configurable_DataControl_Create"));
+		assertTrue(allPropertiesConfigurableDataControl.getActionOutcome().get(Operation.SAVE).equals("All_Properties_Configurable_DataControl_Save"));
+		assertTrue(allPropertiesConfigurableDataControl.getActionOutcome().get(Operation.DELETE).equals("All_Properties_Configurable_DataControl_delete"));
+		assertTrue(allPropertiesConfigurableDataControl.getActionOutcome().get(Operation.UPDATE) == null);
 	}
 }
