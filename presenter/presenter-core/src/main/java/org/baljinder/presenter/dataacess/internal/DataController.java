@@ -67,17 +67,13 @@ public class DataController extends AbstractDataController {
 					logger.debug("Data Fetch not required for[" + getDataControlName() + "] as the parent["
 							+ parentDataControl.getDataControlName() + "] has no data row");
 				data.clear();
-				return false; // if parent has no data element then child has nothing to relate to (You cant have child without parent :-)
+				// if parent has no data element then child has nothing to relate to (You cant have child without parent)
+				return false; 
 			}
 		}
 		return true;
 	}
 
-	/** 
-	 * 
-	 */
-	//TODO: get it out to view specific framework ;
-	
 	public void clearSelectedElementsIndexes() {
 		selectedElementsIndex.clear();
 		performAfterEvent(Event.CLEAR_SELECTED_UI_ELEMENTS);
@@ -231,17 +227,9 @@ public class DataController extends AbstractDataController {
 		return getCurrentElementInternal();
 	}
 
-	//TODO: move this to jsf specific part 
 	public List<Map<String, Object>> getSelectedElements() {
 		List<Map<String, Object>> selectedElements = Lists.newArrayList();
 		List<Integer> selectedElementsIndex = getSelectedElementsIndex();
-		//TODO: what to with this
-		/*RowKeySet selectedIndexs = getTable().getSelectedRowKeys();
-		Iterator<Object> iter = selectedIndexs.iterator();
-		while (iter.hasNext()) {
-			Integer index = (Integer) iter.next();
-			selectedElementsIndex.add(index);
-		}*/
 		if(selectedElementsIndex.size() == 0){
 			if (data.size() > 0) {
 				setCurrentElementIndex(0);
@@ -251,7 +239,6 @@ public class DataController extends AbstractDataController {
 		}
 		for (Integer selectedIndex : selectedElementsIndex)
 			selectedElements.add(data.get(selectedIndex));
-		//selectedElementsIndex.clear(); //TODO: why clearing
 		return selectedElements;
 	}
 
