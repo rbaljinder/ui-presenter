@@ -108,19 +108,19 @@ public class DataController extends AbstractDataController {
 			}
 		}
 		eventHandler.afterInsert(this);
-		return null;
+		return defaultActionOutcome.get(Operation.CREATE);
 	}
 
 	public String save() {
 		save(false);
-		return null;
+		return defaultActionOutcome.get(Operation.SAVE);
 	}
 
 	public String save(Boolean flushChanges) {
 		for(Map<String, Object> anElement : data)
 			 saveInternal(anElement,flushChanges);
 		markDataFetched();
-		return null;
+		return defaultActionOutcome.get(Operation.SAVE);
 	}
 
 	//FIXME: WHAT IS THIS
@@ -158,14 +158,14 @@ public class DataController extends AbstractDataController {
 		saveSelectedElements(false);
 		markDataFetched();
 		eventHandler.afterSave(this);
-		return null;
+		return defaultActionOutcome.get(Operation.SAVE);
 	}
 
 	public String saveSelectedElements(Boolean flushChanges) {
 		List<Map<String, Object>> selectedElements = getSelectedElements();
 		for (Map<String, Object> element : selectedElements)
 				saveInternal(element, flushChanges);
-		return null;
+		return defaultActionOutcome.get(Operation.SAVE);
 	}
 	
 	public String update() {
@@ -173,7 +173,7 @@ public class DataController extends AbstractDataController {
 		getDao().update(getCurrentElementInternal());
 		markDataFetched();
 		eventHandler.afterUpdate(this);
-		return null;
+		return defaultActionOutcome.get(Operation.UPDATE);
 	}
 
 	public String delete() {
@@ -186,7 +186,7 @@ public class DataController extends AbstractDataController {
 			data.remove(removeMe);
 		markDataFetched();
 		clearSelectedElementsIndexes();
-		return null;
+		return defaultActionOutcome.get(Operation.DELETE);
 	}
 //TODO:Merge methods insert/delete with their selected parts
 	public String deleteSelectedElements() {
@@ -200,7 +200,7 @@ public class DataController extends AbstractDataController {
 			data.remove(removeMe);
 		markDataFetched();
 		clearSelectedElementsIndexes();
-		return null;
+		return defaultActionOutcome.get(Operation.DELETE);
 	}
 	
 	private void deleteInternal(Map<String, Object> objectToDelete) {
@@ -280,7 +280,7 @@ public class DataController extends AbstractDataController {
 		if (getData().size() > 0)
 			setCurrentElementIndex(0);
 		performAfterEvent(Event.SELECT_DATA);
-		return null;
+		return defaultActionOutcome.get(Operation.SELECT);
 	}
 
 	public String sort(String propertyName){
@@ -300,7 +300,7 @@ public class DataController extends AbstractDataController {
 			orderByAttributes.add(new OrderByAttribute(sortModelAttribute[0], sortModelAttribute[1], OrderByAttribute.ASC));
 		dataFetched = false;
 		fetchData();
-		return null;
+		return defaultActionOutcome.get(Operation.SORT);
 	}
 	
 	public String sort(String []properties){
@@ -313,7 +313,7 @@ public class DataController extends AbstractDataController {
 		getDao().update(getCurrentElementInternal(), true);
 		markDataFetched();
 		eventHandler.afterUpdate(this);
-		return null;
+		return defaultActionOutcome.get(Operation.UPDATE);
 	}
 
 	public List<Map<String, Object>> refresh() {
@@ -353,4 +353,5 @@ public class DataController extends AbstractDataController {
 	
 	public void performAfterEvent(Event event) {
 	}
+
 }

@@ -71,6 +71,9 @@ public interface IDataController extends SupportsEventHandler {
 		CLEAR_SELECTED_UI_ELEMENTS, SELECT_DATA
 	};
 
+	public enum Operation {
+		CREATE,DELETE,UPDATE,SAVE,SELECT,SORT
+	};
 	/**
 	 * Set the name of the data control. This will be the bean-name/bean-id/managed-bean-name(for jsf) for the data control.
 	 * 
@@ -388,5 +391,28 @@ public interface IDataController extends SupportsEventHandler {
 	public List<Integer> getSelectedElementsIndex();
 
 	public void performAfterEvent(Event event);
+	
+	/**
+	 * Set default outcome(a string value that can be used for navigation or other purpose) for following operations :
+	 * 
+	 * <ul>
+	 *  <li>Create</li>
+	 *  <li>Save</li>
+	 *  <li>Update</li>
+	 *  <li>Delete</li>
+	 *  <li>Sort</li>
+	 *  <li>Select</li>
+	 * </ul>
+	 *  
+	 * @param actionOutcomes
+	 */
+	public void setActionOutcome(Map<Operation,String> actionOutcomes) ;
+	
+	/**
+	 * Get default outcome(a string value that can be used for navigation or other purpose) for operations.
+	 * 
+	 * @return
+	 */
+	public Map<Operation,String> getActionOutcome() ;
 
 }

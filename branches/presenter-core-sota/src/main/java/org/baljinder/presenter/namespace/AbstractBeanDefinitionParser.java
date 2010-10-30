@@ -167,7 +167,23 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	protected static final String PROPERTY_VALUE = "value";
 
 	protected static final String PROPERTY_REF = "ref";
-
+	
+	protected static final String ACTION_OUTCOME= "actionOutcome";
+	
+	protected static final String ACTION_OUTCOME_XSD = "action-outcome";
+	
+	protected static final String ACTION_OUTCOME_CREATE_XSD = "create";
+	
+	protected static final String ACTION_OUTCOME_SAVE_XSD = "save";
+	
+	protected static final String ACTION_OUTCOME_UPDATE_XSD = "update";
+	
+	protected static final String ACTION_OUTCOME_DELETE_XSD = "delete";
+	
+	protected static final String ACTION_OUTCOME_SELECT_XSD = "select";
+	
+	protected static final String ACTION_OUTCOME_SORT_XSD = "sort";
+	
 	public AbstractBeanDefinitionParser() {
 		defaultClasses.put(DATACONTROLCLASS, DataController.class);
 		defaultClasses.put(PAGECLASS, PageController.class);

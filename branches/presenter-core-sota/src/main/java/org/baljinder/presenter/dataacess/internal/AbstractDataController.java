@@ -4,6 +4,7 @@
 package org.baljinder.presenter.dataacess.internal;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.baljinder.presenter.dataacess.IEventHandler;
 import org.baljinder.presenter.dataacess.IPersistenceManager;
 import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.ModelFieldMapping;
+import org.baljinder.presenter.dataacess.IDataController.Operation;
 import org.baljinder.presenter.dataacess.internal.support.EmptyEventHandler;
 import org.baljinder.presenter.dataacess.util.IQueryBuilder;
 import org.baljinder.presenter.dataacess.util.PresentationConstants;
@@ -23,6 +25,7 @@ import org.baljinder.presenter.util.ReflectionUtils;
 import org.baljinder.presenter.util.Utils;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Baljinder Randhawa
@@ -71,8 +74,23 @@ public abstract class AbstractDataController implements IDataController {
 	private IQueryBuilder queryBuilder;
 
 	private List<OrderByAttribute> orderByList = Lists.newArrayList();
+	
+	protected Map<Operation,String> defaultActionOutcome = new HashMap<Operation, String>(){
+		
+		private static final long serialVersionUID = 1L;
+		
+		//TODO : is this required ?
+		@Override
+		public String get(Object key) {
+			String outcome = super.get(key);
+			if(StringUtils.isBlank(outcome))
+				return null ;
+			return outcome ;
+		};
+	} ;
 
-	private Map<String, ModelFieldMapping> filterObjectMap = new HashMap<String, ModelFieldMapping>() {
+	
+	private Map<String, ModelFieldMapping> filterObjectMap = new LinkedHashMap<String, ModelFieldMapping>() {
 
 		private static final long serialVersionUID = 1L;
 
@@ -467,4 +485,14 @@ public abstract class AbstractDataController implements IDataController {
 	public void setEventHandler(IEventHandler eventHandler) {
 		this.eventHandler = eventHandler;
 	}
+	
+	public void setActionOutcome(Map<Operation, String> actionOutcomes) {
+		defaultActionOutcome = actionOutcomes ;
+		
+	}
+
+	public Map<Operation, String> getActionOutcome() {
+		return defaultActionOutcome;
+	}
+
 }
