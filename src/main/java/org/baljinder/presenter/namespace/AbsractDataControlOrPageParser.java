@@ -6,6 +6,8 @@ package org.baljinder.presenter.namespace;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.baljinder.presenter.dataacess.IDataController;
+import org.baljinder.presenter.dataacess.IDataController.Operation;
 import org.baljinder.presenter.dataacess.internal.GenericPresentationDao;
 import org.baljinder.presenter.dataacess.internal.extension.ValidValueDataControl;
 import org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.ManagedList;
+import org.springframework.beans.factory.support.ManagedMap;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.xml.DomUtils;
@@ -129,6 +132,23 @@ public abstract class AbsractDataControlOrPageParser extends AbstractBeanDefinit
 			mpvs.addPropertyValue(PARENTDATACONTROL, new RuntimeBeanReference(parentDataControl));
 			Element relations = DomUtils.getChildElementByTagName(dataControlElement, PARENTRELATIONS_XSD);
 			mpvs.addPropertyValue(PARENTCHILDRELATION, getAttributeCollectionFromChilds(relations, PARENTRELATION_XSD, RELATION));
+		}
+		Element actionOutcomeElement = DomUtils.getChildElementByTagName(dataControlElement, ACTION_OUTCOME_XSD);
+		if(actionOutcomeElement != null){
+			ManagedMap<Operation, String> actionOutomes = new ManagedMap<Operation, String>();
+			if(StringUtils.isNotBlank(actionOutcomeElement.getAttribute(ACTION_OUTCOME_CREATE_XSD)))
+				actionOutomes.put(Operation.CREATE, actionOutcomeElement.getAttribute(ACTION_OUTCOME_CREATE_XSD));
+			if(StringUtils.isNotBlank(actionOutcomeElement.getAttribute(ACTION_OUTCOME_DELETE_XSD)))
+				actionOutomes.put(Operation.DELETE, actionOutcomeElement.getAttribute(ACTION_OUTCOME_DELETE_XSD));
+			if(StringUtils.isNotBlank(actionOutcomeElement.getAttribute(ACTION_OUTCOME_UPDATE_XSD)))
+				actionOutomes.put(Operation.UPDATE, actionOutcomeElement.getAttribute(ACTION_OUTCOME_UPDATE_XSD));
+			if(StringUtils.isNotBlank(actionOutcomeElement.getAttribute(ACTION_OUTCOME_SELECT_XSD)))
+				actionOutomes.put(Operation.SELECT, actionOutcomeElement.getAttribute(ACTION_OUTCOME_SELECT_XSD));
+			if(StringUtils.isNotBlank(actionOutcomeElement.getAttribute(ACTION_OUTCOME_SORT_XSD)))
+				actionOutomes.put(Operation.SORT, actionOutcomeElement.getAttribute(ACTION_OUTCOME_SORT_XSD));
+			if(StringUtils.isNotBlank(actionOutcomeElement.getAttribute(ACTION_OUTCOME_SAVE_XSD)))
+				actionOutomes.put(Operation.SAVE, actionOutcomeElement.getAttribute(ACTION_OUTCOME_SAVE_XSD));
+			mpvs.addPropertyValue(ACTION_OUTCOME,actionOutomes);
 		}
 		addPropertyToBeanDefinition(getChildElementCollection(dataControlElement, PROPERTY),mpvs);
 		List<Node> dataControlTransitions = getChildElementCollection(dataControlElement, TRANSITION_XSD);
