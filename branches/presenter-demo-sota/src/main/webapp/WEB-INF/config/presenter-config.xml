@@ -6,10 +6,8 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
 		http://www.rbaljinder.org/schema/presenter classpath:/org/baljinder/presenter/namespace/presenter.xsd">
-	<import resource="/persistence.xml" />
-	<ps:data-control name="dataControl_dataAccess_test" scope="singleton">
-		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
-	</ps:data-control>
+	<import resource="persistence.xml" />
+	<import resource="modules.xml" />
 	<bean id="defaultQueryBuilder" 
 		class="org.baljinder.presenter.dataacess.util.BasicQueryBuilder">
 		<property name="filters" ref="dataControlFilters" />

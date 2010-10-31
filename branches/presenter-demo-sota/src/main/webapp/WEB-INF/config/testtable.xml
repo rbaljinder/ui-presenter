@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:ps="http://www.rbaljinder.org/schema/presenter-faces" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+		http://www.rbaljinder.org/schema/presenter-faces http://ui-presenter.googlecode.com/files/presenter-faces-1.0.02.xsd">
+	<ps:transition name="TestTable_List_Transition">
+		<ps:target-page page="TestTable_List" />
+	</ps:transition>
+	<ps:transition name="TestTable_Create_Transition" mode="insert">
+		<ps:target-page page="TestTable_Create" />
+	</ps:transition>
+	<ps:page name="TestTable_List">
+		<ps:data-control name="TestTable_List_DataControl" access-strategy="direct">
+			<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+		</ps:data-control>
+	</ps:page>
+	<ps:page name="TestTable_Create">
+		<ps:data-control name="TestTable_Create_DataControl">
+			<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+			<ps:action-outcome save="TestTable_List"/>
+			<ps:action-outcome-binding save="TestTable_List_Transition.performTransition"/>
+		</ps:data-control>
+	</ps:page>
+	<ps:page name="TestTable_Update">
+		<ps:data-control name="TestTable_Update_DataControl">
+			<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+			<ps:action-outcome update="TestTable_List"/>
+		</ps:data-control>
+	</ps:page>
+	<ps:page name="TestTable_Show">
+		<ps:data-control name="TestTable_Show_DataControl">
+			<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+		</ps:data-control>
+	</ps:page>
+	<ps:data-control name="dataControl_dataAccess_test">
+		<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+	</ps:data-control>
+
+</beans>

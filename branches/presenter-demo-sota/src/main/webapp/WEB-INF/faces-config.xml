@@ -11,11 +11,6 @@ ns/javaee/web-facesconfig_1_2.xsd">
 			org.springframework.web.jsf.DelegatingVariableResolver
 		</variable-resolver>
 	</application>
-	<!-- <navigation-rule> <from-view-id>/welcome.xhtml</from-view-id> <navigation-case> 
-		<from-outcome>TestTable_Create</from-outcome> <to-view-id>/WEB-INF/views/testtable/create.xhtml</to-view-id> 
-		</navigation-case> <navigation-case> <from-outcome>TestTable_List</from-outcome> 
-		<to-view-id>/WEB-INF/views/testtable/list.xhtml</to-view-id> </navigation-case> 
-		</navigation-rule> -->
 	<navigation-rule>
 	<from-view-id>*</from-view-id>
 		<navigation-case>

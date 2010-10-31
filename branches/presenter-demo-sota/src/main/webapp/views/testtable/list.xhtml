@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<ui:composition template="/views/main.xhtml">
+<ui:define name="body" >
+	<a4j:form id="body">
+		<h:panelGroup id="dataTablePanel" >
+			<rich:dataTable id="dataTable"
+				value="#{TestTable_List_DataControl.data}" var="dataControl"
+				rows="#{TestTable_List_DataControl.pageSize}">
+				<f:facet name="caption">
+					<h:outputText value="testxId" />
+				</f:facet>
+				<f:facet name="header">
+					<h:outputText value="name" />
+				</f:facet>
+				<rich:column>
+					<h:outputText value="#{dataControl['testTable']['testId']}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{dataControl['testTable']['name']}" />
+				</rich:column>
+				<f:facet name="footer">
+				</f:facet>
+			</rich:dataTable>
+			<a4j:commandButton value="first" reRender="greeting,dataTablePanel"
+				rendered="#{TestTable_List_DataControl.prevPossible}"
+				action="#{TestTable_List_DataControl.first}" />
+			<a4j:commandButton value="prev" reRender="greeting,dataTablePanel"
+				rendered="#{TestTable_List_DataControl.prevPossible}"
+				action="#{TestTable_List_DataControl.prev}" />
+			<a4j:commandButton value=">" reRender="greeting,dataTablePanel"
+				rendered="#{TestTable_List_DataControl.nextPossible}"
+				action="#{TestTable_List_DataControl.next}" />
+			<a4j:commandButton value=">>" reRender="greeting,dataTablePanel"
+				rendered="#{TestTable_List_DataControl.nextPossible}"
+				action="#{TestTable_List_DataControl.last}" />
+		</h:panelGroup>
+	</a4j:form>
+	</ui:define>
+</ui:composition>
+</html>
