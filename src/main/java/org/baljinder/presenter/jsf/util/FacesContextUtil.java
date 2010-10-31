@@ -60,7 +60,6 @@ public class FacesContextUtil {
 		return _scopeUtil;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void clearSubmittedValuesInComponentTree(String componentName) {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		UIViewRoot view = fc.getViewRoot();
@@ -69,7 +68,6 @@ public class FacesContextUtil {
 			clearChildren(refreshComponent.getChildren());
 	}
 
-	@SuppressWarnings("unchecked")
 	private void clearChildren(List<UIComponent> componentList) {
 		for (UIComponent component : componentList) {
 			if (component.getChildCount() > 0)
