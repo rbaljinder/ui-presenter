@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
-	<batch>
+	<presenter>
 		<dependencies>
 			<!-- Ivy-style dependency definition -->
-			<dependency org="org.springframework.batch" name="spring-batch-core" rev="2.1.1.RELEASE" />
+			<dependency org="org.baljinder" name="presenter-core-sota" rev="1.0" />
 			
 			<!-- Maven-style dependency definition (should be used if exclusions need to be defined) -->
 			<dependency>
-			        <groupId>org.springframework.batch</groupId>
-			        <artifactId>spring-batch-admin-manager</artifactId>
-			        <version>1.0.0.RELEASE</version>
+			        <groupId>org.baljinder</groupId>
+			        <artifactId>presenter-core-sota</artifactId>
+			        <version>1.0</version>
 			</dependency>
 		</dependencies>
-	</batch>
+	</presenter>
 </configuration>
