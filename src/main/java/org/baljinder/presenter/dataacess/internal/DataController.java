@@ -225,23 +225,65 @@ public class DataController extends AbstractDataController {
 		return data;
 	}
 
+	public List<Map<String, Object>> getData(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> filters) {
+		setPageSize(pageSize);
+		if(sortField != null)
+			mergeSortFileds(sortField,sortOrder);
+		if(filters != null && !filters.isEmpty())
+			mergeFilters(filters);
+		if (!fetchParentIfAny())
+			return data;
+		eventHandler.beforeDataFetch(this);
+		logger.info("Fetching data for Data Control[" + getDataControlName() + "]");
+		data = getDao().getAllEntities(getModelList(), pageSize, first, getQuery());
+		resetDataControllerAfterDataFetch();
+		if (data.size() > 0)
+			setCurrentElementIndex(0);
+		else
+			data = Lists.newArrayList();
+		eventHandler.afterDataFetch(this);
+		markDataFetched();
+		dataFetched = true;
+		return data;
+	}
+	
+	protected void mergeFilters(Map<String, String> filters) {
+		for(Map.Entry<String, String> entry :filters.entrySet()){
+			if(StringUtils.isNotBlank(entry.getValue()))
+				getFilterObjectMap().get(entry.getKey()).setValue(entry.getValue());
+		}	
+	}
+
+	protected void mergeSortFileds(String sortField, boolean sortOrder) {
+		List<OrderByAttribute> orderByAttributes = getOrderByList();
+		OrderByAttribute orderByAttributeToRemove = null;
+		String[] sortModelAttribute = StringUtils.split(sortField, ".");
+		boolean exists = false ;
+		for (OrderByAttribute attribute : orderByAttributes) {
+			if (attribute.getModel().equals(sortModelAttribute[0]) && attribute.getAttribute().equals(sortModelAttribute[1])) {
+				exists = true ;
+				orderByAttributeToRemove = attribute;
+				orderByAttributeToRemove.flipOrder();
+				break;
+			}
+		}
+		if(!exists){
+			if (sortOrder)
+				orderByAttributes.add(new OrderByAttribute(sortModelAttribute[0], sortModelAttribute[1], OrderByAttribute.DESC));
+			else 
+				orderByAttributes.add(new OrderByAttribute(sortModelAttribute[0], sortModelAttribute[1], OrderByAttribute.ASC));
+		}
+	}
+
 	public Map<String, Object> getCurrentElement() {
 		if (shouldFetchData())
 			fetchData();
 		return getCurrentElementInternal();
 	}
 
-	//TODO: move this to jsf specific part 
 	public List<Map<String, Object>> getSelectedElements() {
 		List<Map<String, Object>> selectedElements = Lists.newArrayList();
 		List<Integer> selectedElementsIndex = getSelectedElementsIndex();
-		//TODO: what to with this
-		/*RowKeySet selectedIndexs = getTable().getSelectedRowKeys();
-		Iterator<Object> iter = selectedIndexs.iterator();
-		while (iter.hasNext()) {
-			Integer index = (Integer) iter.next();
-			selectedElementsIndex.add(index);
-		}*/
 		if(selectedElementsIndex.size() == 0){
 			if (data.size() > 0) {
 				setCurrentElementIndex(0);

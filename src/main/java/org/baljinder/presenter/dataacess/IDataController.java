@@ -120,6 +120,18 @@ public interface IDataController extends SupportsEventHandler {
 	 * @return
 	 */
 	public List<Map<String, Object>> getData();
+	
+	/**
+	 * As of now this is just a convenience method. But it may be used for state-less data controller, a possibility.  
+	 * @param first
+	 * @param pageSize
+	 * @param sortField
+	 * @param sortOrder
+	 * @param filters
+	 * @return
+	 */
+	//TODO: add test cases
+	public List<Map<String, Object>> getData(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> filters) ; 
 
 	/**
 	 * Set the list of domain model classes(Entity). The whole processing of query generation/data fetch/populating the data list to return,
