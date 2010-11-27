@@ -12,45 +12,45 @@ import org.springframework.roo.project.Path;
 
 
 /**
- * Provides {@link RooMetadata}.
+ * Provides {@link PresenterMetadata}.
  * 
  * @since 1.1
  *
  */
 @Component
 @Service
-public final class RooMetadataProvider extends AbstractItdMetadataProvider {
+public final class PresenterMetadataProvider extends AbstractItdMetadataProvider {
 
 	protected void activate(ComponentContext context) {
 		metadataDependencyRegistry.registerDependency(PhysicalTypeIdentifier.getMetadataIdentiferType(), getProvidesType());
-		addMetadataTrigger(new JavaType(RooRoo.class.getName()));
+		addMetadataTrigger(new JavaType(PresnterRoo.class.getName()));
 	}
 	
 	protected void deactivate(ComponentContext context) {
 		metadataDependencyRegistry.deregisterDependency(PhysicalTypeIdentifier.getMetadataIdentiferType(), getProvidesType());
-		removeMetadataTrigger(new JavaType(RooRoo.class.getName()));	
+		removeMetadataTrigger(new JavaType(PresnterRoo.class.getName()));	
 	}
 	
 	protected ItdTypeDetailsProvidingMetadataItem getMetadata(String metadataIdentificationString, JavaType aspectName, PhysicalTypeMetadata governorPhysicalTypeMetadata, String itdFilename) {
-		return new RooMetadata(metadataIdentificationString, aspectName, governorPhysicalTypeMetadata);
+		return new PresenterMetadata(metadataIdentificationString, aspectName, governorPhysicalTypeMetadata);
 	}
 	
 	public String getItdUniquenessFilenameSuffix() {
-		return "Roo";
+		return "Presenter";
 	}
 
 	protected String getGovernorPhysicalTypeIdentifier(String metadataIdentificationString) {
-		JavaType javaType = RooMetadata.getJavaType(metadataIdentificationString);
-		Path path = RooMetadata.getPath(metadataIdentificationString);
+		JavaType javaType = PresenterMetadata.getJavaType(metadataIdentificationString);
+		Path path = PresenterMetadata.getPath(metadataIdentificationString);
 		String physicalTypeIdentifier = PhysicalTypeIdentifier.createIdentifier(javaType, path);
 		return physicalTypeIdentifier;
 	}
 	
 	protected String createLocalIdentifier(JavaType javaType, Path path) {
-		return RooMetadata.createIdentifier(javaType, path);
+		return PresenterMetadata.createIdentifier(javaType, path);
 	}
 
 	public String getProvidesType() {
-		return RooMetadata.getMetadataIdentiferType();
+		return PresenterMetadata.getMetadataIdentiferType();
 	}
 }
