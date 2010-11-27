@@ -7,7 +7,7 @@ import org.springframework.roo.model.JavaType;
  *
  * @since 1.1.0-M1
  */
-public interface RooOperations {
+public interface PresneterOperations {
 
 	boolean isCommandAvailable();
 

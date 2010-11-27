@@ -32,9 +32,9 @@ import org.w3c.dom.Element;
  */
 @Component
 @Service
-public class RooOperationsImpl implements RooOperations{
+public class PresenterOperationsImpl implements PresneterOperations{
 
-	private static Logger logger = Logger.getLogger(RooOperations.class.getName());
+	private static Logger logger = Logger.getLogger(PresneterOperations.class.getName());
 
 	@Reference private MetadataService metadataService;
 	@Reference private PhysicalTypeMetadataProvider physicalTypeMetadataProvider;
@@ -60,8 +60,8 @@ public class RooOperationsImpl implements RooOperations{
 		Assert.isInstanceOf(MutableClassOrInterfaceTypeDetails.class, ptd, "Java source code is immutable for type " + PhysicalTypeIdentifier.getFriendlyName(id));
 		MutableClassOrInterfaceTypeDetails mutableTypeDetails = (MutableClassOrInterfaceTypeDetails) ptd;
 
-		if (null == MemberFindingUtils.getAnnotationOfType(mutableTypeDetails.getTypeAnnotations(), new JavaType(RooRoo.class.getName()))) {
-			JavaType rooSolrSearchable = new JavaType(RooRoo.class.getName());
+		if (null == MemberFindingUtils.getAnnotationOfType(mutableTypeDetails.getTypeAnnotations(), new JavaType(PresnterRoo.class.getName()))) {
+			JavaType rooSolrSearchable = new JavaType(PresnterRoo.class.getName());
 			if (!mutableTypeDetails.getTypeAnnotations().contains(rooSolrSearchable)) {
 				mutableTypeDetails.addTypeAnnotation(new DefaultAnnotationMetadata(rooSolrSearchable, new ArrayList<AnnotationAttributeValue<?>>()));
 			}
@@ -71,7 +71,7 @@ public class RooOperationsImpl implements RooOperations{
 	public void setup() {
 		Element configuration = XmlUtils.getConfiguration(getClass());
 
-		List<Element> dependencies = XmlUtils.findElements("/configuration/batch/dependencies/dependency", configuration);
+		List<Element> dependencies = XmlUtils.findElements("/configuration/presenter/dependencies/dependency", configuration);
 		for (Element dependency : dependencies) {
 			projectOperations.dependencyUpdate(new Dependency(dependency));
 		}

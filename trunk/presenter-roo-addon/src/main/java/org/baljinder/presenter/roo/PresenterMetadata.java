@@ -27,12 +27,12 @@ import org.springframework.roo.support.util.Assert;
  * @since 1.1.0.M2
  *
  */
-public class RooMetadata extends AbstractItdTypeDetailsProvidingMetadataItem {
+public class PresenterMetadata extends AbstractItdTypeDetailsProvidingMetadataItem {
 
-	private static final String PROVIDES_TYPE_STRING = RooMetadata.class.getName();
+	private static final String PROVIDES_TYPE_STRING = PresenterMetadata.class.getName();
 	private static final String PROVIDES_TYPE = MetadataIdentificationUtils.create(PROVIDES_TYPE_STRING);
 
-	public RooMetadata(String identifier, JavaType aspectName, PhysicalTypeMetadata governorPhysicalTypeMetadata) {
+	public PresenterMetadata(String identifier, JavaType aspectName, PhysicalTypeMetadata governorPhysicalTypeMetadata) {
 		super(identifier, aspectName, governorPhysicalTypeMetadata);
 		Assert.isTrue(isValid(identifier), "Metadata identification string '" + identifier + "' does not appear to be a valid");
 		

@@ -22,23 +22,23 @@ import org.springframework.roo.shell.CommandMarker;
  */
 @Component
 @Service
-public class RooCommands implements CommandMarker {
+public class PresenterCommands implements CommandMarker {
 	
-	private static Logger logger = Logger.getLogger(RooCommands.class.getName());
+	private static Logger logger = Logger.getLogger(PresenterCommands.class.getName());
 
-	@Reference private RooOperations operations;
+	@Reference private PresneterOperations operations;
 	
-	@CliAvailabilityIndicator({"Roo setup", "Roo add"})
+	@CliAvailabilityIndicator({"Presenter setup", "Presenter add"})
 	public boolean isPropertyAvailable() {
 		return true;  // it's safe to always see the properties we expose
 	}
 	
-	@CliCommand(value="Roo add", help="Some helpful description")
+	@CliCommand(value="Presenter add", help="Added presenter to the project")
 	public void add(@CliOption(key="type", mandatory=true, help="The java type to apply this annotation to") JavaType target) {
 		operations.annotateType(target);
 	}
 	
-	@CliCommand(value="Roo setup", help="Setup Roo addon")
+	@CliCommand(value="Presenter setup", help="Setup presenter addon")
 	public void setup() {
 		operations.setup();
 	}
