@@ -2,6 +2,7 @@ package org.baljinder.presenter.dataacess.jsf.myfaces.namespace;
 
 import org.baljinder.presenter.dataacess.IDataController;
 import org.baljinder.presenter.dataacess.jsf.myfaces.MyFacesSupportingDataController;
+import org.baljinder.presenter.dataacess.jsf.prime.PrimeFacesSupportingDataController;
 import org.baljinder.presenter.testing.support.SpringContextTestCase;
 import org.springframework.context.ApplicationContext;
 
@@ -23,5 +24,8 @@ public class NameSpaceDefinitionAndBeanConstructionTest extends SpringContextTes
 		ApplicationContext ac = getApplicationContext();
 		IDataController allPropertiesConfigurableDataControl = (IDataController) ac.getBean("EventHandler_Supporting_DataControl");
 		assertTrue(allPropertiesConfigurableDataControl instanceof MyFacesSupportingDataController);
+		IDataController facesDataControl = (IDataController) ac.getBean("Prime_EventHandler_Supporting_DataControl");
+		assertTrue(facesDataControl instanceof PrimeFacesSupportingDataController);
 	}
+	
 }

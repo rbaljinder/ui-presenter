@@ -1,8 +1,7 @@
-package org.baljinder.presenter.dataacess.jsf.myfaces.namespace;
+package org.baljinder.presenter.dataacess.jsf.namespace;
 
 import org.apache.commons.lang.StringUtils;
 import org.baljinder.presenter.dataacess.IDataController.Operation;
-import org.baljinder.presenter.dataacess.jsf.myfaces.MyFacesSupportingDataController;
 import org.baljinder.presenter.namespace.DataControlBeanDefinitionParser;
 import org.baljinder.presenter.namespace.PageBeanDefinitionParser;
 import org.baljinder.presenter.namespace.PresenterNameSpaceHandler;
@@ -13,7 +12,7 @@ import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
-public class MyFacesSpecializedHanlder extends PresenterNameSpaceHandler {
+public abstract class FacesSpecializedHanlder extends PresenterNameSpaceHandler {
 	
 	public String ACTION_OUTCOME_METHOD_BINDING_XSD = "action-outcome-binding";
 	
@@ -32,18 +31,7 @@ public class MyFacesSpecializedHanlder extends PresenterNameSpaceHandler {
 	protected static final String ACTION_OUTCOME_SORT_XSD = "sort";
 
 	
-	@Override
-	public void init() {
-		super.init();
-		registerBeanDefinitionParser("data-control", new FacesDataControlBeanDefinitionParser());
-		registerBeanDefinitionParser("page", new FacesPageBeanDefinitionParser());
-	}
-
 	public class FacesPageBeanDefinitionParser extends PageBeanDefinitionParser{
-		
-		public FacesPageBeanDefinitionParser() {
-			defaultClasses.put(DATACONTROLCLASS, MyFacesSupportingDataController.class);
-		}
 		
 		@Override
 		protected AbstractBeanDefinition createDataControlBeanDefinition(
@@ -55,10 +43,6 @@ public class MyFacesSpecializedHanlder extends PresenterNameSpaceHandler {
 		
 	}	
 	public class FacesDataControlBeanDefinitionParser extends DataControlBeanDefinitionParser{
-		
-		public FacesDataControlBeanDefinitionParser() {
-			defaultClasses.put(DATACONTROLCLASS, MyFacesSupportingDataController.class);
-		}
 		
 		@Override
 		protected AbstractBeanDefinition createDataControlBeanDefinition(
