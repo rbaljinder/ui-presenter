@@ -2,11 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:ps="http://www.rbaljinder.org/schema/presenter-faces"
+	xmlns:ps-p="http://www.rbaljinder.org/schema/presenter-prime-faces"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
-		http://www.rbaljinder.org/schema/presenter-faces presenter-faces.xsd">
+		http://www.rbaljinder.org/schema/presenter-faces presenter-faces.xsd
+		http://www.rbaljinder.org/schema/presenter-prime-faces presenter-prime-faces.xsd">
 	<import resource="persistence.xml" />
 	<!--Keeping the scope of the beans as prototype(for some of the beans its 
 		session/request out of the box), as i am not using WebApplicationContext -->
@@ -14,6 +16,10 @@
 		scope="singleton" access-strategy="direct">
 		<ps:model class="org.baljinder.presenter.testing.support.model.System" />
 	</ps:data-control>
+	<ps-p:data-control name="Prime_EventHandler_Supporting_DataControl"
+		scope="singleton" access-strategy="direct">
+		<ps-p:model class="org.baljinder.presenter.testing.support.model.System" />
+	</ps-p:data-control>
 	<bean id="defaultQueryBuilder"
 		class="org.baljinder.presenter.dataacess.util.BasicQueryBuilder">
 		<property name="filters" ref="dataControlFilters" />

@@ -11,6 +11,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.richfaces.bom.version>4.0.0.20101004-M3</org.richfaces.bom.version>
 	</properties>
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Technology Maven Repository</name>
+			<url>http://repository.prime.com.tr</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.baljinder</groupId>
@@ -87,7 +95,7 @@
 			<version>1.0</version>
 		</dependency>
 		<!-- RichFaces libraries -->
-				<dependency>
+		<dependency>
 			<groupId>org.richfaces.framework</groupId>
 			<artifactId>richfaces-api</artifactId>
 			<version>3.3.1.GA</version>
@@ -102,26 +110,12 @@
 			<artifactId>richfaces-ui</artifactId>
 			<version>3.3.1.GA</version>
 		</dependency>
-		<!--  <dependency>
-			<groupId>org.richfaces</groupId>
-			<artifactId>richfaces-bom</artifactId>
-			<version>${org.richfaces.bom.version}</version>
-			<scope>import</scope>
-			<type>pom</type>
-		</dependency>
 		<dependency>
-			<groupId>org.richfaces.ui</groupId>
-			<artifactId>richfaces-components-ui</artifactId>
-			<version>${org.richfaces.bom.version}</version>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>2.2.RC2</version>
 		</dependency>
-		 <dependency> <groupId>org.richfaces.ui</groupId> <artifactId>richfaces-components-ui</artifactId> 
-			</dependency> <dependency> <groupId>org.richfaces.framework</groupId> <artifactId>richfaces-api</artifactId> 
-			<version>3.3.1.GA</version> </dependency> <dependency> <groupId>org.richfaces.framework</groupId> 
-			<artifactId>richfaces-impl</artifactId> <version>3.3.1.GA</version> </dependency> 
-			<dependency> <groupId>org.richfaces.ui</groupId> <artifactId>richfaces-ui</artifactId> 
-			<version>3.3.1.GA</version> </dependency> -->
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
