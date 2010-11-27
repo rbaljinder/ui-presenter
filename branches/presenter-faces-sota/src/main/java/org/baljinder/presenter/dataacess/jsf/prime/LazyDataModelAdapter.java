@@ -19,9 +19,8 @@ public class LazyDataModelAdapter extends LazyDataModel<Map<String, Object>>{
 
 
 	@Override
-	public List<Map<String, Object>> load(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> arg4) {
-
-		return null;
+	public List<Map<String, Object>> load(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> filters) {
+		return dataController.getData(first, pageSize, sortField, sortOrder, filters);
 	}
 	
 	@Override
