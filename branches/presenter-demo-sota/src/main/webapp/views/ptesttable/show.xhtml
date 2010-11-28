@@ -6,20 +6,24 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 
-<ui:composition template="/views/main.xhtml">
+<ui:composition template="/WEB-INF/views/main.xhtml">
 	<ui:define name="body" >
-		<a4j:form id="body">
+		<a4j:form>
 			<h:panelGroup id="insert">
+				<a4j:commandButton value="Create"
+					reRender="greeting,dataTable,insert"
+					action="#{dataControl_dataAccess_test.create}" />
 				<h:panelGroup id="new"
-					rendered="#{not empty TestTable_Create_DataControl.newlyCreatedElement}">
+					rendered="#{not empty dataControl_dataAccess_test.newlyCreatedElement}">
 					<h:outputText value="Name" />
 					<h:inputText
-						value="#{TestTable_Create_DataControl.newlyCreatedElement[0]['testTable']['name']}" />
+						value="#{dataControl_dataAccess_test.newlyCreatedElement[0]['testTable']['name']}" />
 					<h:outputText value="id" />
 					<h:inputText
-						value="#{TestTable_Create_DataControl.newlyCreatedElement[0]['testTable']['testId']}" />
-					<a4j:commandButton value="save" reRender="body"
-						action="#{TestTable_Create_DataControl.save}" />
+						value="#{dataControl_dataAccess_test.newlyCreatedElement[0]['testTable']['testId']}" />
+					<a4j:commandButton value="save"
+						reRender="greeting,dataTable,filters,insert,new"
+						action="#{dataControl_dataAccess_test.save}" />
 				</h:panelGroup>
 			</h:panelGroup>
 		</a4j:form>

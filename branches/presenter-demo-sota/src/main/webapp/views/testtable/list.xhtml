@@ -7,41 +7,47 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 <ui:composition template="/views/main.xhtml">
-<ui:define name="body" >
-	<a4j:form id="body">
-		<h:panelGroup id="dataTablePanel" >
-			<rich:dataTable id="dataTable"
-				value="#{TestTable_List_DataControl.data}" var="dataControl"
-				rows="#{TestTable_List_DataControl.pageSize}">
-				<f:facet name="caption">
-					<h:outputText value="testxId" />
-				</f:facet>
-				<f:facet name="header">
-					<h:outputText value="name" />
-				</f:facet>
-				<rich:column>
-					<h:outputText value="#{dataControl['testTable']['testId']}" />
-				</rich:column>
-				<rich:column>
-					<h:outputText value="#{dataControl['testTable']['name']}" />
-				</rich:column>
-				<f:facet name="footer">
-				</f:facet>
-			</rich:dataTable>
-			<a4j:commandButton value="first" reRender="greeting,dataTablePanel"
-				rendered="#{TestTable_List_DataControl.prevPossible}"
-				action="#{TestTable_List_DataControl.first}" />
-			<a4j:commandButton value="prev" reRender="greeting,dataTablePanel"
-				rendered="#{TestTable_List_DataControl.prevPossible}"
-				action="#{TestTable_List_DataControl.prev}" />
-			<a4j:commandButton value=">" reRender="greeting,dataTablePanel"
-				rendered="#{TestTable_List_DataControl.nextPossible}"
-				action="#{TestTable_List_DataControl.next}" />
-			<a4j:commandButton value=">>" reRender="greeting,dataTablePanel"
-				rendered="#{TestTable_List_DataControl.nextPossible}"
-				action="#{TestTable_List_DataControl.last}" />
-		</h:panelGroup>
-	</a4j:form>
+	<ui:define name="body">
+		<a4j:form id="body">
+			<h:panelGroup id="dataTablePanel">
+				<rich:dataTable id="dataTable"
+					value="#{TestTable_List_DataControl.data}" var="dataControl"
+					rows="#{TestTable_List_DataControl.pageSize}" width="70%" >
+					<f:facet name="header">
+						<rich:columnGroup>
+							<rich:column>
+								<h:outputText value="Id" />
+							</rich:column>
+							<rich:column>
+								<h:outputText value="Name" />
+							</rich:column>
+						</rich:columnGroup>
+					</f:facet>
+					<rich:column title="Id">
+						<h:outputText value="#{dataControl['testTable']['testId']}" />
+					</rich:column>
+					<rich:column title="Name">
+						<h:outputText value="#{dataControl['testTable']['name']}" />
+					</rich:column>
+					<f:facet name="footer">
+					</f:facet>
+				</rich:dataTable>
+				<rich:panel rendered="#{TestTable_List_DataControl.nextPossible or TestTable_List_DataControl.prevPossible }">
+					<a4j:commandButton image="/images/resultset_first.png" reRender="greeting,dataTablePanel"
+						rendered="#{TestTable_List_DataControl.prevPossible}"
+						action="#{TestTable_List_DataControl.first}" />
+					<a4j:commandButton image="/images/resultset_previous.png" reRender="greeting,dataTablePanel"
+						rendered="#{TestTable_List_DataControl.prevPossible}"
+						action="#{TestTable_List_DataControl.prev}" />
+					<a4j:commandButton image="/images/resultset_next.png" reRender="greeting,dataTablePanel"
+						rendered="#{TestTable_List_DataControl.nextPossible}"
+						action="#{TestTable_List_DataControl.next}" />
+					<a4j:commandButton image="/images/resultset_last.png" reRender="greeting,dataTablePanel"
+						rendered="#{TestTable_List_DataControl.nextPossible}"
+						action="#{TestTable_List_DataControl.last}" />
+				</rich:panel>
+			</h:panelGroup>
+		</a4j:form>
 	</ui:define>
 </ui:composition>
 </html>
