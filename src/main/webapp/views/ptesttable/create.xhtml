@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/views/pmain.xhtml">
+	<ui:define name="body">
+		<h:panelGroup id="contents">
+			<h:form id="dataContainer">
+				<h:panelGroup id="new"
+					rendered="#{not empty TestTable_Create_DataControl.newlyCreatedElement}">
+					<h:outputText value="Name" />
+					<h:inputText
+						value="#{TestTable_Create_DataControl.newlyCreatedElement[0]['testTable']['name']}" />
+					<h:outputText value="id" />
+					<h:inputText
+						value="#{TestTable_Create_DataControl.newlyCreatedElement[0]['testTable']['testId']}" />
+					<p:commandButton value="Save" update="contents"
+						action="#{TestTable_Create_DataControl.save}"
+						style="margin-right:20px;" />
+				</h:panelGroup>
+			</h:form>
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
