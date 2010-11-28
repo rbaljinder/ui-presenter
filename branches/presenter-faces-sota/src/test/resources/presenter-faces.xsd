@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.rbaljinder.org/schema/presenter-faces"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:tool="http://www.springframework.org/schema/tool"
+	targetNamespace="http://www.rbaljinder.org/schema/presenter-faces"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:import namespace="http://www.springframework.org/schema/beans" />
+	<xsd:element name="page">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="type" minOccurs="0" maxOccurs="1"
+					default="org.baljinder.presenter.dataacess.internal.PageController">
+					<xsd:complexType mixed="true">
+						<xsd:attribute name="class" type="xsd:string" use="optional"
+							default="org.baljinder.presenter.dataacess.internal.PageController">
+							<xsd:annotation>
+								<xsd:appinfo>
+									<tool:annotation>
+										<tool:expected-type type="java.lang.Class" />
+										<tool:assignable-to
+											type="org.baljinder.presenter.dataacess.IPageController" />
+									</tool:annotation>
+								</xsd:appinfo>
+							</xsd:annotation>
+						</xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="data-control" type="data-control" />
+				</xsd:sequence>
+				<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="transition" type="transition" />
+				</xsd:sequence>
+				<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="property">
+						<xsd:complexType>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+							<xsd:attribute name="value" type="xsd:string" use="optional" />
+							<xsd:attribute name="ref" type="xsd:string" use="optional" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:ID" use="required" />
+			<xsd:attribute name="cached" type="xsd:boolean"
+				default="false" use="optional" />
+			<xsd:attribute name="scope" type="xsd:string" default="request"
+				use="optional" />
+			<xsd:attribute name="init-method" type="xsd:string"
+				default="initialize" use="optional" />
+			<xsd:attribute name="event-handler" type="xsd:string"
+				use="optional">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<tool:annotation>
+							<tool:expected-type type="java.lang.Class" />
+							<tool:assignable-to
+								type="org.baljinder.presenter.dataacess.IEventHandler" />
+						</tool:annotation>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="event-handler-ref" type="xsd:string"
+				use="optional" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="data-control">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="data-control" />
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="data-control">
+		<xsd:sequence>
+			<xsd:element name="type" minOccurs="0" maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="class" type="xsd:string"
+						default="org.baljinder.presenter.dataacess.internal.DataController"
+						use="optional">
+						<xsd:annotation>
+							<xsd:appinfo>
+								<tool:annotation>
+									<tool:expected-type type="java.lang.Class" />
+									<tool:assignable-to
+										type="org.baljinder.presenter.dataacess.IDataController" />
+								</tool:annotation>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="default-where-clause" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="clause" type="xsd:string" use="optional" />
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="dao-key-name" minOccurs="0" maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="key" type="xsd:string"
+						default="org.baljinder.presenter.dataacess.internal.GenericPresentationDao"
+						use="optional">
+						<xsd:annotation>
+							<xsd:appinfo>
+								<tool:annotation>
+									<tool:expected-type type="java.lang.Class" />
+									<tool:assignable-to
+										type="org.baljinder.presenter.dataacess.IPresentationDao" />
+								</tool:annotation>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<!-- For the time being just hard coding persistance manager and queryBuilder 
+				although configurable but better use a parent bean for this sort of common 
+				config -->
+			<xsd:element name="persistence-manager" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="manager" type="xsd:string"
+						default="presentationPersistence" use="optional" />
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="query-builder" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="builder" type="xsd:string"
+						default="defaultQueryBuilder" use="optional" />
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="model">
+					<xsd:complexType>
+						<xsd:attribute name="class" type="xsd:string" use="required">
+							<xsd:annotation>
+								<xsd:appinfo>
+									<tool:annotation>
+										<tool:expected-type type="java.lang.Class" />
+									</tool:annotation>
+								</xsd:appinfo>
+							</xsd:annotation>
+						</xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:element name="parent-relations" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType>
+					<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+						<xsd:element name="parent-relation">
+							<xsd:complexType>
+								<xsd:attribute name="relation" type="xsd:string" />
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="join-criteria" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="criteria" type="xsd:string" use="optional" />
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="data-control" type="data-control" />
+			</xsd:sequence>
+			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="transition" type="transition" />
+			</xsd:sequence>
+			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="property">
+					<xsd:complexType>
+						<xsd:attribute name="name" type="xsd:string" use="required" />
+						<xsd:attribute name="value" type="xsd:string" use="optional" />
+						<xsd:attribute name="ref" type="xsd:string" use="optional" />
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:element name="action-outcome" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="create" type="xsd:string" use="optional" />
+					<xsd:attribute name="save" type="xsd:string" use="optional" />
+					<xsd:attribute name="delete" type="xsd:string" use="optional" />
+					<xsd:attribute name="update" type="xsd:string" use="optional" />
+					<xsd:attribute name="select" type="xsd:string" use="optional" />
+					<xsd:attribute name="sort" type="xsd:string" use="optional" />
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="action-outcome-binding" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="create" type="xsd:string" use="optional" />
+					<xsd:attribute name="save" type="xsd:string" use="optional" />
+					<xsd:attribute name="delete" type="xsd:string" use="optional" />
+					<xsd:attribute name="update" type="xsd:string" use="optional" />
+					<xsd:attribute name="select" type="xsd:string" use="optional" />
+					<xsd:attribute name="sort" type="xsd:string" use="optional" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:ID" use="required" />
+		<xsd:attribute name="size" type="xsd:integer" default="10"
+			use="optional" />
+		<xsd:attribute name="scope" type="xsd:string" default="session"
+			use="optional" />
+		<xsd:attribute name="access-strategy" use="optional"
+			default="jsf-based">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="jsf-based" />
+					<xsd:enumeration value="direct" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="coded-value" type="xsd:string"
+			default="false" use="optional" />
+		<xsd:attribute name="init-method" type="xsd:string"
+			default="initialize" use="optional" />
+		<xsd:attribute name="event-handler" type="xsd:string"
+			use="optional">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<tool:annotation>
+						<tool:expected-type type="java.lang.Class" />
+						<tool:assignable-to
+							type="org.baljinder.presenter.dataacess.IEventHandler" />
+					</tool:annotation>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="event-handler-ref" type="xsd:string"
+			use="optional" />
+	</xsd:complexType>
+
+
+	<xsd:element name="transition">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="transition" />
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="transition">
+		<xsd:sequence>
+			<xsd:element name="type" minOccurs="0" maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="class" type="xsd:string"
+						default="org.baljinder.presenter.dataacess.internal.TransitionController"
+						use="optional">
+						<xsd:annotation>
+							<xsd:appinfo>
+								<tool:annotation>
+									<tool:expected-type type="java.lang.Class" />
+									<tool:assignable-to
+										type="org.baljinder.presenter.dataacess.ITransitionController" />
+								</tool:annotation>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="target-page" minOccurs="1" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:attribute name="page" type="xsd:string"></xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="source-data-control" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType>
+					<xsd:attribute name="data-control" type="xsd:string"></xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="target-data-control" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType>
+					<xsd:attribute name="data-control" type="xsd:string"></xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="transition-action" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType>
+					<xsd:attribute name="class" type="xsd:string" use="required">
+						<xsd:annotation>
+							<xsd:appinfo>
+								<tool:annotation>
+									<tool:expected-type type="java.lang.Class" />
+									<tool:assignable-to
+										type="org.baljinder.presenter.dataacess.ITransitionAction" />
+								</tool:annotation>
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="scope" type="xsd:string"
+						default="request" use="optional" />
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="outcome" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:attribute name="value" type="xsd:string"
+						default=""></xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="transition-criteria" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType>
+					<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+						<xsd:element name="transition-criterion">
+							<xsd:complexType>
+								<xsd:attribute name="criterion" type="xsd:string" />
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="property">
+					<xsd:complexType>
+						<xsd:attribute name="name" type="xsd:string" use="required" />
+						<xsd:attribute name="value" type="xsd:string" use="optional" />
+						<xsd:attribute name="ref" type="xsd:string" use="optional" />
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+		<xsd:attribute name="mode" use="optional" default="load">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="query"></xsd:enumeration>
+					<xsd:enumeration value="load"></xsd:enumeration>
+					<xsd:enumeration value="insert"></xsd:enumeration>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="scope" type="xsd:string" default="request"
+			use="optional" />
+		<xsd:attribute name="event-handler" type="xsd:string"
+			use="optional">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<tool:annotation>
+						<tool:expected-type type="java.lang.Class" />
+						<tool:assignable-to
+							type="org.baljinder.presenter.dataacess.IEventHandler" />
+					</tool:annotation>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="event-handler-ref" type="xsd:string"
+			use="optional" />
+	</xsd:complexType>
+	<xsd:element name="event-handler">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+					<xsd:element name="property">
+						<xsd:complexType>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+							<xsd:attribute name="value" type="xsd:string" use="optional" />
+							<xsd:attribute name="ref" type="xsd:string" use="optional" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:ID" use="required" />
+			<xsd:attribute name="scope" type="xsd:string" default="singleton"
+				use="optional" />
+			<xsd:attribute name="class" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:appinfo>
+						<tool:annotation>
+							<tool:expected-type type="java.lang.Class" />
+							<tool:assignable-to
+								type="org.baljinder.presenter.dataacess.IEventHandler" />
+						</tool:annotation>
+					</xsd:appinfo>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

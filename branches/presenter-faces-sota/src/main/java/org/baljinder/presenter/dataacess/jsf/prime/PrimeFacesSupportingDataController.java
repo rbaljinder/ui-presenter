@@ -17,12 +17,13 @@ public class PrimeFacesSupportingDataController extends FacesDataController impl
 
 	@Override
 	protected String selectDataFromTable() {
-		throw new UnsupportedOperationException("Not implemented yet");
+		//throw new UnsupportedOperationException("Not implemented yet");
+		return "";
 	}
 
 	@Override
 	protected void clearSelectedIndexesOfUITable() {
-		throw new UnsupportedOperationException("Not implemented yet");
+		//throw new UnsupportedOperationException("Not implemented yet");
 	}
 	
 }
