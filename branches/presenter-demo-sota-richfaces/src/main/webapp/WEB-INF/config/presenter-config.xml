@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:ps="http://www.rbaljinder.org/schema/presenter" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+		http://www.rbaljinder.org/schema/presenter classpath:/org/baljinder/presenter/namespace/presenter.xsd">
+	<import resource="persistence.xml" />
+	<import resource="modules.xml" />
+	<bean id="defaultQueryBuilder" 
+		class="org.baljinder.presenter.dataacess.util.BasicQueryBuilder">
+		<property name="filters" ref="dataControlFilters" />
+	</bean>
+	<bean id="directDataAccessStrategy"
+		class="org.baljinder.presenter.dataacess.internal.support.DirectDataAccessStrategy" />
+	<bean id="jsfBasedDataAccessStrategy"
+		class="org.baljinder.presenter.jsf.JSFSupportingDataAccessStrategy" />
+
+	<util:map id="dataControlFilters">
+	</util:map>
+		<bean id="genericValidValueDao"
+		class="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl">
+	</bean>
+
+	<bean id="genericPresentationDao"
+		class="org.baljinder.presenter.dataacess.internal.GenericPresentationDao" />
+
+	<bean id="codedValueDAO" class="org.baljinder.presenter.dataacess.cvl.CodedValueDAO" />
+
+	<bean id="presentationPersistence"
+		class="org.baljinder.presenter.dataacess.internal.PersistenceManager">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+		<property name="daoAssociations">
+			<map>
+				<entry
+					key="org.baljinder.presenter.dataacess.internal.extension.ValidValueGenericDaoImpl"
+					value-ref="genericValidValueDao" />
+				<entry
+					key="org.baljinder.presenter.dataacess.internal.GenericPresentationDao"
+					value-ref="genericPresentationDao" />
+				<entry key="org.baljinder.presenter.dataacess.cvl.CodedValueDAO"
+					value-ref="codedValueDAO" />
+			</map>
+		</property>
+	</bean>
+	<util:list id="hibernate_mappings">
+		<value>/org/baljinder/presenter/testing/support/model/mapping.hbm.xml</value>
+	</util:list>
+</beans>
