@@ -20,11 +20,15 @@ public class LazyDataModelAdapter extends LazyDataModel<Map<String, Object>>{
 
 	@Override
 	public List<Map<String, Object>> load(int first, int pageSize, String sortField, boolean sortOrder, Map<String, String> filters) {
+		if (dataController.getDao() == null)
+			dataController.setDao(dataController.getPersistenceManager().getDAO(dataController.getDaoKeyName()));
 		return dataController.getData(first, pageSize, sortField, sortOrder, filters);
 	}
 	
 	@Override
 	public int getRowCount() {
+		if (dataController.getDao() == null)
+			dataController.setDao(dataController.getPersistenceManager().getDAO(dataController.getDaoKeyName()));
 		return dataController.getDao().getCountOfRecords(dataController.getCountQuery());
 	}
 
