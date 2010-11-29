@@ -6,6 +6,9 @@ import java.util.Map;
 import org.baljinder.presenter.dataacess.internal.OrderByAttribute;
 import org.baljinder.presenter.dataacess.util.IQueryBuilder;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 /**
  * 
  * This interface is the central point to interact with this CRUD layer for various operation. Following is the list of main operations:
@@ -398,9 +401,18 @@ public interface IDataController extends SupportsEventHandler {
 
 	public String selectData();
 
-	public void getSelectedElementsIndex(List<Integer> indices);
+	public void setSelectedElementsIndex(List<Integer> indices);
 
 	public List<Integer> getSelectedElementsIndex();
+
+	//TODO: more convinence methods
+	public void setSelectedDataElement(Map<String, Object> element) ;
+
+	public void setSelectedDataElements(Map<String, Object>[] elements) ;
+
+	public Map<String, Object> getSelectedDataElement() ;
+	
+	public Map<String, Object>[] getSelectedDataElements() ;
 
 	public void performAfterEvent(Event event);
 	
