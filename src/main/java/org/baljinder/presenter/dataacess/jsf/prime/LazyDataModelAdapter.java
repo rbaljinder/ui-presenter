@@ -25,6 +25,7 @@ public class LazyDataModelAdapter extends LazyDataModel<Map<String, Object>>{
 		return dataController.getData(first, pageSize, sortField, sortOrder, filters);
 	}
 	
+	//FIXME: query is being fired twice: may be set it in the above method and keep an attribute on datacontroller so that we dont have to calculate it again and again 
 	@Override
 	public int getRowCount() {
 		if (dataController.getDao() == null)
