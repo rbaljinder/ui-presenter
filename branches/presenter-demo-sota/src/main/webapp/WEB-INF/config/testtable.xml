@@ -6,6 +6,10 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
 		http://www.rbaljinder.org/schema/presenter-prime-faces http://ui-presenter.googlecode.com/files/presenter-prime-faces-1.0.0.1.xsd">
+	
+	<ps:transition name="TestTable_All_Transition">
+		<ps:target-page page="TestTable_All" />
+	</ps:transition>
 	<ps:transition name="TestTable_List_Transition">
 		<ps:target-page page="TestTable_List" />
 	</ps:transition>
@@ -14,6 +18,11 @@
 	</ps:transition>
 	<ps:page name="TestTable_List">
 		<ps:data-control name="TestTable_List_DataControl" size="4">
+			<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
+		</ps:data-control>
+	</ps:page>
+	<ps:page name="TestTable_All">
+		<ps:data-control name="TestTable_All_DataControl" size="4">
 			<ps:model class="org.baljinder.presenter.testing.support.model.TestTable" />
 		</ps:data-control>
 	</ps:page>

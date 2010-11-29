@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/views/pmain.xhtml">
+	<ui:define name="body">
+		<h:form id="contents">
+
+			<p:commandButton value="New"
+				action="#{TestTable_All_DataControl.create}" update="contents">
+			</p:commandButton>
+
+			<p:dataTable var="data"
+				value="#{TestTable_All_DataControl.dataModel}" paginator="true"
+				paginatorPosition="bottom"
+				rows="#{TestTable_All_DataControl.pageSize}" lazy="true"
+				selection="#{TestTable_All_DataControl.selectedDataElement}"
+				selectionMode="single"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="5,10,15" onRowSelectUpdate="show,update">
+
+				<p:column headerText="testId">
+					<h:outputText value="#{data['testTable']['testId']}" />
+				</p:column>
+
+				<p:column headerText="Year">
+					<h:outputText value="#{data['testTable']['name']}" />
+				</p:column>
+
+			</p:dataTable>
+
+			<p:fieldset id="create" rendered="#{not empty TestTable_Create_DataControl.newlyCreatedElement}">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:outputText value="id" />
+					<h:inputText
+						value="#{TestTable_All_DataControl.newlyCreatedElement[0]['testTable']['testId']}" />
+					<h:outputText value="Name" />
+					<h:inputText
+						value="#{TestTable_All_DataControl.newlyCreatedElement[0]['testTable']['name']}" />
+					<p:commandButton value="Save" ajax="false"
+						action="#{TestTable_All_DataControl.save}"
+						style="margin-right:20px;" />
+				</h:panelGrid>
+			</p:fieldset>
+
+			<p:fieldset id="show" legend="Data">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:outputText value="Name" />
+					<h:outputText
+						value="#{TestTable_All_DataControl['selectedDataElement']['testTable']['name']}" />
+					<h:outputText value="Id" />
+					<h:outputText
+						value="#{TestTable_All_DataControl['selectedDataElement']['testTable']['testId']}" />
+
+					<p:commandButton value="Update"
+						action="#{TestTable_All_DataControl.setDisplayMode}"
+						style="margin-right:20px;" update="contents">
+						 <f:param name="updateActionParam" value="UPDATE"/>
+					</p:commandButton>	
+						
+					<p:commandButton value="Delete"
+						action="#{TestTable_All_DataControl.deleteSelectedElements}"
+						style="margin-right:20px;" update="contents" />
+				</h:panelGrid>
+			</p:fieldset>
+			
+			<p:fieldset id="update" legend="Data" rendered="#{TestTable_All_DataControl.displayMode == 'UPDATE'}">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:outputText value="Name" />
+					<h:inputText
+						value="#{TestTable_All_DataControl['selectedDataElement']['testTable']['name']}" />
+					<h:outputText value="Id" />
+					<h:inputText
+						value="#{TestTable_All_DataControl['selectedDataElement']['testTable']['testId']}" />
+
+					<p:commandButton value="Delete"
+						action="#{TestTable_All_DataControl.saveSelectedElements}"
+						style="margin-right:20px;" update="contents" />
+				</h:panelGrid>
+			</p:fieldset>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -13,39 +13,65 @@
 		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
 		<link type="text/css" rel="stylesheet"
 			href="#{request.contextPath}/css/skin.css" />
-			<style type="text/css">
-			
-			.ui-widget {
-				font-size: 12px;
-			}
-			
-			.ui-menu .ui-menu-item .ui-menu-item-label {
-				padding: .2em 1.7em;
-			}
-			
-			.ui-growl {
-				top:115px;
-			}
-			
-			.themeMenu {
-				overflow: auto;
-				height:300px;
-				width:200px;
-			}
-			.body 
-			{
-				font-size: 12px;
-			}
-		</style>
+		<style type="text/css">
+.ui-widget {
+	font-size: 12px;
+}
+
+.ui-menu .ui-menu-item .ui-menu-item-label {
+	padding: .2em 1.7em;
+}
+
+.ui-growl {
+	top: 115px;
+}
+
+.themeMenu {
+	overflow: auto;
+	height: 300px;
+	width: 200px;
+}
+
+.body {
+	font-size: 12px;
+}
+
+#center {
+	width: 80%;
+}
+
+#layout-doc {
+	width: 800px;
+}
+
+.ui-layout-doc {
+	overflow: hidden;
+	position: relative;
+}
+</style>
 		<ui:insert name="head"></ui:insert>
 	</h:head>
 	<h:body>
-		<h:panelGrid>
-			<ui:include src="pnavigation.xhtml" />
-			<ui:insert name="body" id="body">
-				Body content missed
-			</ui:insert>
-		</h:panelGrid>
+		<p:layout fullPage="true">
+			<p:layoutUnit id="top" position="top" height="50" minHeight="50"
+				maxHeight="175">
+				<h:outputText value="Presenter - Demo"
+					style="font-size:36px;position:absolute;left:100px;" />
+			</p:layoutUnit>
+			<p:layoutUnit id="bottom" position="bottom" height="50" zindex="0"
+				scrollable="null">
+			</p:layoutUnit>
+
+			<p:layoutUnit id="left" position="left" width="200" minWidth="150">
+				<ui:include src="pnavigation.xhtml" />
+			</p:layoutUnit>
+			<p:layoutUnit id="center" position="center"
+				style="text-align:center;">
+				<ui:insert name="body" id="body">
+						Body content missed
+					</ui:insert>
+			</p:layoutUnit>
+		</p:layout>
 	</h:body>
 </f:view>
 </html>

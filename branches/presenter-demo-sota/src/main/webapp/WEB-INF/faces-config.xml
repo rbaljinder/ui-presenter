@@ -20,5 +20,10 @@
 			<to-view-id>/views/ptesttable/list.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>TestTable_All</from-outcome>
+			<to-view-id>/views/ptesttable/ptesttable.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
 	</navigation-rule>
 </faces-config>
