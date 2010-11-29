@@ -21,6 +21,7 @@ public class DataController extends AbstractDataController {
 
 	public boolean initialize() {
 		eventHandler.beforeInitialize(this);
+		selectedElementsIndex.clear();
 		newlyCreatedElements.clear();
 		data.clear();
 		boolean toReturn = super.initialize();
@@ -103,7 +104,7 @@ public class DataController extends AbstractDataController {
 			for (int index = 0; index < noOfModelsInvolved; index++) {
 				String modelName = Utils.getModelName(getModelList(), newInstance);
 				newDataElement.put(modelName, newInstance);
-				data.add(0, newDataElement);
+				//data.add(0, newDataElement);
 				newlyCreatedElements.add(newDataElement);
 			}
 		}
@@ -119,6 +120,10 @@ public class DataController extends AbstractDataController {
 	public String save(Boolean flushChanges) {
 		for(Map<String, Object> anElement : data)
 			 saveInternal(anElement,flushChanges);
+		for(Map<String, Object> anElement : newlyCreatedElements)
+			 saveInternal(anElement,flushChanges);
+		data.addAll(newlyCreatedElements);
+		newlyCreatedElements.clear();
 		markDataFetched();
 		return defaultActionOutcome.get(Operation.SAVE);
 	}
@@ -135,7 +140,6 @@ public class DataController extends AbstractDataController {
 			Map<String, Object> newlyCreatedElement = isNewlyCreatedElement(anEntry);
 			if (newlyCreatedElement != null ) {
 				dao.create(elementToSave);
-				newlyCreatedElements.remove(newlyCreatedElement);
 			} else {
 				if (flushChanges)
 					dao.save(getCurrentElementInternal(), true);
@@ -220,8 +224,14 @@ public class DataController extends AbstractDataController {
 	public List<Map<String, Object>> getData() {
 		if (shouldFetchData())
 			fetchData();
-		if (data.size() > getPageSize())
-			return data.subList(0, getPageSize());
+		if (data.size() > getPageSize()){
+			List<Map<String, Object>> dataAsPerPageSize = data.subList(0, getPageSize());
+			for(Map<String, Object> element :getNewlyCreatedElement()){
+				if(dataAsPerPageSize.indexOf(element) != -1)
+					dataAsPerPageSize.remove(dataAsPerPageSize.indexOf(element));
+			}
+			return dataAsPerPageSize;
+		}
 		return data;
 	}
 
@@ -297,7 +307,7 @@ public class DataController extends AbstractDataController {
 		return selectedElements;
 	}
 
-	public void getSelectedElementsIndex(List<Integer> indices) {
+	public void setSelectedElementsIndex(List<Integer> indices) {
 		this.selectedElementsIndex= indices;
 	}
 	
@@ -315,6 +325,34 @@ public class DataController extends AbstractDataController {
 		return Maps.newHashMap();
 	}
 	
+	public void setSelectedDataElement(Map<String, Object> element) {
+		int index = getData().indexOf(element);
+		if (index != -1) {
+			setSelectedElementsIndex(Lists.newArrayList(index));
+		}
+	}
+
+	public void setSelectedDataElements(Map<String, Object>[] elements) {
+		List<Integer> selectedIndicies = Lists.newArrayList();
+		for (Map<String, Object> anElement : elements) {
+			int index = getData().indexOf(anElement);
+			if (index != -1) {
+				selectedIndicies.add(index);
+			}
+		}
+		if (selectedIndicies.size() > 0)
+			setSelectedElementsIndex(Lists.newArrayList(selectedIndicies));
+	}
+
+	public Map<String, Object> getSelectedDataElement() {
+		return getSelectedElements().size() > 0? getSelectedElements().get(0):Maps.<String, Object>newHashMap();
+
+	}
+
+	public Map<String, Object>[] getSelectedDataElements() {
+		return (Map<String, Object>[]) getSelectedElements().toArray();
+	}
+
 	//If somebody calls this method, then the datacontroller has no information about how to figure out which elements are selected
 	//so just raise calling performAfterEvent(), so someone know how to do it, then have a hook to do that
 	public String selectData() {
