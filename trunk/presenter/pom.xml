@@ -9,7 +9,5 @@
 		<module>testing-support</module>
 		<module>presenter-core</module>
 		<module>presenter-faces</module>
-		<module>presenter-demo</module>
-		<module>presenter-demo-richfaces</module>
 	</modules>
 </project>
