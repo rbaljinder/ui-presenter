@@ -28,16 +28,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.myfaces.trinidad</groupId>
-			<artifactId>trinidad-api</artifactId>
-			<version>1.2.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.myfaces.tomahawk</groupId>
-			<artifactId>tomahawk</artifactId>
-			<version>1.1.6</version>
-		</dependency>
-		<dependency>
 			<groupId>org.baljinder</groupId>
 			<artifactId>testing-support</artifactId>
 			<version>1.0</version>
