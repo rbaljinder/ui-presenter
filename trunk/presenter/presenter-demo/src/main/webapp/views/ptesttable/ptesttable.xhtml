@@ -30,7 +30,8 @@
 
 			</p:dataTable>
 
-			<p:fieldset id="create" rendered="#{not empty TestTable_Create_DataControl.newlyCreatedElement}">
+			<p:fieldset id="create"
+				rendered="#{not empty TestTable_All_DataControl.newlyCreatedElement}">
 				<h:panelGrid columns="2" cellpadding="10">
 					<h:outputText value="id" />
 					<h:inputText
@@ -44,7 +45,8 @@
 				</h:panelGrid>
 			</p:fieldset>
 
-			<p:fieldset id="show" legend="Data">
+			<p:fieldset id="show" legend="DataS"
+				rendered="#{TestTable_All_DataControl.displayMode == 'LIST' or TestTable_All_DataControl.displayMode == 'SHOW'}">
 				<h:panelGrid columns="2" cellpadding="10">
 					<h:outputText value="Name" />
 					<h:outputText
@@ -54,18 +56,16 @@
 						value="#{TestTable_All_DataControl['selectedDataElement']['testTable']['testId']}" />
 
 					<p:commandButton value="Update"
-						action="#{TestTable_All_DataControl.setDisplayMode}"
+						action="#{TestTable_All_DataControl.updateDisplayMode}"
 						style="margin-right:20px;" update="contents">
-						 <f:param name="updateActionParam" value="UPDATE"/>
-					</p:commandButton>	
-						
-					<p:commandButton value="Delete"
-						action="#{TestTable_All_DataControl.deleteSelectedElements}"
-						style="margin-right:20px;" update="contents" />
+						<f:setPropertyActionListener
+							target="#{TestTable_All_DataControl.displayMode}" value="UPDATE" />
+					</p:commandButton>
 				</h:panelGrid>
 			</p:fieldset>
-			
-			<p:fieldset id="update" legend="Data" rendered="#{TestTable_All_DataControl.displayMode == 'UPDATE'}">
+
+			<p:fieldset id="update" legend="Data"
+				rendered="#{TestTable_All_DataControl.displayMode == 'UPDATE'}">
 				<h:panelGrid columns="2" cellpadding="10">
 					<h:outputText value="Name" />
 					<h:inputText
@@ -74,8 +74,14 @@
 					<h:inputText
 						value="#{TestTable_All_DataControl['selectedDataElement']['testTable']['testId']}" />
 
-					<p:commandButton value="Delete"
+					<p:commandButton value="Update"
 						action="#{TestTable_All_DataControl.saveSelectedElements}"
+						style="margin-right:20px;" update="contents">
+						<f:setPropertyActionListener
+							target="#{TestTable_All_DataControl.displayMode}" value="SHOW" />
+					</p:commandButton>
+					<p:commandButton value="Delete"
+						action="#{TestTable_All_DataControl.deleteSelectedElements}"
 						style="margin-right:20px;" update="contents" />
 				</h:panelGrid>
 			</p:fieldset>
