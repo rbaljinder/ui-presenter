@@ -1,0 +1,2 @@
+http\://www.rbaljinder.org/schema/presenter-faces=org.baljinder.presenter.dataacess.jsf.namespace.myfaces.MyFacesSpecializedHanlder
+http\://www.rbaljinder.org/schema/presenter-prime-faces=org.baljinder.presenter.dataacess.jsf.namespace.prime.PrimeFacesSpecializedHanlder
