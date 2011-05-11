@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.baljinder</groupId>
-	<artifactId>presenter-core-sota</artifactId>
+	<artifactId>presenter-core</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
 	<name>yet another presentation framework</name>
@@ -126,7 +126,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.baljinder</groupId>
-			<artifactId>testing-support-sota</artifactId>
+			<artifactId>testing-support</artifactId>
 			<version>1.0</version>
 			<scope>test</scope>
 		</dependency>

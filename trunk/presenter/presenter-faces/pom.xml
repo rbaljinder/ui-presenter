@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.baljinder</groupId>
-	<artifactId>presenter-faces-sota</artifactId>
+	<artifactId>presenter-faces</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 	<name>presenter-faces</name>
@@ -22,7 +22,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.baljinder</groupId>
-			<artifactId>presenter-core-sota</artifactId>
+			<artifactId>presenter-core</artifactId>
 			<version>1.0</version>
 			<type>jar</type>
 			<scope>compile</scope>
@@ -39,7 +39,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.baljinder</groupId>
-			<artifactId>testing-support-sota</artifactId>
+			<artifactId>testing-support</artifactId>
 			<version>1.0</version>
 			<scope>test</scope>
 		</dependency>
