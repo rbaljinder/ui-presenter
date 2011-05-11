@@ -17,7 +17,6 @@ import org.baljinder.presenter.dataacess.IEventHandler;
 import org.baljinder.presenter.dataacess.IPersistenceManager;
 import org.baljinder.presenter.dataacess.IPresentationDao;
 import org.baljinder.presenter.dataacess.ModelFieldMapping;
-import org.baljinder.presenter.dataacess.IDataController.Operation;
 import org.baljinder.presenter.dataacess.internal.support.EmptyEventHandler;
 import org.baljinder.presenter.dataacess.util.IQueryBuilder;
 import org.baljinder.presenter.dataacess.util.PresentationConstants;
@@ -25,7 +24,6 @@ import org.baljinder.presenter.util.ReflectionUtils;
 import org.baljinder.presenter.util.Utils;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * @author Baljinder Randhawa

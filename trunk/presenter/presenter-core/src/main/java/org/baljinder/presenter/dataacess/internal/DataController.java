@@ -105,7 +105,7 @@ public class DataController extends AbstractDataController {
 				String modelName = Utils.getModelName(getModelList(), newInstance);
 				newDataElement.put(modelName, newInstance);
 				//data.add(0, newDataElement);
-				newlyCreatedElements.add(newDataElement);
+				newlyCreatedElements.add(0,newDataElement);
 			}
 		}
 		eventHandler.afterInsert(this);
