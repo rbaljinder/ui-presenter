@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+<h:head contentType="text/html">
+	<h:link type="text/css" rel="stylesheet" href="/css/skin.css" />
+</h:head>
+<f:view contentType="text/html">
+	<h:head>
+		<title>Presenter - Demo</title>
+		<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+		<link type="text/css" rel="stylesheet"
+			href="#{request.contextPath}/css/skin.css" />
+		<style type="text/css">
+.ui-widget {
+	font-size: 12px;
+}
+
+.ui-menu .ui-menu-item .ui-menu-item-label {
+	padding: .2em 1.7em;
+}
+
+.ui-growl {
+	top: 115px;
+}
+
+.themeMenu {
+	overflow: auto;
+	height: 300px;
+	width: 200px;
+}
+
+.body {
+	font-size: 12px;
+}
+
+#center {
+	width: 80%;
+}
+
+#layout-doc {
+	width: 800px;
+}
+
+.ui-layout-doc {
+	overflow: hidden;
+	position: relative;
+}
+</style>
+		<ui:insert name="head"></ui:insert>
+	</h:head>
+	<h:body>
+		<p:layout fullPage="true">
+			<p:layoutUnit id="top" position="top" height="50" minHeight="50"
+				maxHeight="175">
+				<h:outputText value="Presenter - Demo"
+					style="font-size:36px;position:absolute;left:100px;" />
+			</p:layoutUnit>
+			<p:layoutUnit id="bottom" position="bottom" height="50" zindex="0"
+				scrollable="null">
+			</p:layoutUnit>
+
+			<p:layoutUnit id="left" position="left" width="200" minWidth="150">
+				<ui:include src="pnavigation.xhtml" />
+			</p:layoutUnit>
+			<p:layoutUnit id="center" position="center"
+				style="text-align:center;">
+				<ui:insert name="body" id="body">
+						Body content missed
+					</ui:insert>
+			</p:layoutUnit>
+		</p:layout>
+	</h:body>
+</f:view>
+</html>
