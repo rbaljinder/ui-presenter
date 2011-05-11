@@ -178,6 +178,17 @@
 					</xsd:complexType>
 				</xsd:element>
 			</xsd:sequence>
+			<xsd:element name="action-outcome" minOccurs="0"
+				maxOccurs="1">
+				<xsd:complexType mixed="true">
+					<xsd:attribute name="create" type="xsd:string" use="optional" />
+					<xsd:attribute name="save" type="xsd:string" use="optional" />
+					<xsd:attribute name="delete" type="xsd:string" use="optional" />
+					<xsd:attribute name="update" type="xsd:string" use="optional" />
+					<xsd:attribute name="select" type="xsd:string" use="optional" />
+					<xsd:attribute name="sort" type="xsd:string" use="optional" />
+				</xsd:complexType>
+			</xsd:element>
 		</xsd:sequence>
 		<xsd:attribute name="name" type="xsd:ID" use="required" />
 		<xsd:attribute name="size" type="xsd:integer" default="10"

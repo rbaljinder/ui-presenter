@@ -6,9 +6,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>presenter-testing-support</module>
+		<module>testing-support</module>
 		<module>presenter-core</module>
 		<module>presenter-faces</module>
 		<module>presenter-demo</module>
+		<module>presenter-demo-richfaces</module>
 	</modules>
 </project>
