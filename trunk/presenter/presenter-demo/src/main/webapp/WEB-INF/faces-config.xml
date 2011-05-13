@@ -22,7 +22,7 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>TestTable_All</from-outcome>
-			<to-view-id>/views/testtable/ptesttable.xhtml</to-view-id>
+			<to-view-id>/views/testtable/testtable.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
