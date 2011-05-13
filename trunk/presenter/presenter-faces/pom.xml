@@ -1,16 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>presenter</artifactId>
+		<groupId>org.baljinder</groupId>
+		<version>1.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>org.baljinder</groupId>
 	<artifactId>presenter-faces</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 	<name>presenter-faces</name>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<org.richfaces.bom.version>4.0.0.20101004-M3</org.richfaces.bom.version>
-	</properties>
 	<repositories>
 		<repository>
 			<id>prime-repo</id>
@@ -23,14 +24,12 @@
 		<dependency>
 			<groupId>org.baljinder</groupId>
 			<artifactId>presenter-core</artifactId>
-			<version>1.0</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<version>${version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.baljinder</groupId>
 			<artifactId>testing-support</artifactId>
-			<version>1.0</version>
+			<version>${version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -65,12 +64,6 @@
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
 			<version>2.0.3</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.el</groupId>
-			<artifactId>el-api</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
             <groupId>javax.el</groupId>
