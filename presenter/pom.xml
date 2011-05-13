@@ -5,12 +5,22 @@
 	<artifactId>presenter</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
-	<properties>
-		<useProjectReferences>false</useProjectReferences>
-	</properties>
 	<modules>
 		<module>testing-support</module>
 		<module>presenter-core</module>
 		<module>presenter-faces</module>
 	</modules>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<useProjectReferences>false</useProjectReferences>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
