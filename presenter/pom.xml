@@ -9,6 +9,7 @@
 		<module>testing-support</module>
 		<module>presenter-core</module>
 		<module>presenter-faces</module>
+		<module>presenter-demo</module>
 	</modules>
 	<build>
 		<pluginManagement>
