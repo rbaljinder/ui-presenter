@@ -13,7 +13,7 @@
 	<version>1.0</version>
 	<name>testing-support</name>
 	<properties>
-		<SpringVersion>3.0.4.RELEASE</SpringVersion>
+		<SpringVersion>5.2.22.RELEASE</SpringVersion>
 	</properties>
 	<dependencies>
 		<dependency>
