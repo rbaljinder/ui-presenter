@@ -13,7 +13,7 @@
 	<version>1.0</version>
 	<name>yet another presentation framework</name>
 	<properties>
-		<SpringVersion>3.0.4.RELEASE</SpringVersion>
+		<SpringVersion>5.2.22.RELEASE</SpringVersion>
 	</properties>
 	<dependencies>
 		<!-- Spring dependencies -->
@@ -65,12 +65,12 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>3.5.5-Final</version>
+			<version>5.4.24.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.5.5-Final</version>
+			<version>5.4.24.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
@@ -87,7 +87,7 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.1</version>
+			<version>3.2.2</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -99,7 +99,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>r05</version>
+			<version>30.0-android</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- -->
